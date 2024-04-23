@@ -26,6 +26,6 @@ install.packages("bookdown")
 
 Remember each Rmd file contains one and only one chapter, and a chapter is definedb by the first-level heading `#`.
 
-XXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXsXXXafasfasfXXXXXXXX
 
 # 2 Inicio
