@@ -2,7 +2,7 @@
 title: "Series de Tiempo"
 author: "Diego Fernando Ortiz"
 date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
+
 output: bookdown::gitbook
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
