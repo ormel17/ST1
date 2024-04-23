@@ -9,27 +9,35 @@ biblio-style: apalike
 link-citations: yes
 github-repo: rstudio/bookdown-demo
 description: "Bookdown propuesto para la asignatura Series de Tiempo."
+
 ---
+
+# Inicio
 
  **Fuente:**https://www.kaggle.com/datasets/thedevastator/2015-us-average-maximum-and-minimum-temperatures
  
-* **Relevancia Temática:** Dado que Colombia está experimentando una crisis relacionada con temperaturas extremas y falta de lluvias, el estudio de cómo las temperaturas fluctúan y su impacto en los recursos hídricos es crucial. Aunque este dataset es sobre los Estados Unidos, las tendencias y patrones observados en el comportamiento climático, como el aumento de temperaturas máximas y la variabilidad de las temperaturas mínimas, pueden proporcionar insights comparativos importantes. Estos patrones podrían ser paralelos o servir como un estudio comparativo para prever posibles escenarios en Colombia bajo condiciones climáticas similares.
+## **Relevancia Temática:** 
+Dado que Colombia está experimentando una crisis relacionada con temperaturas extremas y falta de lluvias, el estudio de cómo las temperaturas fluctúan y su impacto en los recursos hídricos es crucial. Aunque este dataset es sobre los Estados Unidos, las tendencias y patrones observados en el comportamiento climático, como el aumento de temperaturas máximas y la variabilidad de las temperaturas mínimas, pueden proporcionar insights comparativos importantes. Estos patrones podrían ser paralelos o servir como un estudio comparativo para prever posibles escenarios en Colombia bajo condiciones climáticas similares.
 
 <br>
 
-* **Datos Detallados y Granulares:** El dataset ofrece datos diarios de 1120 estaciones meteorológicas, permitiendo un análisis detallado y granular de las temperaturas. Esta riqueza de datos facilita el análisis de tendencias a largo plazo y variaciones estacionales, elementos clave para entender la dinámica entre temperatura y escasez de agua.
+## **Datos Detallados y Granulares:** 
+El dataset ofrece datos diarios de 1120 estaciones meteorológicas, permitiendo un análisis detallado y granular de las temperaturas. Esta riqueza de datos facilita el análisis de tendencias a largo plazo y variaciones estacionales, elementos clave para entender la dinámica entre temperatura y escasez de agua.
 
 <br>
 
-* **Aplicabilidad de Análisis Multivariado:** La información sobre temperaturas máximas, mínimas y promedio permite realizar análisis multivariado para evaluar cómo las fluctuaciones de temperatura influyen en otros factores ambientales. Esto es especialmente relevante para estudiar la correlación entre altas temperaturas y la disminución de niveles de agua, un fenómeno que también está afectando a Colombia.
+## **Aplicabilidad de Análisis Multivariado:**
+La información sobre temperaturas máximas, mínimas y promedio permite realizar análisis multivariado para evaluar cómo las fluctuaciones de temperatura influyen en otros factores ambientales. Esto es especialmente relevante para estudiar la correlación entre altas temperaturas y la disminución de niveles de agua, un fenómeno que también está afectando a Colombia.
 
 <br>
 
-* **Comparación Interregional:** Aunque el dataset es específico de los EE.UU., el análisis de cómo diferentes regiones dentro de un país grande y climáticamente diverso manejan variaciones en las temperaturas puede ofrecer perspectivas valiosas para Colombia, un país con una geografía igualmente diversa y múltiples microclimas.
+## **Comparación Interregional:** 
+Aunque el dataset es específico de los EE.UU., el análisis de cómo diferentes regiones dentro de un país grande y climáticamente diverso manejan variaciones en las temperaturas puede ofrecer perspectivas valiosas para Colombia, un país con una geografía igualmente diversa y múltiples microclimas.
 
 <br>
 
-* **Soporte para Modelos Predictivos:** Utilizar este dataset para desarrollar y validar modelos predictivos sobre el impacto de las variaciones de temperatura en los recursos hídricos podría ser extrapolado para prever y mitigar los efectos de la escasez de agua en Colombia, especialmente en preparación para futuros eventos climáticos extremos.
+## **Soporte para Modelos Predictivos:** 
+Utilizar este dataset para desarrollar y validar modelos predictivos sobre el impacto de las variaciones de temperatura en los recursos hídricos podría ser extrapolado para prever y mitigar los efectos de la escasez de agua en Colombia, especialmente en preparación para futuros eventos climáticos extremos.
 
 
-
+# Actividad 2
