@@ -28,9 +28,4 @@ Remember each Rmd file contains one and only one chapter, and a chapter is defin
 
 XXXXXXXXXXXXXXXXXXXXX
 
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
-```
+# 2 Inicio
