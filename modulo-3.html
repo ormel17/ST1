@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Documento Bookdown Propuesta</title>
+  <title>Chapter 4 Modulo 3 | Documento Bookdown Propuesta</title>
   <meta name="description" content="Bookdown propuesto para la asignatura Series de Tiempo." />
   <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Documento Bookdown Propuesta" />
+  <meta property="og:title" content="Chapter 4 Modulo 3 | Documento Bookdown Propuesta" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Bookdown propuesto para la asignatura Series de Tiempo." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Documento Bookdown Propuesta" />
+  <meta name="twitter:title" content="Chapter 4 Modulo 3 | Documento Bookdown Propuesta" />
   
   <meta name="twitter:description" content="Bookdown propuesto para la asignatura Series de Tiempo." />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
+<link rel="prev" href="modulo-2.html"/>
 
-<link rel="next" href="análisis-dataset.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -171,42 +171,75 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Documento Bookdown Propuesta</h1>
-<p class="author"><em>Diego Fernando Ortiz</em></p>
-<p class="date"><em>Daily Climate time series data</em></p>
-</div>
-<div id="inicio" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Inicio<a href="inicio.html#inicio" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><strong>Fuente:</strong> <a href="https://www.kaggle.com/datasets/sumanthvrao/daily-climate-time-series-data">Kaggle</a></p>
-<div id="relevancia-temática" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Relevancia Temática<a href="inicio.html#relevancia-temática" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Aunque el dataset es específico de Delhi, India, la observación de tendencias y patrones en el comportamiento climático en una región que experimenta variaciones significativas puede proporcionar información valiosa. Estos datos pueden servir como un estudio comparativo para anticipar escenarios posibles en Colombia, especialmente bajo condiciones climáticas extremas similares.</p>
-</div>
-<div id="datos-detallados-y-granulares" class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> Datos Detallados y Granulares<a href="inicio.html#datos-detallados-y-granulares" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>El conjunto de datos ofrece mediciones diarias desde el 1 de enero de 2013 hasta el 24 de abril de 2017, proporcionando un marco detallado para el análisis de tendencias a largo plazo y variaciones estacionales en Delhi. Esta granularidad facilita el estudio detallado de la relación entre las variaciones de temperatura y otros parámetros climáticos, crucial para entender las dinámicas ambientales que pueden ser similares en otras partes del mundo, incluida Colombia.</p>
-</div>
-<div id="aplicabilidad-de-análisis-multivariado" class="section level2 hasAnchor" number="1.3">
-<h2><span class="header-section-number">1.3</span> Aplicabilidad de Análisis Multivariado<a href="inicio.html#aplicabilidad-de-análisis-multivariado" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Con variables como temperatura media, humedad, velocidad del viento y presión media, es posible realizar análisis multivariado para investigar cómo las fluctuaciones de estos elementos se correlacionan entre sí y afectan condiciones ambientales más amplias. Esto es relevante para estudiar posibles vínculos entre altas temperaturas y sequías, un fenómeno preocupante también en Colombia.</p>
-</div>
-<div id="comparación-interregional" class="section level2 hasAnchor" number="1.4">
-<h2><span class="header-section-number">1.4</span> Comparación Interregional<a href="inicio.html#comparación-interregional" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Mientras que este conjunto de datos es específico de una ciudad, los métodos analíticos aplicados aquí pueden ser extrapolados para comparar diferentes regiones dentro de Colombia, un país con una diversidad climática considerable. Entender cómo diferentes microclimas responden a variaciones similares en parámetros climáticos puede ofrecer insights cruciales para la gestión de recursos y la preparación ante eventos extremos.</p>
-</div>
-<div id="soporte-para-modelos-predictivos" class="section level2 hasAnchor" number="1.5">
-<h2><span class="header-section-number">1.5</span> Soporte para Modelos Predictivos<a href="inicio.html#soporte-para-modelos-predictivos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Utilizando este conjunto de datos, podemos desarrollar y validar modelos predictivos que estimen el impacto de las variaciones climáticas en los recursos hídricos. Tales modelos no solo son pertinentes para la región de Delhi sino que pueden ser adaptados para prever y mitigar efectos similares en Colombia, especialmente en preparación para futuros eventos climáticos extremos.</p>
-</div>
+<div id="modulo-3" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Modulo 3<a href="modulo-3.html#modulo-3" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Para abordar la pregunta sobre si es necesario implementar transformaciones para controlar la tendencia y la variabilidad en tu serie de tiempo de datos climáticos, primero debemos entender las características de tus datos y cuál podría ser el impacto de tales transformaciones. Aquí vamos a explorar y justificar el uso de dichos procedimientos.</p>
+<p>Análisis de la Necesidad de Transformaciones
+Evaluación de la Tendencia y Variabilidad:
+Para decidir si se necesitan transformaciones, primero es crucial evaluar la presencia de tendencias no estacionarias y la variabilidad en los datos. Esto se puede hacer visualizando los datos y utilizando pruebas estadísticas.
+Visualización de Tendencias:
+Utiliza gráficos de línea para observar visualmente si hay una tendencia creciente o decreciente en los datos.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="modulo-3.html#cb41-1" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> meantemp)) <span class="sc">+</span></span>
+<span id="cb41-2"><a href="modulo-3.html#cb41-2" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb41-3"><a href="modulo-3.html#cb41-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Tendencia de la Temperatura Media&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Fecha&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Temperatura Media&quot;</span>)</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+Prueba de Dickey-Fuller Aumentada (ADF):
+Esta prueba te ayudará a determinar si la serie es estacionaria o no, lo que es crucial para decidir sobre la necesidad de transformaciones.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="modulo-3.html#cb42-1" tabindex="-1"></a><span class="fu">library</span>(tseries)</span></code></pre></div>
+<pre><code>## Registered S3 method overwritten by &#39;quantmod&#39;:
+##   method            from
+##   as.zoo.data.frame zoo</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="modulo-3.html#cb44-1" tabindex="-1"></a><span class="fu">adf.test</span>(data<span class="sc">$</span>meantemp, <span class="at">alternative =</span> <span class="st">&quot;stationary&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+##  Augmented Dickey-Fuller Test
+## 
+## data:  data$meantemp
+## Dickey-Fuller = -1.8526, Lag order = 11, p-value = 0.6407
+## alternative hypothesis: stationary</code></pre>
+<p>Los resultados de la prueba de Dickey-Fuller Aumentada (ADF) que has obtenido muestran un valor de p-valor de 0.6407, lo cual es significativamente mayor que cualquier umbral común de significancia (como 0.05 o 0.01). Esto indica que no podemos rechazar la hipótesis nula de que la serie tiene una raíz unitaria, es decir, que la serie no es estacionaria.</p>
+<p>Interpretación
+La falta de estacionariedad implica que la serie temporal de la temperatura media tiene una tendencia o variabilidad que cambia con el tiempo, lo que puede afectar los análisis futuros y la capacidad de hacer pronósticos precisos.</p>
+<p>Este análisis explora la necesidad de aplicar transformaciones a la serie temporal de la temperatura media para controlar la tendencia y la variabilidad.</p>
+<p>Transformación Logarítmica y Visualización</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="modulo-3.html#cb46-1" tabindex="-1"></a><span class="co"># Transformación Logarítmica</span></span>
+<span id="cb46-2"><a href="modulo-3.html#cb46-2" tabindex="-1"></a>data<span class="sc">$</span>log_meantemp <span class="ot">&lt;-</span> <span class="fu">log</span>(data<span class="sc">$</span>meantemp)</span>
+<span id="cb46-3"><a href="modulo-3.html#cb46-3" tabindex="-1"></a></span>
+<span id="cb46-4"><a href="modulo-3.html#cb46-4" tabindex="-1"></a><span class="co"># Visualización de la serie logarítmica</span></span>
+<span id="cb46-5"><a href="modulo-3.html#cb46-5" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> log_meantemp)) <span class="sc">+</span></span>
+<span id="cb46-6"><a href="modulo-3.html#cb46-6" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb46-7"><a href="modulo-3.html#cb46-7" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Logaritmo de la Temperatura Media&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Fecha&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Log(Temperatura Media)&quot;</span>)</span></code></pre></div>
+<p><img src="index_files/figure-html/transform-and-plot-log-1.png" width="672" /></p>
+<p>Diferenciación y Visualización</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="modulo-3.html#cb47-1" tabindex="-1"></a><span class="co"># Calcular la diferenciación logarítmica y eliminar la primera fila para mantener la consistencia de datos</span></span>
+<span id="cb47-2"><a href="modulo-3.html#cb47-2" tabindex="-1"></a>diff_series <span class="ot">&lt;-</span> <span class="fu">diff</span>(data<span class="sc">$</span>log_meantemp)</span>
+<span id="cb47-3"><a href="modulo-3.html#cb47-3" tabindex="-1"></a>data <span class="ot">&lt;-</span> data[<span class="sc">-</span><span class="dv">1</span>, ]  <span class="co"># Elimina la primera fila</span></span>
+<span id="cb47-4"><a href="modulo-3.html#cb47-4" tabindex="-1"></a>data<span class="sc">$</span>diff_log_meantemp <span class="ot">&lt;-</span> diff_series</span>
+<span id="cb47-5"><a href="modulo-3.html#cb47-5" tabindex="-1"></a></span>
+<span id="cb47-6"><a href="modulo-3.html#cb47-6" tabindex="-1"></a><span class="co"># Visualización de la serie diferenciada</span></span>
+<span id="cb47-7"><a href="modulo-3.html#cb47-7" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> diff_log_meantemp)) <span class="sc">+</span></span>
+<span id="cb47-8"><a href="modulo-3.html#cb47-8" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb47-9"><a href="modulo-3.html#cb47-9" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Diferencia del Logaritmo de la Temperatura Media&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Fecha&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Diferencia de Log(Temperatura Media)&quot;</span>)</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+Reevaluar la Estacionariedad</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="modulo-3.html#cb48-1" tabindex="-1"></a><span class="co"># Prueba ADF en la serie transformada y diferenciada</span></span>
+<span id="cb48-2"><a href="modulo-3.html#cb48-2" tabindex="-1"></a>adf_result_transformed <span class="ot">&lt;-</span> <span class="fu">adf.test</span>(data<span class="sc">$</span>diff_log_meantemp, <span class="at">alternative =</span> <span class="st">&quot;stationary&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning in adf.test(data$diff_log_meantemp, alternative = &quot;stationary&quot;):
+## p-value smaller than printed p-value</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="modulo-3.html#cb50-1" tabindex="-1"></a><span class="fu">print</span>(adf_result_transformed)</span></code></pre></div>
+<pre><code>## 
+##  Augmented Dickey-Fuller Test
+## 
+## data:  data$diff_log_meantemp
+## Dickey-Fuller = -13.915, Lag order = 11, p-value = 0.01
+## alternative hypothesis: stationary</code></pre>
 </div>
             </section>
 
           </div>
         </div>
       </div>
+<a href="modulo-2.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="análisis-dataset.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Modulo 2 | Documento Bookdown Propuesta</title>
+  <meta name="description" content="Bookdown propuesto para la asignatura Series de Tiempo." />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Modulo 2 | Documento Bookdown Propuesta" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Bookdown propuesto para la asignatura Series de Tiempo." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Modulo 2 | Documento Bookdown Propuesta" />
+  
+  <meta name="twitter:description" content="Bookdown propuesto para la asignatura Series de Tiempo." />
+  
+
+<meta name="author" content="Diego Fernando Ortiz" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="análisis-dataset.html"/>
+<link rel="next" href="modulo-3.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="inicio.html"><a href="inicio.html"><i class="fa fa-check"></i><b>1</b> Inicio</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="inicio.html"><a href="inicio.html#relevancia-temática"><i class="fa fa-check"></i><b>1.1</b> Relevancia Temática</a></li>
+<li class="chapter" data-level="1.2" data-path="inicio.html"><a href="inicio.html#datos-detallados-y-granulares"><i class="fa fa-check"></i><b>1.2</b> Datos Detallados y Granulares</a></li>
+<li class="chapter" data-level="1.3" data-path="inicio.html"><a href="inicio.html#aplicabilidad-de-análisis-multivariado"><i class="fa fa-check"></i><b>1.3</b> Aplicabilidad de Análisis Multivariado</a></li>
+<li class="chapter" data-level="1.4" data-path="inicio.html"><a href="inicio.html#comparación-interregional"><i class="fa fa-check"></i><b>1.4</b> Comparación Interregional</a></li>
+<li class="chapter" data-level="1.5" data-path="inicio.html"><a href="inicio.html#soporte-para-modelos-predictivos"><i class="fa fa-check"></i><b>1.5</b> Soporte para Modelos Predictivos</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="análisis-dataset.html"><a href="análisis-dataset.html"><i class="fa fa-check"></i><b>2</b> Análisis Dataset</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="análisis-dataset.html"><a href="análisis-dataset.html#análisis-exploratorio-de-datos"><i class="fa fa-check"></i><b>2.1</b> Análisis exploratorio de datos</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="modulo-2.html"><a href="modulo-2.html"><i class="fa fa-check"></i><b>3</b> Modulo 2</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="modulo-2.html"><a href="modulo-2.html#análiis-del-promedio-movil"><i class="fa fa-check"></i><b>3.1</b> Análiis del promedio movil</a></li>
+<li class="chapter" data-level="3.2" data-path="modulo-2.html"><a href="modulo-2.html#análisis-de-rezagos"><i class="fa fa-check"></i><b>3.2</b> Análisis de Rezagos</a></li>
+<li class="chapter" data-level="3.3" data-path="modulo-2.html"><a href="modulo-2.html#análisis-de-estacionalidad"><i class="fa fa-check"></i><b>3.3</b> Análisis de Estacionalidad</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="modulo-3.html"><a href="modulo-3.html"><i class="fa fa-check"></i><b>4</b> Modulo 3</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Documento Bookdown Propuesta</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="modulo-2" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Modulo 2<a href="modulo-2.html#modulo-2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Ajustamos el formato fecha</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="modulo-2.html#cb20-1" tabindex="-1"></a><span class="co"># Imprimir las primeras fechas para verificar el formato</span></span>
+<span id="cb20-2"><a href="modulo-2.html#cb20-2" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(data<span class="sc">$</span>date))</span></code></pre></div>
+<pre><code>## [1] &quot;2013-01-01&quot; &quot;2013-01-02&quot; &quot;2013-01-03&quot; &quot;2013-01-04&quot; &quot;2013-01-05&quot;
+## [6] &quot;2013-01-06&quot;</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="modulo-2.html#cb22-1" tabindex="-1"></a><span class="co"># Cargar las bibliotecas necesarias</span></span>
+<span id="cb22-2"><a href="modulo-2.html#cb22-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)  <span class="co"># Para manipulación de datos y ggplot2</span></span>
+<span id="cb22-3"><a href="modulo-2.html#cb22-3" tabindex="-1"></a><span class="fu">library</span>(lubridate)  <span class="co"># Para manejo de fechas</span></span>
+<span id="cb22-4"><a href="modulo-2.html#cb22-4" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="modulo-2.html#cb22-5" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="modulo-2.html#cb22-6" tabindex="-1"></a><span class="co"># Convertir la columna de fecha a formato de fecha usando ymd()</span></span>
+<span id="cb22-7"><a href="modulo-2.html#cb22-7" tabindex="-1"></a>data<span class="sc">$</span>date <span class="ot">&lt;-</span> <span class="fu">ymd</span>(data<span class="sc">$</span>date)</span>
+<span id="cb22-8"><a href="modulo-2.html#cb22-8" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="modulo-2.html#cb22-9" tabindex="-1"></a><span class="co"># Inspeccionar los primeros registros para confirmar que la conversión fue exitosa</span></span>
+<span id="cb22-10"><a href="modulo-2.html#cb22-10" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
+<pre><code>##         date  meantemp humidity wind_speed meanpressure
+## 1 2013-01-01 10.000000 84.50000   0.000000     1015.667
+## 2 2013-01-02  7.400000 92.00000   2.980000     1017.800
+## 3 2013-01-03  7.166667 87.00000   4.633333     1018.667
+## 4 2013-01-04  8.666667 71.33333   1.233333     1017.167
+## 5 2013-01-05  6.000000 86.83333   3.700000     1016.500
+## 6 2013-01-06  7.000000 82.80000   1.480000     1018.000</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="modulo-2.html#cb24-1" tabindex="-1"></a><span class="co"># Inspección de la estructura de los datos para asegurar que las transformaciones son correctas</span></span>
+<span id="cb24-2"><a href="modulo-2.html#cb24-2" tabindex="-1"></a><span class="fu">str</span>(data)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    1462 obs. of  5 variables:
+##  $ date        : Date, format: &quot;2013-01-01&quot; &quot;2013-01-02&quot; ...
+##  $ meantemp    : num  10 7.4 7.17 8.67 6 ...
+##  $ humidity    : num  84.5 92 87 71.3 86.8 ...
+##  $ wind_speed  : num  0 2.98 4.63 1.23 3.7 ...
+##  $ meanpressure: num  1016 1018 1019 1017 1016 ...</code></pre>
+<div id="análiis-del-promedio-movil" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Análiis del promedio movil<a href="modulo-2.html#análiis-del-promedio-movil" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="modulo-2.html#cb26-1" tabindex="-1"></a><span class="co"># Asumiendo que la librería lubridate ya está cargada y la fecha ha sido convertida</span></span>
+<span id="cb26-2"><a href="modulo-2.html#cb26-2" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="modulo-2.html#cb26-3" tabindex="-1"></a><span class="co"># Cargar la biblioteca necesaria para el cálculo de medias móviles</span></span>
+<span id="cb26-4"><a href="modulo-2.html#cb26-4" tabindex="-1"></a><span class="fu">library</span>(zoo)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;zoo&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     as.Date, as.Date.numeric</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="modulo-2.html#cb29-1" tabindex="-1"></a><span class="co"># Calcular el promedio móvil de 30 días para la temperatura media</span></span>
+<span id="cb29-2"><a href="modulo-2.html#cb29-2" tabindex="-1"></a>data<span class="sc">$</span>MovingAvg <span class="ot">&lt;-</span> <span class="fu">rollmean</span>(data<span class="sc">$</span>meantemp, <span class="dv">30</span>, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">align =</span> <span class="st">&quot;center&quot;</span>)</span>
+<span id="cb29-3"><a href="modulo-2.html#cb29-3" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="modulo-2.html#cb29-4" tabindex="-1"></a><span class="co"># Utilizar ggplot2 para visualizar la temperatura media y su promedio móvil</span></span>
+<span id="cb29-5"><a href="modulo-2.html#cb29-5" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb29-6"><a href="modulo-2.html#cb29-6" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> date)) <span class="sc">+</span></span>
+<span id="cb29-7"><a href="modulo-2.html#cb29-7" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> meantemp), <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb29-8"><a href="modulo-2.html#cb29-8" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> MovingAvg), <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb29-9"><a href="modulo-2.html#cb29-9" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Temperatura Media y Promedio Móvil de 30 días&quot;</span>,</span>
+<span id="cb29-10"><a href="modulo-2.html#cb29-10" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Fecha&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Temperatura (°C)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb29-11"><a href="modulo-2.html#cb29-11" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<pre><code>## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+## ℹ Please use `linewidth` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.</code></pre>
+<pre><code>## Warning: Removed 29 rows containing missing values or values outside the scale range
+## (`geom_line()`).</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+</div>
+<div id="análisis-de-rezagos" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Análisis de Rezagos<a href="modulo-2.html#análisis-de-rezagos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="modulo-2.html#cb32-1" tabindex="-1"></a><span class="co"># Asumiendo que las librerías necesarias ya están cargadas y que &#39;data&#39; es tu dataframe</span></span>
+<span id="cb32-2"><a href="modulo-2.html#cb32-2" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="modulo-2.html#cb32-3" tabindex="-1"></a><span class="co"># Crear rezagos de la temperatura media</span></span>
+<span id="cb32-4"><a href="modulo-2.html#cb32-4" tabindex="-1"></a>data<span class="sc">$</span>lag1 <span class="ot">&lt;-</span> <span class="fu">lag</span>(data<span class="sc">$</span>meantemp, <span class="dv">1</span>)  <span class="co"># Rezago de un día</span></span>
+<span id="cb32-5"><a href="modulo-2.html#cb32-5" tabindex="-1"></a>data<span class="sc">$</span>lag7 <span class="ot">&lt;-</span> <span class="fu">lag</span>(data<span class="sc">$</span>meantemp, <span class="dv">7</span>)  <span class="co"># Rezago de una semana</span></span>
+<span id="cb32-6"><a href="modulo-2.html#cb32-6" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="modulo-2.html#cb32-7" tabindex="-1"></a><span class="co"># Visualización de la temperatura con rezagos</span></span>
+<span id="cb32-8"><a href="modulo-2.html#cb32-8" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> date)) <span class="sc">+</span></span>
+<span id="cb32-9"><a href="modulo-2.html#cb32-9" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> meantemp, <span class="at">color =</span> <span class="st">&quot;Temperatura actual&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb32-10"><a href="modulo-2.html#cb32-10" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> lag1, <span class="at">color =</span> <span class="st">&quot;Rezago 1 día&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb32-11"><a href="modulo-2.html#cb32-11" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> lag7, <span class="at">color =</span> <span class="st">&quot;Rezago 7 días&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">&quot;dotted&quot;</span>) <span class="sc">+</span></span>
+<span id="cb32-12"><a href="modulo-2.html#cb32-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Temperatura Media y Rezagos&quot;</span>,</span>
+<span id="cb32-13"><a href="modulo-2.html#cb32-13" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Fecha&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Temperatura (°C)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb32-14"><a href="modulo-2.html#cb32-14" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;Temperatura actual&quot;</span> <span class="ot">=</span> <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;Rezago 1 día&quot;</span> <span class="ot">=</span> <span class="st">&quot;green&quot;</span>, <span class="st">&quot;Rezago 7 días&quot;</span> <span class="ot">=</span> <span class="st">&quot;red&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb32-15"><a href="modulo-2.html#cb32-15" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<pre><code>## Warning: Removed 1 row containing missing values or values outside the scale range
+## (`geom_line()`).</code></pre>
+<pre><code>## Warning: Removed 7 rows containing missing values or values outside the scale range
+## (`geom_line()`).</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+Análisis Adicional de Rezagos
+Además de visualizar los rezagos, podrías investigar más a fondo las correlaciones estadísticas entre la temperatura actual y sus rezagos para entender cuánto influyen los valores pasados en el presente:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="modulo-2.html#cb35-1" tabindex="-1"></a><span class="co"># Calcular la correlación entre la temperatura y sus rezagos</span></span>
+<span id="cb35-2"><a href="modulo-2.html#cb35-2" tabindex="-1"></a><span class="fu">cor</span>(data<span class="sc">$</span>meantemp, data<span class="sc">$</span>lag1, <span class="at">use =</span> <span class="st">&quot;complete.obs&quot;</span>)  <span class="co"># Correlación con rezago de un día</span></span></code></pre></div>
+<pre><code>## [1] 0.9740675</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="modulo-2.html#cb37-1" tabindex="-1"></a><span class="fu">cor</span>(data<span class="sc">$</span>meantemp, data<span class="sc">$</span>lag7, <span class="at">use =</span> <span class="st">&quot;complete.obs&quot;</span>)  <span class="co"># Correlación con rezago de siete días</span></span></code></pre></div>
+<pre><code>## [1] 0.9161794</code></pre>
+</div>
+<div id="análisis-de-estacionalidad" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Análisis de Estacionalidad<a href="modulo-2.html#análisis-de-estacionalidad" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="modulo-2.html#cb39-1" tabindex="-1"></a><span class="co"># Asumiendo que la librería lubridate ya está cargada y que &#39;data&#39; es tu dataframe</span></span>
+<span id="cb39-2"><a href="modulo-2.html#cb39-2" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="modulo-2.html#cb39-3" tabindex="-1"></a><span class="co"># Extraer el mes de cada fecha para análisis estacional</span></span>
+<span id="cb39-4"><a href="modulo-2.html#cb39-4" tabindex="-1"></a>data<span class="sc">$</span>month <span class="ot">&lt;-</span> <span class="fu">month</span>(data<span class="sc">$</span>date)</span>
+<span id="cb39-5"><a href="modulo-2.html#cb39-5" tabindex="-1"></a></span>
+<span id="cb39-6"><a href="modulo-2.html#cb39-6" tabindex="-1"></a><span class="co"># Calcular la media mensual de la temperatura</span></span>
+<span id="cb39-7"><a href="modulo-2.html#cb39-7" tabindex="-1"></a>monthly_avg <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb39-8"><a href="modulo-2.html#cb39-8" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span></span>
+<span id="cb39-9"><a href="modulo-2.html#cb39-9" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_temp =</span> <span class="fu">mean</span>(meantemp, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb39-10"><a href="modulo-2.html#cb39-10" tabindex="-1"></a></span>
+<span id="cb39-11"><a href="modulo-2.html#cb39-11" tabindex="-1"></a><span class="co"># Ordenar los resultados por mes para correcta visualización</span></span>
+<span id="cb39-12"><a href="modulo-2.html#cb39-12" tabindex="-1"></a>monthly_avg <span class="ot">&lt;-</span> monthly_avg <span class="sc">%&gt;%</span></span>
+<span id="cb39-13"><a href="modulo-2.html#cb39-13" tabindex="-1"></a>  <span class="fu">arrange</span>(month)</span>
+<span id="cb39-14"><a href="modulo-2.html#cb39-14" tabindex="-1"></a></span>
+<span id="cb39-15"><a href="modulo-2.html#cb39-15" tabindex="-1"></a><span class="co"># Visualizar la estacionalidad de la temperatura media</span></span>
+<span id="cb39-16"><a href="modulo-2.html#cb39-16" tabindex="-1"></a><span class="fu">ggplot</span>(monthly_avg, <span class="fu">aes</span>(<span class="at">x =</span> month, <span class="at">y =</span> mean_temp)) <span class="sc">+</span></span>
+<span id="cb39-17"><a href="modulo-2.html#cb39-17" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">group =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb39-18"><a href="modulo-2.html#cb39-18" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb39-19"><a href="modulo-2.html#cb39-19" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Ene&quot;</span>, <span class="st">&quot;Feb&quot;</span>, <span class="st">&quot;Mar&quot;</span>, <span class="st">&quot;Abr&quot;</span>, <span class="st">&quot;May&quot;</span>, <span class="st">&quot;Jun&quot;</span>, <span class="st">&quot;Jul&quot;</span>, <span class="st">&quot;Ago&quot;</span>, <span class="st">&quot;Sep&quot;</span>, <span class="st">&quot;Oct&quot;</span>, <span class="st">&quot;Nov&quot;</span>, <span class="st">&quot;Dic&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb39-20"><a href="modulo-2.html#cb39-20" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Estacionalidad de la Temperatura Media por Mes&quot;</span>,</span>
+<span id="cb39-21"><a href="modulo-2.html#cb39-21" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Mes&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Temperatura Media (°C)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb39-22"><a href="modulo-2.html#cb39-22" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>Análisis Adicional de Estacionalidad
+Para un análisis más profundo, podrías considerar el uso de técnicas de descomposición de series temporales para separar explícitamente la estacionalidad de otras componentes como la tendencia y el ruido:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="modulo-2.html#cb40-1" tabindex="-1"></a><span class="co"># Usar la función stl() para descomposición estacional</span></span>
+<span id="cb40-2"><a href="modulo-2.html#cb40-2" tabindex="-1"></a>data_ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(data<span class="sc">$</span>meantemp, <span class="at">frequency =</span> <span class="dv">12</span>)  <span class="co"># Asumiendo datos mensuales</span></span>
+<span id="cb40-3"><a href="modulo-2.html#cb40-3" tabindex="-1"></a>result_stl <span class="ot">&lt;-</span> <span class="fu">stl</span>(data_ts, <span class="at">s.window =</span> <span class="st">&quot;periodic&quot;</span>)</span>
+<span id="cb40-4"><a href="modulo-2.html#cb40-4" tabindex="-1"></a></span>
+<span id="cb40-5"><a href="modulo-2.html#cb40-5" tabindex="-1"></a><span class="co"># Visualizar los componentes de la descomposición</span></span>
+<span id="cb40-6"><a href="modulo-2.html#cb40-6" tabindex="-1"></a><span class="fu">plot</span>(result_stl)</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="análisis-dataset.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="modulo-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": false,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
