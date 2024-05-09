@@ -145,7 +145,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2" data-path="análisis-dataset.html"><a href="análisis-dataset.html"><i class="fa fa-check"></i><b>2</b> Análisis Dataset</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="análisis-dataset.html"><a href="análisis-dataset.html#análisis-exploratorio-de-datos"><i class="fa fa-check"></i><b>2.1</b> Análisis exploratorio de datos</a></li>
+<li class="chapter" data-level="2.1" data-path="análisis-dataset.html"><a href="análisis-dataset.html#dataset"><i class="fa fa-check"></i><b>2.1</b> Dataset</a></li>
+<li class="chapter" data-level="2.2" data-path="análisis-dataset.html"><a href="análisis-dataset.html#resumen-estadístico-de-las-variables"><i class="fa fa-check"></i><b>2.2</b> Resumen Estadístico de las Variables</a></li>
+<li class="chapter" data-level="2.3" data-path="análisis-dataset.html"><a href="análisis-dataset.html#correlación"><i class="fa fa-check"></i><b>2.3</b> Correlación</a></li>
+<li class="chapter" data-level="2.4" data-path="análisis-dataset.html"><a href="análisis-dataset.html#análisis-exploratorio-de-datos"><i class="fa fa-check"></i><b>2.4</b> Análisis exploratorio de datos</a></li>
+<li class="chapter" data-level="2.5" data-path="análisis-dataset.html"><a href="análisis-dataset.html#descomposición-de-series-temporales"><i class="fa fa-check"></i><b>2.5</b> Descomposición de Series Temporales</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="modulo-2.html"><a href="modulo-2.html"><i class="fa fa-check"></i><b>3</b> Modulo 2</a>
 <ul>
@@ -232,7 +236,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## generated.</code></pre>
 <pre><code>## Warning: Removed 29 rows containing missing values or values outside the scale range
 ## (`geom_line()`).</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 </div>
 <div id="análisis-de-rezagos" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> Análisis de Rezagos<a href="modulo-2.html#análisis-de-rezagos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -255,7 +259,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## (`geom_line()`).</code></pre>
 <pre><code>## Warning: Removed 7 rows containing missing values or values outside the scale range
 ## (`geom_line()`).</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<p><img src="index_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 Análisis Adicional de Rezagos
 Además de visualizar los rezagos, podrías investigar más a fondo las correlaciones estadísticas entre la temperatura actual y sus rezagos para entender cuánto influyen los valores pasados en el presente:</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="modulo-2.html#cb35-1" tabindex="-1"></a><span class="co"># Calcular la correlación entre la temperatura y sus rezagos</span></span>
@@ -288,7 +292,7 @@ Además de visualizar los rezagos, podrías investigar más a fondo las correlac
 <span id="cb39-20"><a href="modulo-2.html#cb39-20" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Estacionalidad de la Temperatura Media por Mes&quot;</span>,</span>
 <span id="cb39-21"><a href="modulo-2.html#cb39-21" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Mes&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Temperatura Media (°C)&quot;</span>) <span class="sc">+</span></span>
 <span id="cb39-22"><a href="modulo-2.html#cb39-22" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <p>Análisis Adicional de Estacionalidad
 Para un análisis más profundo, podrías considerar el uso de técnicas de descomposición de series temporales para separar explícitamente la estacionalidad de otras componentes como la tendencia y el ruido:</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="modulo-2.html#cb40-1" tabindex="-1"></a><span class="co"># Usar la función stl() para descomposición estacional</span></span>
@@ -297,7 +301,7 @@ Para un análisis más profundo, podrías considerar el uso de técnicas de desc
 <span id="cb40-4"><a href="modulo-2.html#cb40-4" tabindex="-1"></a></span>
 <span id="cb40-5"><a href="modulo-2.html#cb40-5" tabindex="-1"></a><span class="co"># Visualizar los componentes de la descomposición</span></span>
 <span id="cb40-6"><a href="modulo-2.html#cb40-6" tabindex="-1"></a><span class="fu">plot</span>(result_stl)</span></code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 </div>
 </div>
             </section>

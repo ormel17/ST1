@@ -37,7 +37,7 @@ Utilizando este conjunto de datos, podemos desarrollar y validar modelos predict
 
 
 
-Cargamos nuestro Dataset
+## Dataset
 
 ```{r}
 ruta <- "C:/Users/Diego Ortiz/OneDrive/Documentos/Series de tiempo/Series1/ST1/DailyDelhiClimateTrain.csv"
@@ -45,52 +45,206 @@ ruta <- "C:/Users/Diego Ortiz/OneDrive/Documentos/Series de tiempo/Series1/ST1/D
 
 data <- read.csv(ruta)
 
-head(data)
+
 ```
 
-##Análisis inicial
+
 
 ```{r include=FALSE}
 # Carga de la biblioteca necesaria
 library(tidyverse)
 ```
 
-
+Validamos el cargue inicial de nuestro Dataset
 ```{r}
-# Inspección de las primeras filas del dataset
+
 head(data)
+```
 
-# Resumen estadístico de los datos
+## Resumen Estadístico de las Variables
+```{r}
 summary(data)
+```
+<br>
 
-# Verificar si hay valores NA
+* **1. Temperatura Media (meantemp)**
+
+<br>
+
+**Rango:** De 6°C a 38.71°C, mostrando una gran variabilidad anual que es típica de zonas con cambios estacionales marcados.
+
+**Cuartiles:**
+
+**1er Cuartil (Q1):** 18.86°C, indicando que el 25% de los días tienen una temperatura igual o menor a este valor.
+
+**Mediana:** 27.71°C, lo que significa que la mitad de los días son más fríos y la otra mitad más calurosos que este valor.
+
+**3er Cuartil (Q3):** 31.31°C, el 75% de los días tienen temperaturas que no superan este valor.
+
+**Media:** 25.50°C, cercana a la mediana, lo que sugiere una distribución relativamente simétrica de las temperaturas alrededor de este valor central.
+
+<br>
+
+* **2. Humedad**
+
+<br>
+
+**Rango:** De 13.43% a 100%, indicando días con muy baja humedad hasta saturación completa.
+
+**Cuartiles:**
+
+**1er Cuartil (Q1):** 50.38%, el 25% de los días tienen una humedad igual o menor a este valor.
+
+**Mediana:** 62.62%, más de la mitad de los días tienen una humedad superior a este porcentaje.
+
+**Q3:** 72.22%, tres cuartos de los días presentan una humedad que no excede este valor.
+
+**Media:** 60.77%, también cercana a la mediana, sugiriendo una distribución equilibrada de la humedad.
+
+<br>
+
+* **3. Velocidad del Viento**
+
+<br>
+
+**Rango:** De 0 km/h a 42.22 km/h, mostrando días sin viento hasta días con vientos fuertes.
+
+**Cuartiles:**
+
+**Q1:** 3.475 km/h, un cuarto de los días tienen una velocidad de viento igual o menor a este valor.
+
+**Mediana:** 6.222 km/h, indicando que la mitad de los días tienen velocidades de viento menores a este valor.
+
+**Q3:** 9.238 km/h, el 75% de los días tienen velocidades de viento que no superan este valor.
+
+**Media:** 6.802 km/h, ligeramente superior a la mediana, sugiriendo un leve sesgo hacia días con más viento.
+
+<br>
+
+* **4. Presión Media**
+
+<br>
+
+**Rango:** De -3.042 hPa  a 7679.333 hPa.
+
+**Cuartiles:**
+
+**Q1:** 1001.580 hPa, indicando condiciones normales de presión atmosférica.
+
+**Mediana:** 1008.563 hPa, valor medio típico de la presión atmosférica.
+
+**Q3:** 1014.945 hPa, dentro de lo esperado para la presión normal.
+
+**Media:** 1011.105 hPa, cercana a la mediana.
+<br>
+
+Verificamos  si hay valores NA
+```{r}
 sum(is.na(data))
+```
+No tenemos valores nulos en nuestro Dataset
+<br>
+<br>
 
-# Gráfico de correlación para ver relaciones preliminares
-library(corrplot)
-correlation_matrix <- cor(data %>% select(-date))
-corrplot(correlation_matrix, method = "circle")
+## Correlación
+
+
+
+
+
+```{R}
+# Instalar corrplot si no está instalada
+if(!require(corrplot)){
+  install.packages("corrplot")
+  library(corrplot)
+}
+
+# Calcular la matriz de correlación
+correlation_matrix <- cor(data[, c("meantemp", "humidity", "wind_speed", "meanpressure")], use = "complete.obs")
+
+# Gráfico de la matriz de correlación
+corrplot(correlation_matrix, method = "circle", type = "upper", order = "hclust", 
+         tl.col = "black", tl.srt = 45, addCoef.col = "black", 
+         title = "Matriz de Correlación de Variables Climáticas", cl.cex = 0.8, tl.cex = 0.8)
 
 
 ```
+
+<br>
+
+* **Temperatura Media (meantemp) y Velocidad del Viento (wind_speed):**
+
+
+**Correlación= 0.31:**  Hay una correlación positiva moderada entre la temperatura media y la velocidad del viento. Esto sugiere que, en general, días más cálidos tienden a estar asociados con vientos más fuertes. Esto podría deberse a que el calor puede intensificar los movimientos del aire debido a diferencias en la presión atmosférica.
+
+<br>
+
+* **Temperatura Media (meantemp) y Humedad (humidity):**
+
+**Correlación= -0.057:** La correlación es muy débil y negativa, indicando que no hay una relación lineal significativa entre la temperatura y la humedad. Los días más cálidos no muestran una tendencia clara de ser más o menos húmedos.
+
+<br>
+
+* **Temperatura Media (meantemp) y Presión Media (meanpressure):**
+
+**Correlación= -0.03:** Similar al caso anterior, hay una correlación negativa muy débil, casi inexistente, entre la temperatura media y la presión media. Esto indica que las variaciones en la temperatura tienen poco o ningún efecto lineal sobre la presión atmosférica en este conjunto de datos.
+
+<br>
+
+* **Velocidad del Viento (wind_speed) y Humedad (humidity):**
+
+**Correlación= -0.37:**  Existe una correlación negativa moderada entre la velocidad del viento y la humedad. Esto puede sugerir que días con vientos más fuertes tienden a tener menor humedad, posiblemente porque el viento dispersa la humedad del aire.
+
+<br>
+
+* **Velocidad del Viento (wind_speed) y Presión Media (meanpressure):**
+
+**Correlación= -0.02:** Hay una correlación negativa muy baja entre la velocidad del viento y la presión media, lo que sugiere que no hay una relación lineal clara entre estas dos variables.
+
+<br>
+
+* **Humedad (humidity) y Presión Media (meanpressure):**
+
+**Correlación= 0:** No existe correlación entre la humedad y la presión media, indicando que los cambios en una no están linealmente relacionados con cambios en la otra en este conjunto de datos.
 
 
 ## Análisis exploratorio de datos
 
 **Distribuciones individuales**
 
-```{r}
+<br>
 
+**Temperatura Media**
+
+
+
+```{r}
 # Histograma de la temperatura media
 ggplot(data, aes(x = meantemp)) +
   geom_histogram(bins = 30, fill = "blue", color = "black") +
   labs(title = "Distribución de la Temperatura Media", x = "Temperatura Media", y = "Frecuencia")
+```
+El histograma de la temperatura media muestra una distribución bimodal, con dos picos claramente definidos. Esto sugiere patrones estacionales, con temperaturas más bajas en los meses de invierno y más altas en los meses de verano. La distribución relativamente amplia indica variabilidad en las temperaturas diarias a lo largo del año.
 
+<br>
+
+**Humedad**
+
+<br>
+
+```{r}
 # Histograma de la humedad
 ggplot(data, aes(x = humidity)) +
   geom_histogram(bins = 30, fill = "green", color = "black") +
   labs(title = "Distribución de la Humedad", x = "Humedad", y = "Frecuencia")
+```
+La distribución de la humedad parece ser ligeramente sesgada hacia la derecha, con un rango que cubre desde muy baja hasta saturación (100%). La mayoría de los valores se concentra alrededor del 50-80%, indicando una humedad generalmente alta en esta área.
 
+<br>
+
+**Velocidad del viento**
+
+```{r}
 # Histograma de la velocidad del viento
 ggplot(data, aes(x = wind_speed)) +
   geom_histogram(bins = 30, fill = "red", color = "black") +
@@ -98,43 +252,56 @@ ggplot(data, aes(x = wind_speed)) +
 
 
 ```
+El histograma para la velocidad del viento muestra una distribución sesgada hacia la derecha, con la mayoría de los días teniendo velocidades bajas a moderadas y unos pocos días con velocidades extremadamente altas. Esto es típico en áreas donde los días de viento extremo son menos frecuentes pero pueden alcanzar velocidades significativas.
 
-
-* **Relaciones Entre Variables**
+## Descomposición de Series Temporales
 
 ```{r}
-# Diagrama de dispersión de temperatura vs. humedad
-ggplot(data, aes(x = meantemp, y = humidity)) +
-  geom_point(alpha = 0.5, color = "blue") +
-  labs(title = "Temperatura Media vs. Humedad", x = "Temperatura Media", y = "Humedad")
+# Asegurándose de que la columna de fecha es de tipo Date
+data$date <- as.Date(data$date)
 
-# Diagrama de dispersión de temperatura vs. velocidad del viento
-ggplot(data, aes(x = meantemp, y = wind_speed)) +
-  geom_point(alpha = 0.5, color = "red") +
-  labs(title = "Temperatura Media vs. Velocidad del Viento", x = "Temperatura Media", y = "Velocidad del Viento")
-
+# Cargar ggplot2 para gráficos
+library(ggplot2)
 ```
 
-* **Series Temporales**
+<br>
+**Temperatura Media**
 
 ```{r}
 
-# Gráfico de series temporales para la temperatura media
-data$date <- as.Date(data$date)  # Asegúrate de que la columna 'date' esté en formato de fecha
 ggplot(data, aes(x = date, y = meantemp)) +
-  geom_line(color = "blue") +
-  labs(title = "Serie Temporal de la Temperatura Media", x = "Fecha", y = "Temperatura Media")
+  geom_line(group=1, colour="blue") +
+  labs(title="Serie Temporal de la Temperatura Media", x="Fecha", y="Temperatura Media (°C)")
+```
+El gráfico de la serie temporal de la temperatura media muestra una clara estacionalidad con temperaturas que oscilan regularmente cada año, sin una tendencia general evidente de aumento o disminución a lo largo del tiempo. Las variaciones estacionales son prominentes, con picos durante los meses de verano y valles en los meses de invierno, reflejando la típica fluctuación climática de la región. La variabilidad interanual en la amplitud de estas oscilaciones sugiere diferencias en la intensidad de las estaciones que podrían estar influenciadas por factores climáticos adicionales. No se observan tendencias a largo plazo en el aumento o disminución de las temperaturas medias anuales, lo que indica una relativa estabilidad en el clima durante el período observado.
 
-# Gráfico de series temporales para la humedad
+<br>
+**Humeda**
+
+```{r}
+
 ggplot(data, aes(x = date, y = humidity)) +
-  geom_line(color = "green") +
-  labs(title = "Serie Temporal de la Humedad", x = "Fecha", y = "Humedad")
-
-
+  geom_line(group=1, colour="green") +
+  labs(title="Serie Temporal de la Humedad", x="Fecha", y="Humedad (%)")
 ```
 
+El gráfico de la serie temporal de la humedad muestra una estacionalidad marcada, con oscilaciones claras y repetidas que indican variaciones significativas entre períodos húmedos y secos a lo largo del año. Las diferencias anuales en la altura de los picos sugieren variabilidad en la intensidad de las estaciones lluviosas, probablemente relacionadas con cambios en los patrones climáticos locales. Los períodos de alta humedad, que a menudo alcanzan el 100%, podrían corresponder a las temporadas de monzones, mientras que los valles representan los tiempos más secos, destacando la influencia de los ciclos estacionales en el clima de la región.
 
-# Modulo 2
+<br>
+**Velocidad del Viento**
+
+```{r}
+ggplot(data, aes(x = date, y = wind_speed)) +
+  geom_line(group=1, colour="red") +
+  labs(title="Serie Temporal de la Velocidad del Viento", x="Fecha", y="Velocidad del Viento (km/h)")
+```
+El gráfico muestra la velocidad del viento a lo largo de varios años, destacando variaciones diarias significativas sin una tendencia clara de aumento o disminución a largo plazo. La velocidad del viento presenta una estacionalidad menos marcada comparada con la temperatura y la humedad, aunque se observan picos ocasionales que podrían corresponder a eventos meteorológicos específicos como tormentas o frentes de alta velocidad. Estos picos son notables y esporádicos, con la mayoría de los valores concentrados en rangos más bajos, indicando que días con vientos extremadamente fuertes son menos frecuentes. La serie muestra una variabilidad considerable día a día, lo cual es típico en los registros de velocidad del viento debido a su naturaleza altamente dinámica y susceptible a cambios rápidos debido a las condiciones locales y regionales.
+
+
+
+# Unidad 2
+
+##Ajuste de los datos
 
 Ajustamos el formato fecha
 
@@ -146,18 +313,18 @@ print(head(data$date))
 
 
 ```{r}
-# Cargar las bibliotecas necesarias
-library(tidyverse)  # Para manipulación de datos y ggplot2
-library(lubridate)  # Para manejo de fechas
+
+library(tidyverse)  
+library(lubridate)  
 
 
 # Convertir la columna de fecha a formato de fecha usando ymd()
 data$date <- ymd(data$date)
 
-# Inspeccionar los primeros registros para confirmar que la conversión fue exitosa
+# Validar primeros registros
 head(data)
 
-# Inspección de la estructura de los datos para asegurar que las transformaciones son correctas
+# Ver structura de los datos para asegurar que las transformaciones son correctas
 str(data)
 
 
@@ -166,9 +333,9 @@ str(data)
 ## Análiis del promedio movil
 
 ```{r}
-# Asumiendo que la librería lubridate ya está cargada y la fecha ha sido convertida
 
-# Cargar la biblioteca necesaria para el cálculo de medias móviles
+
+# Cargar la biblioteca para el cálculo de medias móviles
 library(zoo)
 
 # Calcular el promedio móvil de 30 días para la temperatura media
@@ -184,11 +351,12 @@ ggplot(data, aes(x = date)) +
   theme_minimal()
 
 ```
+El gráfico muestra claramente las tendencias subyacentes y suaviza las fluctuaciones diarias, resaltando la estacionalidad marcada en la serie de tiempo. La línea roja del promedio móvil sigue de cerca los picos y valles del gráfico de temperatura original (azul), pero con menos ruido, facilitando la identificación de los períodos más cálidos y fríos del año. Esta suavización ayuda a visualizar la tendencia central de la temperatura a lo largo del tiempo, lo cual es especialmente útil para analizar patrones estacionales y para detectar anomalías o cambios inusuales en el clima que podrían no ser evidentes en los datos diarios.
 
 ## Análisis de Rezagos
 
 ```{r}
-# Asumiendo que las librerías necesarias ya están cargadas y que 'data' es tu dataframe
+
 
 # Crear rezagos de la temperatura media
 data$lag1 <- lag(data$meantemp, 1)  # Rezago de un día
@@ -206,21 +374,33 @@ ggplot(data, aes(x = date)) +
 
 
 ```
-Análisis Adicional de Rezagos
-Además de visualizar los rezagos, podrías investigar más a fondo las correlaciones estadísticas entre la temperatura actual y sus rezagos para entender cuánto influyen los valores pasados en el presente:
+El gráfico de la temperatura media junto con sus rezagos de 1 día y 7 días ilustra cómo las temperaturas pasadas están estrechamente relacionadas con los valores actuales, lo que sugiere una fuerte autocorrelación diaria y semanal en la serie temporal. La superposición de las líneas de rezago con la temperatura actual muestra que los patrones diarios y semanales son consistentes a lo largo del tiempo, con los rezagos siguiendo muy de cerca la serie principal, especialmente el rezago de un día.
+
+Esto refleja que las temperaturas de días anteriores pueden ser buenos predictores de la temperatura del día siguiente, evidenciando dependencia temporal significativa. Los rezagos de una semana, aunque también siguen de cerca la tendencia principal, muestran una variación ligeramente mayor, indicando que mientras la influencia de los valores pasados persiste a lo largo de la semana, los factores externos o variaciones naturales pueden influir más en la variabilidad a medida que aumenta el intervalo de rezago.
+
+
+**Correlación Rezagos**
+
+* **Rezago 1 Día**
 
 ```{r}
-# Calcular la correlación entre la temperatura y sus rezagos
 cor(data$meantemp, data$lag1, use = "complete.obs")  # Correlación con rezago de un día
+```
+La correlación entre la temperatura y sus rezagos revela una conexión notablemente fuerte tanto a corto como a mediano plazo. La correlación de 0.974 para el rezago de un día indica que la temperatura de un día específico es casi perfectamente predictiva de la temperatura del día siguiente, reflejando una alta dependencia diaria. Esto es común en variables climáticas como la temperatura, donde las condiciones de un día tienden a ser similares al siguiente, a menos que ocurran cambios meteorológicos significativos.
+<br>
+* **Rezago 7 Día**
+
+```{r}
 cor(data$meantemp, data$lag7, use = "complete.obs")  # Correlación con rezago de siete días
 
 ```
-
+La correlación de 0.916 para el rezago de siete días sigue siendo muy alta, lo que sugiere que la temperatura también tiene una fuerte memoria semanal. Aunque la influencia se atenúa ligeramente con el tiempo, el valor sigue siendo lo suficientemente alto como para indicar que la temperatura de una semana puede predecir bastante bien la temperatura de la semana siguiente. Esto puede ser útil para pronósticos a corto plazo, ya que muestra que las temperaturas tienden a mantenerse relativamente estables o seguir patrones predecibles a lo largo de una semana.
 
 ## Análisis de Estacionalidad
 
+**Análisis estacional**
+
 ```{r}
-# Asumiendo que la librería lubridate ya está cargada y que 'data' es tu dataframe
 
 # Extraer el mes de cada fecha para análisis estacional
 data$month <- month(data$date)
@@ -246,8 +426,11 @@ ggplot(monthly_avg, aes(x = month, y = mean_temp)) +
 
 ```
 
-Análisis Adicional de Estacionalidad
-Para un análisis más profundo, podrías considerar el uso de técnicas de descomposición de series temporales para separar explícitamente la estacionalidad de otras componentes como la tendencia y el ruido:
+El gráfico que muestra la estacionalidad de la temperatura media por mes en Delhi ilustra claramente el patrón estacional típico en la región. Se observa un aumento pronunciado en las temperaturas desde enero, alcanzando su punto máximo en los meses de verano de mayo a julio, donde las temperaturas se mantienen en valores altos. Posteriormente, las temperaturas comienzan a disminuir gradualmente hacia el final del año.
+
+Este patrón refleja las características climáticas de un clima subtropical, donde los veranos son calurosos y los inviernos relativamente fríos. La gráfica destaca los meses más cálidos claramente, lo que puede ser crucial para la planificación en sectores como la agricultura, la salud pública y la gestión de recursos energéticos, ya que estos meses pueden requerir medidas adicionales debido al calor extremo. Además, el marcado descenso hacia finales de año sugiere que las condiciones se vuelven considerablemente más frescas, lo que también podría tener implicaciones significativas en varias actividades y servicios.
+
+**Descomposición estacional**
 
 ```{r}
 # Usar la función stl() para descomposición estacional
@@ -259,18 +442,31 @@ plot(result_stl)
 
 
 ```
+**Análisis de los Componentes:**
+<br>
+
+* **Componente de Datos:**
+Muestra la serie temporal original de la temperatura media. Esta visualización es útil para comparar directamente con los componentes extraídos y ver cómo se componen los datos originales.
+
+* **Componente Estacional:**
+Claramente visible, este componente captura la variabilidad estacional de la serie, mostrando patrones repetitivos que corresponden a las fluctuaciones estacionales anuales. Este patrón estacional es muy regular, indicando fuertes variaciones estacionales que son típicas en los datos climáticos, donde las temperaturas cambian según la estación.
+
+* **Componente de Tendencia:**
+Este gráfico muestra la tendencia subyacente en los datos, eliminando los efectos de la estacionalidad y otros ruidos. Observamos un movimiento suave que revela los cambios a largo plazo en la temperatura, como un aumento o disminución gradual. Esto es crucial para comprender las tendencias climáticas a lo largo del tiempo, incluyendo el calentamiento o enfriamiento en la región de estudio.
+
+* **Componente de Residuo:**
+Los residuos representan lo que queda después de extraer los componentes de tendencia y estacionalidad. Estos pueden incluir efectos aleatorios y anomalías no capturadas por los modelos de estacionalidad y tendencia. El gráfico de residuos parece ser bastante "ruidoso", lo cual es típico, indicando que hay variaciones en los datos que no se ajustan a patrones estacionales simples o tendencias suaves.
+
+# Unidad 3
 
 
-# Modulo 3
+## Análisis Visual y Descomposición de la Serie Temporal
 
+<br>
 
-Para abordar la pregunta sobre si es necesario implementar transformaciones para controlar la tendencia y la variabilidad en tu serie de tiempo de datos climáticos, primero debemos entender las características de tus datos y cuál podría ser el impacto de tales transformaciones. Aquí vamos a explorar y justificar el uso de dichos procedimientos.
+**Visualización inicial**
 
-Análisis de la Necesidad de Transformaciones
-Evaluación de la Tendencia y Variabilidad:
-Para decidir si se necesitan transformaciones, primero es crucial evaluar la presencia de tendencias no estacionarias y la variabilidad en los datos. Esto se puede hacer visualizando los datos y utilizando pruebas estadísticas.
-Visualización de Tendencias:
-Utiliza gráficos de línea para observar visualmente si hay una tendencia creciente o decreciente en los datos.
+Utilizamos gráficos de líneas para obtener una vista preliminar de los datos. Esto  ayudará a identificar visualmente tendencias y ciclos.
 
 ```{r}
 ggplot(data, aes(x = date, y = meantemp)) +
@@ -278,23 +474,65 @@ ggplot(data, aes(x = date, y = meantemp)) +
   labs(title = "Tendencia de la Temperatura Media", x = "Fecha", y = "Temperatura Media")
 
 ```
-Prueba de Dickey-Fuller Aumentada (ADF):
-Esta prueba te ayudará a determinar si la serie es estacionaria o no, lo que es crucial para decidir sobre la necesidad de transformaciones.
+La visualización inicial de la tendencia de la temperatura media  muestra la variabilidad y los patrones estacionales a lo largo del tiempo. Este gráfico ilustra la oscilación de las temperaturas a través de las estaciones, con picos durante los meses de verano y valles en los meses de invierno, lo que indica una fuerte estacionalidad en los datos. Además, la serie muestra fluctuaciones dentro de cada temporada que podrían estar influenciadas por factores meteorológicos adicionales.
+
+* Estacionalidad: 
+Los picos y valles recurrentes a lo largo de los años demuestran la influencia de las estaciones en la temperatura media. Esto es típico de las regiones que experimentan variaciones climáticas significativas a lo largo del año.
+
+* Variabilidad: 
+La variabilidad en las temperaturas también puede sugerir la influencia de fenómenos climáticos más cortos como olas de calor o frentes fríos.
+
+**Descomposición**
+
+```{r}
+library(forecast)  
+
+
+ts_data <- ts(data$meantemp, frequency = 365)  # Ajusta la frecuencia 
+
+# Aplicar STL
+result_stl <- stl(ts_data, s.window = "periodic")  
+
+plot(result_stl)
+
+
+```
+**Componente de Datos:** La gráfica superior muestra la serie temporal original, que es crucial para visualizar cómo la temperatura fluctúa a lo largo del tiempo.
+
+**Componente Estacional:** Este componente destaca la estacionalidad regular y predecible en la serie temporal, reflejando los patrones estacionales típicos que se repiten anualmente. Es vital para comprender cómo las temperaturas cambian con las estaciones.
+
+**Componente de Tendencia:** La tendencia muestra un incremento gradual a lo largo del tiempo, sugiriendo un aumento en las temperaturas medias que podría ser de interés para estudios sobre el clima y el medio ambiente. Esta tendencia ascendente podría indicar un calentamiento a largo plazo en la región estudiada.
+
+**Componente de Residuo:** Los residuos representan la variabilidad aleatoria que no es explicada por los patrones estacionales ni por la tendencia. Estos son relativamente pequeños y aleatorios, lo que sugiere que los componentes de estacionalidad y tendencia están capturando bien las dinámicas principales de la serie temporal.
+
+
+## Verificación de estacionareidad
+
+Determinamos si la serie temporal es estacionaria
+
+**Prueba de Dickey-Fuller Aumentada (ADF):**
+Una prueba estadística para verificar la presencia de una raíz unitaria, indicativo de no estacionariedad.
 
 ```{r}
 library(tseries)
 adf.test(data$meantemp, alternative = "stationary")
 
 ```
+**Análisis Resultados:**
 
-Los resultados de la prueba de Dickey-Fuller Aumentada (ADF) que has obtenido muestran un valor de p-valor de 0.6407, lo cual es significativamente mayor que cualquier umbral común de significancia (como 0.05 o 0.01). Esto indica que no podemos rechazar la hipótesis nula de que la serie tiene una raíz unitaria, es decir, que la serie no es estacionaria.
+**Dickey-Fuller =** -1.8526: Este valor por sí solo no es suficiente para rechazar la hipótesis nula sin considerar el p-valor asociado.
 
-Interpretación
-La falta de estacionariedad implica que la serie temporal de la temperatura media tiene una tendencia o variabilidad que cambia con el tiempo, lo que puede afectar los análisis futuros y la capacidad de hacer pronósticos precisos.
+**p-valor = 0.6407:** Al ser un p-valor alto, confirma que la serie temporal tiene una tendencia estocástica o una raíz unitaria, indicando que la serie es no estacionaria.
 
-Este análisis explora la necesidad de aplicar transformaciones a la serie temporal de la temperatura media para controlar la tendencia y la variabilidad.
+**Implicaciones de la No Estacionariedad**
 
- Transformación Logarítmica y Visualización
+La no estacionariedad en la serie temporal puede presentar desafíos significativos para el análisis y la predicción porque los modelos estadísticos y de machine learning que asumen estacionariedad pueden dar resultados engañosos o inexactos cuando se aplican a datos no estacionarios, ademas la variabilidad en la media y la varianza a lo largo del tiempo puede afectar la precisión de las predicciones a largo plazo.
+
+
+
+Para abordar la no estacionariedad y hacer la serie temporal adecuada para análisis y modelado predictivonos vemos en la necesidad de aplicar transformaciones a la serie temporal de la temperatura media para controlar la tendencia y la variabilidad.
+
+**Transformación Logarítmica y Visualización**
 
 ```{r transform-and-plot-log}
 # Transformación Logarítmica
@@ -306,7 +544,8 @@ ggplot(data, aes(x = date, y = log_meantemp)) +
   labs(title = "Logaritmo de la Temperatura Media", x = "Fecha", y = "Log(Temperatura Media)")
 ```
 
-Diferenciación y Visualización
+**Diferenciación y Visualización**
+
 ```{r}
 # Calcular la diferenciación logarítmica y eliminar la primera fila para mantener la consistencia de datos
 diff_series <- diff(data$log_meantemp)
@@ -319,7 +558,8 @@ ggplot(data, aes(x = date, y = diff_log_meantemp)) +
   labs(title = "Diferencia del Logaritmo de la Temperatura Media", x = "Fecha", y = "Diferencia de Log(Temperatura Media)")
 
 ```
-Reevaluar la Estacionariedad
+
+**Reevaluar la Estacionariedad**
 
 ```{r}
 # Prueba ADF en la serie transformada y diferenciada
@@ -327,4 +567,30 @@ adf_result_transformed <- adf.test(data$diff_log_meantemp, alternative = "statio
 print(adf_result_transformed)
 
 ```
+
+**Resultados de la Prueba ADF**
+
+**Dickey-Fuller = -13.915:** Este valor es mucho más negativo que en la prueba anterior sin diferenciar, lo que indica una fuerte evidencia en contra de la hipótesis nula de presencia de una raíz unitaria.
+**p-valor = 0.01:** Este p-valor es significativamente bajo y sugiere que la hipótesis nula de no estacionariedad puede ser rechazada con un nivel de confianza del 99%.
+
+
+El p-valor bajo y el valor crítico altamente negativo implican que la serie diferenciada y logarítmicamente transformada de la temperatura media ahora es estacionaria. Esto significa que la serie no presenta tendencias o patrones estacionales que dependan del tiempo, lo cual es crucial para el análisis de series temporales y el modelado predictivo.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Los resultados de la prueba de Dickey-Fuller Aumentada (ADF) que has obtenido muestran un valor de p-valor de 0.6407, lo cual es significativamente mayor que cualquier umbral común de significancia (como 0.05 o 0.01). Esto indica que no podemos rechazar la hipótesis nula de que la serie tiene una raíz unitaria, es decir, que la serie no es estacionaria.
+
+Interpretación
+La falta de estacionariedad implica que la serie temporal de la temperatura media tiene una tendencia o variabilidad que cambia con el tiempo, lo que puede afectar los análisis futuros y la capacidad de hacer pronósticos precisos.
 

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Unidad 3 | Documento Bookdown Propuesta</title>
+  <meta name="description" content="Bookdown propuesto para la asignatura Series de Tiempo." />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Unidad 3 | Documento Bookdown Propuesta" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Bookdown propuesto para la asignatura Series de Tiempo." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Unidad 3 | Documento Bookdown Propuesta" />
+  
+  <meta name="twitter:description" content="Bookdown propuesto para la asignatura Series de Tiempo." />
+  
+
+<meta name="author" content="Diego Fernando Ortiz" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="unidad-2.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="inicio.html"><a href="inicio.html"><i class="fa fa-check"></i><b>1</b> Inicio</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="inicio.html"><a href="inicio.html#relevancia-temática"><i class="fa fa-check"></i><b>1.1</b> Relevancia Temática</a></li>
+<li class="chapter" data-level="1.2" data-path="inicio.html"><a href="inicio.html#datos-detallados-y-granulares"><i class="fa fa-check"></i><b>1.2</b> Datos Detallados y Granulares</a></li>
+<li class="chapter" data-level="1.3" data-path="inicio.html"><a href="inicio.html#aplicabilidad-de-análisis-multivariado"><i class="fa fa-check"></i><b>1.3</b> Aplicabilidad de Análisis Multivariado</a></li>
+<li class="chapter" data-level="1.4" data-path="inicio.html"><a href="inicio.html#comparación-interregional"><i class="fa fa-check"></i><b>1.4</b> Comparación Interregional</a></li>
+<li class="chapter" data-level="1.5" data-path="inicio.html"><a href="inicio.html#soporte-para-modelos-predictivos"><i class="fa fa-check"></i><b>1.5</b> Soporte para Modelos Predictivos</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="análisis-dataset.html"><a href="análisis-dataset.html"><i class="fa fa-check"></i><b>2</b> Análisis Dataset</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="análisis-dataset.html"><a href="análisis-dataset.html#dataset"><i class="fa fa-check"></i><b>2.1</b> Dataset</a></li>
+<li class="chapter" data-level="2.2" data-path="análisis-dataset.html"><a href="análisis-dataset.html#resumen-estadístico-de-las-variables"><i class="fa fa-check"></i><b>2.2</b> Resumen Estadístico de las Variables</a></li>
+<li class="chapter" data-level="2.3" data-path="análisis-dataset.html"><a href="análisis-dataset.html#correlación"><i class="fa fa-check"></i><b>2.3</b> Correlación</a></li>
+<li class="chapter" data-level="2.4" data-path="análisis-dataset.html"><a href="análisis-dataset.html#análisis-exploratorio-de-datos"><i class="fa fa-check"></i><b>2.4</b> Análisis exploratorio de datos</a></li>
+<li class="chapter" data-level="2.5" data-path="análisis-dataset.html"><a href="análisis-dataset.html#descomposición-de-series-temporales"><i class="fa fa-check"></i><b>2.5</b> Descomposición de Series Temporales</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="unidad-2.html"><a href="unidad-2.html"><i class="fa fa-check"></i><b>3</b> Unidad 2</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="unidad-2.html"><a href="unidad-2.html#análiis-del-promedio-movil"><i class="fa fa-check"></i><b>3.1</b> Análiis del promedio movil</a></li>
+<li class="chapter" data-level="3.2" data-path="unidad-2.html"><a href="unidad-2.html#análisis-de-rezagos"><i class="fa fa-check"></i><b>3.2</b> Análisis de Rezagos</a></li>
+<li class="chapter" data-level="3.3" data-path="unidad-2.html"><a href="unidad-2.html#análisis-de-estacionalidad"><i class="fa fa-check"></i><b>3.3</b> Análisis de Estacionalidad</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="unidad-3.html"><a href="unidad-3.html"><i class="fa fa-check"></i><b>4</b> Unidad 3</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="unidad-3.html"><a href="unidad-3.html#análisis-visual-y-descomposición-de-la-serie-temporal"><i class="fa fa-check"></i><b>4.1</b> Análisis Visual y Descomposición de la Serie Temporal</a></li>
+<li class="chapter" data-level="4.2" data-path="unidad-3.html"><a href="unidad-3.html#verificación-de-estacionareidad"><i class="fa fa-check"></i><b>4.2</b> Verificación de estacionareidad</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Documento Bookdown Propuesta</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="unidad-3" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Unidad 3<a href="unidad-3.html#unidad-3" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="análisis-visual-y-descomposición-de-la-serie-temporal" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Análisis Visual y Descomposición de la Serie Temporal<a href="unidad-3.html#análisis-visual-y-descomposición-de-la-serie-temporal" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br></p>
+<p><strong>Visualización inicial</strong></p>
+<p>Utilizamos gráficos de líneas para obtener una vista preliminar de los datos. Esto ayudará a identificar visualmente tendencias y ciclos.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="unidad-3.html#cb41-1" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> meantemp)) <span class="sc">+</span></span>
+<span id="cb41-2"><a href="unidad-3.html#cb41-2" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb41-3"><a href="unidad-3.html#cb41-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Tendencia de la Temperatura Media&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Fecha&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Temperatura Media&quot;</span>)</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+La visualización inicial de la tendencia de la temperatura media muestra la variabilidad y los patrones estacionales a lo largo del tiempo. Este gráfico ilustra la oscilación de las temperaturas a través de las estaciones, con picos durante los meses de verano y valles en los meses de invierno, lo que indica una fuerte estacionalidad en los datos. Además, la serie muestra fluctuaciones dentro de cada temporada que podrían estar influenciadas por factores meteorológicos adicionales.</p>
+<ul>
+<li><p>Estacionalidad:
+Los picos y valles recurrentes a lo largo de los años demuestran la influencia de las estaciones en la temperatura media. Esto es típico de las regiones que experimentan variaciones climáticas significativas a lo largo del año.</p></li>
+<li><p>Variabilidad:
+La variabilidad en las temperaturas también puede sugerir la influencia de fenómenos climáticos más cortos como olas de calor o frentes fríos.</p></li>
+</ul>
+<p><strong>Descomposición</strong></p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="unidad-3.html#cb42-1" tabindex="-1"></a><span class="fu">library</span>(forecast)  </span></code></pre></div>
+<pre><code>## Warning: package &#39;forecast&#39; was built under R version 4.2.3</code></pre>
+<pre><code>## Registered S3 method overwritten by &#39;quantmod&#39;:
+##   method            from
+##   as.zoo.data.frame zoo</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="unidad-3.html#cb45-1" tabindex="-1"></a>ts_data <span class="ot">&lt;-</span> <span class="fu">ts</span>(data<span class="sc">$</span>meantemp, <span class="at">frequency =</span> <span class="dv">365</span>)  <span class="co"># Ajusta la frecuencia </span></span>
+<span id="cb45-2"><a href="unidad-3.html#cb45-2" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="unidad-3.html#cb45-3" tabindex="-1"></a><span class="co"># Aplicar STL</span></span>
+<span id="cb45-4"><a href="unidad-3.html#cb45-4" tabindex="-1"></a>result_stl <span class="ot">&lt;-</span> <span class="fu">stl</span>(ts_data, <span class="at">s.window =</span> <span class="st">&quot;periodic&quot;</span>)  </span>
+<span id="cb45-5"><a href="unidad-3.html#cb45-5" tabindex="-1"></a></span>
+<span id="cb45-6"><a href="unidad-3.html#cb45-6" tabindex="-1"></a><span class="fu">plot</span>(result_stl)</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+<strong>Componente de Datos:</strong> La gráfica superior muestra la serie temporal original, que es crucial para visualizar cómo la temperatura fluctúa a lo largo del tiempo.</p>
+<p><strong>Componente Estacional:</strong> Este componente destaca la estacionalidad regular y predecible en la serie temporal, reflejando los patrones estacionales típicos que se repiten anualmente. Es vital para comprender cómo las temperaturas cambian con las estaciones.</p>
+<p><strong>Componente de Tendencia:</strong> La tendencia muestra un incremento gradual a lo largo del tiempo, sugiriendo un aumento en las temperaturas medias que podría ser de interés para estudios sobre el clima y el medio ambiente. Esta tendencia ascendente podría indicar un calentamiento a largo plazo en la región estudiada.</p>
+<p><strong>Componente de Residuo:</strong> Los residuos representan la variabilidad aleatoria que no es explicada por los patrones estacionales ni por la tendencia. Estos son relativamente pequeños y aleatorios, lo que sugiere que los componentes de estacionalidad y tendencia están capturando bien las dinámicas principales de la serie temporal.</p>
+</div>
+<div id="verificación-de-estacionareidad" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Verificación de estacionareidad<a href="unidad-3.html#verificación-de-estacionareidad" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Determinamos si la serie temporal es estacionaria</p>
+<p><strong>Prueba de Dickey-Fuller Aumentada (ADF):</strong>
+Una prueba estadística para verificar la presencia de una raíz unitaria, indicativo de no estacionariedad.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="unidad-3.html#cb46-1" tabindex="-1"></a><span class="fu">library</span>(tseries)</span>
+<span id="cb46-2"><a href="unidad-3.html#cb46-2" tabindex="-1"></a><span class="fu">adf.test</span>(data<span class="sc">$</span>meantemp, <span class="at">alternative =</span> <span class="st">&quot;stationary&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+##  Augmented Dickey-Fuller Test
+## 
+## data:  data$meantemp
+## Dickey-Fuller = -1.8526, Lag order = 11, p-value = 0.6407
+## alternative hypothesis: stationary</code></pre>
+<p><strong>Análisis Resultados:</strong></p>
+<p><strong>Dickey-Fuller =</strong> -1.8526: Este valor por sí solo no es suficiente para rechazar la hipótesis nula sin considerar el p-valor asociado.</p>
+<p><strong>p-valor = 0.6407:</strong> Al ser un p-valor alto, confirma que la serie temporal tiene una tendencia estocástica o una raíz unitaria, indicando que la serie es no estacionaria.</p>
+<p><strong>Implicaciones de la No Estacionariedad</strong></p>
+<p>La no estacionariedad en la serie temporal puede presentar desafíos significativos para el análisis y la predicción porque los modelos estadísticos y de machine learning que asumen estacionariedad pueden dar resultados engañosos o inexactos cuando se aplican a datos no estacionarios, ademas la variabilidad en la media y la varianza a lo largo del tiempo puede afectar la precisión de las predicciones a largo plazo.</p>
+<p>Para abordar la no estacionariedad y hacer la serie temporal adecuada para análisis y modelado predictivonos vemos en la necesidad de aplicar transformaciones a la serie temporal de la temperatura media para controlar la tendencia y la variabilidad.</p>
+<p><strong>Transformación Logarítmica y Visualización</strong></p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="unidad-3.html#cb48-1" tabindex="-1"></a><span class="co"># Transformación Logarítmica</span></span>
+<span id="cb48-2"><a href="unidad-3.html#cb48-2" tabindex="-1"></a>data<span class="sc">$</span>log_meantemp <span class="ot">&lt;-</span> <span class="fu">log</span>(data<span class="sc">$</span>meantemp)</span>
+<span id="cb48-3"><a href="unidad-3.html#cb48-3" tabindex="-1"></a></span>
+<span id="cb48-4"><a href="unidad-3.html#cb48-4" tabindex="-1"></a><span class="co"># Visualización de la serie logarítmica</span></span>
+<span id="cb48-5"><a href="unidad-3.html#cb48-5" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> log_meantemp)) <span class="sc">+</span></span>
+<span id="cb48-6"><a href="unidad-3.html#cb48-6" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb48-7"><a href="unidad-3.html#cb48-7" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Logaritmo de la Temperatura Media&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Fecha&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Log(Temperatura Media)&quot;</span>)</span></code></pre></div>
+<p><img src="index_files/figure-html/transform-and-plot-log-1.png" width="672" /></p>
+<p><strong>Diferenciación y Visualización</strong></p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="unidad-3.html#cb49-1" tabindex="-1"></a><span class="co"># Calcular la diferenciación logarítmica y eliminar la primera fila para mantener la consistencia de datos</span></span>
+<span id="cb49-2"><a href="unidad-3.html#cb49-2" tabindex="-1"></a>diff_series <span class="ot">&lt;-</span> <span class="fu">diff</span>(data<span class="sc">$</span>log_meantemp)</span>
+<span id="cb49-3"><a href="unidad-3.html#cb49-3" tabindex="-1"></a>data <span class="ot">&lt;-</span> data[<span class="sc">-</span><span class="dv">1</span>, ]  <span class="co"># Elimina la primera fila</span></span>
+<span id="cb49-4"><a href="unidad-3.html#cb49-4" tabindex="-1"></a>data<span class="sc">$</span>diff_log_meantemp <span class="ot">&lt;-</span> diff_series</span>
+<span id="cb49-5"><a href="unidad-3.html#cb49-5" tabindex="-1"></a></span>
+<span id="cb49-6"><a href="unidad-3.html#cb49-6" tabindex="-1"></a><span class="co"># Visualización de la serie diferenciada</span></span>
+<span id="cb49-7"><a href="unidad-3.html#cb49-7" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> diff_log_meantemp)) <span class="sc">+</span></span>
+<span id="cb49-8"><a href="unidad-3.html#cb49-8" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb49-9"><a href="unidad-3.html#cb49-9" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Diferencia del Logaritmo de la Temperatura Media&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Fecha&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Diferencia de Log(Temperatura Media)&quot;</span>)</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p><strong>Reevaluar la Estacionariedad</strong></p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="unidad-3.html#cb50-1" tabindex="-1"></a><span class="co"># Prueba ADF en la serie transformada y diferenciada</span></span>
+<span id="cb50-2"><a href="unidad-3.html#cb50-2" tabindex="-1"></a>adf_result_transformed <span class="ot">&lt;-</span> <span class="fu">adf.test</span>(data<span class="sc">$</span>diff_log_meantemp, <span class="at">alternative =</span> <span class="st">&quot;stationary&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning in adf.test(data$diff_log_meantemp, alternative = &quot;stationary&quot;):
+## p-value smaller than printed p-value</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="unidad-3.html#cb52-1" tabindex="-1"></a><span class="fu">print</span>(adf_result_transformed)</span></code></pre></div>
+<pre><code>## 
+##  Augmented Dickey-Fuller Test
+## 
+## data:  data$diff_log_meantemp
+## Dickey-Fuller = -13.915, Lag order = 11, p-value = 0.01
+## alternative hypothesis: stationary</code></pre>
+<p><strong>Resultados de la Prueba ADF</strong></p>
+<p><strong>Dickey-Fuller = -13.915:</strong> Este valor es mucho más negativo que en la prueba anterior sin diferenciar, lo que indica una fuerte evidencia en contra de la hipótesis nula de presencia de una raíz unitaria.
+<strong>p-valor = 0.01:</strong> Este p-valor es significativamente bajo y sugiere que la hipótesis nula de no estacionariedad puede ser rechazada con un nivel de confianza del 99%.</p>
+<p>El p-valor bajo y el valor crítico altamente negativo implican que la serie diferenciada y logarítmicamente transformada de la temperatura media ahora es estacionaria. Esto significa que la serie no presenta tendencias o patrones estacionales que dependan del tiempo, lo cual es crucial para el análisis de series temporales y el modelado predictivo.</p>
+<p>Los resultados de la prueba de Dickey-Fuller Aumentada (ADF) que has obtenido muestran un valor de p-valor de 0.6407, lo cual es significativamente mayor que cualquier umbral común de significancia (como 0.05 o 0.01). Esto indica que no podemos rechazar la hipótesis nula de que la serie tiene una raíz unitaria, es decir, que la serie no es estacionaria.</p>
+<p>Interpretación
+La falta de estacionariedad implica que la serie temporal de la temperatura media tiene una tendencia o variabilidad que cambia con el tiempo, lo que puede afectar los análisis futuros y la capacidad de hacer pronósticos precisos.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="unidad-2.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": false,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
