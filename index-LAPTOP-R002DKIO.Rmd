@@ -1,0 +1,426 @@
+---
+title: "Documento Bookdown Propuesta"
+author: "Diego Fernando Ortiz"
+date: "Daily Climate time series data"
+
+output: bookdown::gitbook
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+description: "Bookdown propuesto para la asignatura Series de Tiempo."
+
+---
+
+# Inicio
+
+**Fuente:** [Kaggle](https://www.kaggle.com/datasets/sumanthvrao/daily-climate-time-series-data)
+
+## Relevancia Temática
+Aunque el dataset es específico de Delhi, India, la observación de tendencias y patrones en el comportamiento climático en una región que experimenta variaciones significativas puede proporcionar información valiosa. Estos datos pueden servir como un estudio comparativo para anticipar escenarios posibles en Colombia, especialmente bajo condiciones climáticas extremas similares.
+
+## Datos Detallados y Granulares
+El conjunto de datos ofrece mediciones diarias desde el 1 de enero de 2013 hasta el 24 de abril de 2017, proporcionando un marco detallado para el análisis de tendencias a largo plazo y variaciones estacionales en Delhi. Esta granularidad facilita el estudio detallado de la relación entre las variaciones de temperatura y otros parámetros climáticos, crucial para entender las dinámicas ambientales que pueden ser similares en otras partes del mundo, incluida Colombia.
+
+## Aplicabilidad de Análisis Multivariado
+Con variables como temperatura media, humedad, velocidad del viento y presión media, es posible realizar análisis multivariado para investigar cómo las fluctuaciones de estos elementos se correlacionan entre sí y afectan condiciones ambientales más amplias. Esto es relevante para estudiar posibles vínculos entre altas temperaturas y sequías, un fenómeno preocupante también en Colombia.
+
+## Comparación Interregional
+Mientras que este conjunto de datos es específico de una ciudad, los métodos analíticos aplicados aquí pueden ser extrapolados para comparar diferentes regiones dentro de Colombia, un país con una diversidad climática considerable. Entender cómo diferentes microclimas responden a variaciones similares en parámetros climáticos puede ofrecer insights cruciales para la gestión de recursos y la preparación ante eventos extremos.
+
+## Soporte para Modelos Predictivos
+Utilizando este conjunto de datos, podemos desarrollar y validar modelos predictivos que estimen el impacto de las variaciones climáticas en los recursos hídricos. Tales modelos no solo son pertinentes para la región de Delhi sino que pueden ser adaptados para prever y mitigar efectos similares en Colombia, especialmente en preparación para futuros eventos climáticos extremos.
+
+# Análisis Dataset
+
+
+
+
+
+Cargamos nuestro Dataset
+
+```{r}
+ruta <- "C:/Users/Diego Ortiz/OneDrive/Documentos/Series de tiempo/Series1/ST1/DailyDelhiClimateTrain.csv"
+
+
+data <- read.csv(ruta)
+
+
+```
+
+
+
+```{r include=FALSE}
+# Carga de la biblioteca necesaria
+library(tidyverse)
+```
+
+Validamos el cargue inicial de nuestro Dataset
+```{r}
+
+head(data)
+```
+
+Resumen Estadístico de las Variables
+```{r}
+summary(data)
+```
+<br>
+
+* **1. Temperatura Media (meantemp)**
+
+<br>
+
+**Rango:** De 6°C a 38.71°C, mostrando una gran variabilidad anual que es típica de zonas con cambios estacionales marcados.
+
+**Cuartiles:**
+
+**1er Cuartil (Q1):** 18.86°C, indicando que el 25% de los días tienen una temperatura igual o menor a este valor.
+
+**Mediana:** 27.71°C, lo que significa que la mitad de los días son más fríos y la otra mitad más calurosos que este valor.
+
+**3er Cuartil (Q3):** 31.31°C, el 75% de los días tienen temperaturas que no superan este valor.
+
+**Media:** 25.50°C, cercana a la mediana, lo que sugiere una distribución relativamente simétrica de las temperaturas alrededor de este valor central.
+
+<br>
+
+* **2. Humedad**
+
+<br>
+
+**Rango:** De 13.43% a 100%, indicando días con muy baja humedad hasta saturación completa.
+
+**Cuartiles:**
+
+**1er Cuartil (Q1):** 50.38%, el 25% de los días tienen una humedad igual o menor a este valor.
+
+**Mediana:** 62.62%, más de la mitad de los días tienen una humedad superior a este porcentaje.
+
+**Q3:** 72.22%, tres cuartos de los días presentan una humedad que no excede este valor.
+
+**Media:** 60.77%, también cercana a la mediana, sugiriendo una distribución equilibrada de la humedad.
+
+<br>
+
+* **3. Velocidad del Viento**
+
+<br>
+
+**Rango:** De 0 km/h a 42.22 km/h, mostrando días sin viento hasta días con vientos fuertes.
+
+**Cuartiles:**
+
+**Q1:** 3.475 km/h, un cuarto de los días tienen una velocidad de viento igual o menor a este valor.
+
+**Mediana:** 6.222 km/h, indicando que la mitad de los días tienen velocidades de viento menores a este valor.
+
+**Q3:** 9.238 km/h, el 75% de los días tienen velocidades de viento que no superan este valor.
+
+**Media:** 6.802 km/h, ligeramente superior a la mediana, sugiriendo un leve sesgo hacia días con más viento.
+
+<br>
+
+* **4. Presión Media**
+
+<br>
+
+**Rango:** De -3.042 hPa (valor probablemente erróneo) a 7679.333 hPa (extremadamente alto, casi seguramente un error de medición).
+
+**Cuartiles:**
+
+**Q1:** 1001.580 hPa, indicando condiciones normales de presión atmosférica.
+
+**Mediana:** 1008.563 hPa, valor medio típico de la presión atmosférica.
+
+**Q3:** 1014.945 hPa, dentro de lo esperado para la presión normal.
+
+**Media:** 1011.105 hPa, cercana a la mediana, aunque los valores extremadamente altos pueden estar influyendo en el promedio.
+<br>
+
+Verificamos  si hay valores NA
+```{r}
+sum(is.na(data))
+```
+No tenemos valores nulos en nuestro Dataset
+<br>
+<br>
+
+**Correlación**
+
+
+
+
+
+```{R}
+# Instalar corrplot si no está instalada
+if(!require(corrplot)){
+  install.packages("corrplot")
+  library(corrplot)
+}
+
+# Calcular la matriz de correlación
+correlation_matrix <- cor(data[, c("meantemp", "humidity", "wind_speed", "meanpressure")], use = "complete.obs")
+
+# Gráfico de la matriz de correlación
+corrplot(correlation_matrix, method = "circle", type = "upper", order = "hclust", 
+         tl.col = "black", tl.srt = 45, addCoef.col = "black", 
+         title = "Matriz de Correlación de Variables Climáticas", cl.cex = 0.8, tl.cex = 0.8)
+
+
+```
+
+
+## Análisis exploratorio de datos
+
+**Distribuciones individuales**
+
+```{r}
+
+# Histograma de la temperatura media
+ggplot(data, aes(x = meantemp)) +
+  geom_histogram(bins = 30, fill = "blue", color = "black") +
+  labs(title = "Distribución de la Temperatura Media", x = "Temperatura Media", y = "Frecuencia")
+
+# Histograma de la humedad
+ggplot(data, aes(x = humidity)) +
+  geom_histogram(bins = 30, fill = "green", color = "black") +
+  labs(title = "Distribución de la Humedad", x = "Humedad", y = "Frecuencia")
+
+# Histograma de la velocidad del viento
+ggplot(data, aes(x = wind_speed)) +
+  geom_histogram(bins = 30, fill = "red", color = "black") +
+  labs(title = "Distribución de la Velocidad del Viento", x = "Velocidad del Viento", y = "Frecuencia")
+
+
+```
+
+
+* **Relaciones Entre Variables**
+
+```{r}
+# Diagrama de dispersión de temperatura vs. humedad
+ggplot(data, aes(x = meantemp, y = humidity)) +
+  geom_point(alpha = 0.5, color = "blue") +
+  labs(title = "Temperatura Media vs. Humedad", x = "Temperatura Media", y = "Humedad")
+
+# Diagrama de dispersión de temperatura vs. velocidad del viento
+ggplot(data, aes(x = meantemp, y = wind_speed)) +
+  geom_point(alpha = 0.5, color = "red") +
+  labs(title = "Temperatura Media vs. Velocidad del Viento", x = "Temperatura Media", y = "Velocidad del Viento")
+
+```
+
+* **Series Temporales**
+
+```{r}
+
+# Gráfico de series temporales para la temperatura media
+data$date <- as.Date(data$date)  # Asegúrate de que la columna 'date' esté en formato de fecha
+ggplot(data, aes(x = date, y = meantemp)) +
+  geom_line(color = "blue") +
+  labs(title = "Serie Temporal de la Temperatura Media", x = "Fecha", y = "Temperatura Media")
+
+# Gráfico de series temporales para la humedad
+ggplot(data, aes(x = date, y = humidity)) +
+  geom_line(color = "green") +
+  labs(title = "Serie Temporal de la Humedad", x = "Fecha", y = "Humedad")
+
+
+```
+
+
+# Modulo 2
+
+Ajustamos el formato fecha
+
+
+```{r}
+# Imprimir las primeras fechas para verificar el formato
+print(head(data$date))
+```
+
+
+```{r}
+# Cargar las bibliotecas necesarias
+library(tidyverse)  # Para manipulación de datos y ggplot2
+library(lubridate)  # Para manejo de fechas
+
+
+# Convertir la columna de fecha a formato de fecha usando ymd()
+data$date <- ymd(data$date)
+
+# Inspeccionar los primeros registros para confirmar que la conversión fue exitosa
+head(data)
+
+# Inspección de la estructura de los datos para asegurar que las transformaciones son correctas
+str(data)
+
+
+```
+
+## Análiis del promedio movil
+
+```{r}
+# Asumiendo que la librería lubridate ya está cargada y la fecha ha sido convertida
+
+# Cargar la biblioteca necesaria para el cálculo de medias móviles
+library(zoo)
+
+# Calcular el promedio móvil de 30 días para la temperatura media
+data$MovingAvg <- rollmean(data$meantemp, 30, fill = NA, align = "center")
+
+# Utilizar ggplot2 para visualizar la temperatura media y su promedio móvil
+library(ggplot2)
+ggplot(data, aes(x = date)) +
+  geom_line(aes(y = meantemp), color = "blue", size = 1, alpha = 0.5) +
+  geom_line(aes(y = MovingAvg), color = "red", size = 1) +
+  labs(title = "Temperatura Media y Promedio Móvil de 30 días",
+       x = "Fecha", y = "Temperatura (°C)") +
+  theme_minimal()
+
+```
+
+## Análisis de Rezagos
+
+```{r}
+# Asumiendo que las librerías necesarias ya están cargadas y que 'data' es tu dataframe
+
+# Crear rezagos de la temperatura media
+data$lag1 <- lag(data$meantemp, 1)  # Rezago de un día
+data$lag7 <- lag(data$meantemp, 7)  # Rezago de una semana
+
+# Visualización de la temperatura con rezagos
+ggplot(data, aes(x = date)) +
+  geom_line(aes(y = meantemp, color = "Temperatura actual"), size = 1) +
+  geom_line(aes(y = lag1, color = "Rezago 1 día"), size = 1, linetype = "dashed") +
+  geom_line(aes(y = lag7, color = "Rezago 7 días"), size = 1, linetype = "dotted") +
+  labs(title = "Temperatura Media y Rezagos",
+       x = "Fecha", y = "Temperatura (°C)") +
+  scale_color_manual(values = c("Temperatura actual" = "blue", "Rezago 1 día" = "green", "Rezago 7 días" = "red")) +
+  theme_minimal()
+
+
+```
+Análisis Adicional de Rezagos
+Además de visualizar los rezagos, podrías investigar más a fondo las correlaciones estadísticas entre la temperatura actual y sus rezagos para entender cuánto influyen los valores pasados en el presente:
+
+```{r}
+# Calcular la correlación entre la temperatura y sus rezagos
+cor(data$meantemp, data$lag1, use = "complete.obs")  # Correlación con rezago de un día
+cor(data$meantemp, data$lag7, use = "complete.obs")  # Correlación con rezago de siete días
+
+```
+
+
+## Análisis de Estacionalidad
+
+```{r}
+# Asumiendo que la librería lubridate ya está cargada y que 'data' es tu dataframe
+
+# Extraer el mes de cada fecha para análisis estacional
+data$month <- month(data$date)
+
+# Calcular la media mensual de la temperatura
+monthly_avg <- data %>%
+  group_by(month) %>%
+  summarise(mean_temp = mean(meantemp, na.rm = TRUE))
+
+# Ordenar los resultados por mes para correcta visualización
+monthly_avg <- monthly_avg %>%
+  arrange(month)
+
+# Visualizar la estacionalidad de la temperatura media
+ggplot(monthly_avg, aes(x = month, y = mean_temp)) +
+  geom_line(group = 1, color = "blue") +
+  geom_point(color = "red") +
+  scale_x_continuous(breaks = 1:12, labels = c("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic")) +
+  labs(title = "Estacionalidad de la Temperatura Media por Mes",
+       x = "Mes", y = "Temperatura Media (°C)") +
+  theme_minimal()
+
+
+```
+
+Análisis Adicional de Estacionalidad
+Para un análisis más profundo, podrías considerar el uso de técnicas de descomposición de series temporales para separar explícitamente la estacionalidad de otras componentes como la tendencia y el ruido:
+
+```{r}
+# Usar la función stl() para descomposición estacional
+data_ts <- ts(data$meantemp, frequency = 12)  # Asumiendo datos mensuales
+result_stl <- stl(data_ts, s.window = "periodic")
+
+# Visualizar los componentes de la descomposición
+plot(result_stl)
+
+
+```
+
+
+# Modulo 3
+
+
+Para abordar la pregunta sobre si es necesario implementar transformaciones para controlar la tendencia y la variabilidad en tu serie de tiempo de datos climáticos, primero debemos entender las características de tus datos y cuál podría ser el impacto de tales transformaciones. Aquí vamos a explorar y justificar el uso de dichos procedimientos.
+
+Análisis de la Necesidad de Transformaciones
+Evaluación de la Tendencia y Variabilidad:
+Para decidir si se necesitan transformaciones, primero es crucial evaluar la presencia de tendencias no estacionarias y la variabilidad en los datos. Esto se puede hacer visualizando los datos y utilizando pruebas estadísticas.
+Visualización de Tendencias:
+Utiliza gráficos de línea para observar visualmente si hay una tendencia creciente o decreciente en los datos.
+
+```{r}
+ggplot(data, aes(x = date, y = meantemp)) +
+  geom_line() +
+  labs(title = "Tendencia de la Temperatura Media", x = "Fecha", y = "Temperatura Media")
+
+```
+Prueba de Dickey-Fuller Aumentada (ADF):
+Esta prueba te ayudará a determinar si la serie es estacionaria o no, lo que es crucial para decidir sobre la necesidad de transformaciones.
+
+```{r}
+library(tseries)
+adf.test(data$meantemp, alternative = "stationary")
+
+```
+
+Los resultados de la prueba de Dickey-Fuller Aumentada (ADF) que has obtenido muestran un valor de p-valor de 0.6407, lo cual es significativamente mayor que cualquier umbral común de significancia (como 0.05 o 0.01). Esto indica que no podemos rechazar la hipótesis nula de que la serie tiene una raíz unitaria, es decir, que la serie no es estacionaria.
+
+Interpretación
+La falta de estacionariedad implica que la serie temporal de la temperatura media tiene una tendencia o variabilidad que cambia con el tiempo, lo que puede afectar los análisis futuros y la capacidad de hacer pronósticos precisos.
+
+Este análisis explora la necesidad de aplicar transformaciones a la serie temporal de la temperatura media para controlar la tendencia y la variabilidad.
+
+ Transformación Logarítmica y Visualización
+
+```{r transform-and-plot-log}
+# Transformación Logarítmica
+data$log_meantemp <- log(data$meantemp)
+
+# Visualización de la serie logarítmica
+ggplot(data, aes(x = date, y = log_meantemp)) +
+  geom_line() +
+  labs(title = "Logaritmo de la Temperatura Media", x = "Fecha", y = "Log(Temperatura Media)")
+```
+
+Diferenciación y Visualización
+```{r}
+# Calcular la diferenciación logarítmica y eliminar la primera fila para mantener la consistencia de datos
+diff_series <- diff(data$log_meantemp)
+data <- data[-1, ]  # Elimina la primera fila
+data$diff_log_meantemp <- diff_series
+
+# Visualización de la serie diferenciada
+ggplot(data, aes(x = date, y = diff_log_meantemp)) +
+  geom_line() +
+  labs(title = "Diferencia del Logaritmo de la Temperatura Media", x = "Fecha", y = "Diferencia de Log(Temperatura Media)")
+
+```
+Reevaluar la Estacionariedad
+
+```{r}
+# Prueba ADF en la serie transformada y diferenciada
+adf_result_transformed <- adf.test(data$diff_log_meantemp, alternative = "stationary")
+print(adf_result_transformed)
+
+```
+
