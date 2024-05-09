@@ -577,20 +577,3 @@ print(adf_result_transformed)
 El p-valor bajo y el valor crítico altamente negativo implican que la serie diferenciada y logarítmicamente transformada de la temperatura media ahora es estacionaria. Esto significa que la serie no presenta tendencias o patrones estacionales que dependan del tiempo, lo cual es crucial para el análisis de series temporales y el modelado predictivo.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-Los resultados de la prueba de Dickey-Fuller Aumentada (ADF) que has obtenido muestran un valor de p-valor de 0.6407, lo cual es significativamente mayor que cualquier umbral común de significancia (como 0.05 o 0.01). Esto indica que no podemos rechazar la hipótesis nula de que la serie tiene una raíz unitaria, es decir, que la serie no es estacionaria.
-
-Interpretación
-La falta de estacionariedad implica que la serie temporal de la temperatura media tiene una tendencia o variabilidad que cambia con el tiempo, lo que puede afectar los análisis futuros y la capacidad de hacer pronósticos precisos.
-
