@@ -16,22 +16,22 @@ description: "Bookdown propuesto para la asignatura Series de Tiempo."
 
 **Fuente:** [Kaggle](https://www.kaggle.com/datasets/sumanthvrao/daily-climate-time-series-data)
 
-## Relevancia Temática
+* **Relevancia Temática**
 Aunque el dataset es específico de Delhi, India, la observación de tendencias y patrones en el comportamiento climático en una región que experimenta variaciones significativas puede proporcionar información valiosa. Estos datos pueden servir como un estudio comparativo para anticipar escenarios posibles en Colombia, especialmente bajo condiciones climáticas extremas similares.
 
-## Datos Detallados y Granulares
+* **Datos Detallados y Granulares**
 El conjunto de datos ofrece mediciones diarias desde el 1 de enero de 2013 hasta el 24 de abril de 2017, proporcionando un marco detallado para el análisis de tendencias a largo plazo y variaciones estacionales en Delhi. Esta granularidad facilita el estudio detallado de la relación entre las variaciones de temperatura y otros parámetros climáticos, crucial para entender las dinámicas ambientales que pueden ser similares en otras partes del mundo, incluida Colombia.
 
-## Aplicabilidad de Análisis Multivariado
+* **Aplicabilidad de Análisis Multivariado**
 Con variables como temperatura media, humedad, velocidad del viento y presión media, es posible realizar análisis multivariado para investigar cómo las fluctuaciones de estos elementos se correlacionan entre sí y afectan condiciones ambientales más amplias. Esto es relevante para estudiar posibles vínculos entre altas temperaturas y sequías, un fenómeno preocupante también en Colombia.
 
-## Comparación Interregional
+* **Comparación Interregional**
 Mientras que este conjunto de datos es específico de una ciudad, los métodos analíticos aplicados aquí pueden ser extrapolados para comparar diferentes regiones dentro de Colombia, un país con una diversidad climática considerable. Entender cómo diferentes microclimas responden a variaciones similares en parámetros climáticos puede ofrecer insights cruciales para la gestión de recursos y la preparación ante eventos extremos.
 
-## Soporte para Modelos Predictivos
+* **Soporte para Modelos Predictivos**
 Utilizando este conjunto de datos, podemos desarrollar y validar modelos predictivos que estimen el impacto de las variaciones climáticas en los recursos hídricos. Tales modelos no solo son pertinentes para la región de Delhi sino que pueden ser adaptados para prever y mitigar efectos similares en Colombia, especialmente en preparación para futuros eventos climáticos extremos.
 
-# Análisis Dataset
+# Modulo 1 - Unidad 1 
 
 
 
@@ -299,9 +299,9 @@ El gráfico muestra la velocidad del viento a lo largo de varios años, destacan
 
 
 
-# Unidad 2
+# Modulo 1 - Unidad 2
 
-##Ajuste de los datos
+## Ajuste de los datos
 
 Ajustamos el formato fecha
 
@@ -457,7 +457,7 @@ Este gráfico muestra la tendencia subyacente en los datos, eliminando los efect
 * **Componente de Residuo:**
 Los residuos representan lo que queda después de extraer los componentes de tendencia y estacionalidad. Estos pueden incluir efectos aleatorios y anomalías no capturadas por los modelos de estacionalidad y tendencia. El gráfico de residuos parece ser bastante "ruidoso", lo cual es típico, indicando que hay variaciones en los datos que no se ajustan a patrones estacionales simples o tendencias suaves.
 
-# Unidad 3
+# Modulo 1 - Unidad 3
 
 
 ## Análisis Visual y Descomposición de la Serie Temporal
@@ -575,5 +575,172 @@ print(adf_result_transformed)
 
 
 El p-valor bajo y el valor crítico altamente negativo implican que la serie diferenciada y logarítmicamente transformada de la temperatura media ahora es estacionaria. Esto significa que la serie no presenta tendencias o patrones estacionales que dependan del tiempo, lo cual es crucial para el análisis de series temporales y el modelado predictivo.
+
+# Modulo 2 - Unidad 1
+
+## Modelo Holt-Winters
+
+**Holt-Winters:** Es un método de suavizado exponencial que es especialmente útil para datos con tendencias y estacionalidad. Holt-Winters puede aplicar suavizado tanto a la tendencia como a la componente estacional de la serie, haciendo que sea una opción robusta para prever futuros valores en series que exhiben patrones estacionales claros.
+
+## Aplicación del modelo Holt-Winters
+
+```{r}
+# Asegurarse de que los datos están en formato de serie temporal
+ts_data <- ts(data$meantemp, frequency = 365)
+
+# Aplicar el modelo Holt-Winters
+hw_model <- HoltWinters(ts_data)
+
+# Ver los componentes del modelo
+hw_model
+
+```
+<br>
+
+**Aplicación del Modelo Holt-Winters a la Serie Temporal de Temperatura Media**
+
+En esta sección del análisis, he aplicado el modelo de suavizado exponencial Holt-Winters a la serie temporal de temperatura media para capturar tanto la tendencia como la estacionalidad inherentes a los datos. El modelo Holt-Winters es particularmente adecuado para datos con patrones estacionales y tendencias, lo cual es característico de las series temporales climáticas.
+
+**Configuración del Modelo**
+
+El modelo se configuró con los siguientes parámetros de suavizado:
+
+* **Alpha (α) = 0.712403:** Este parámetro controla el nivel de suavizado de la serie y está configurado para adaptarse rápidamente a los cambios en el nivel de los datos.
+
+* **Beta (β) = 0:** Decidí no aplicar suavizado adicional a la tendencia de la serie, ya que los datos han mostrado una tendencia relativamente estable a lo largo del tiempo.
+
+* **Gamma (γ) = 1:** Este parámetro está configurado para permitir una adaptación completa y rápida a los cambios estacionales, esencial para manejar la significativa variabilidad estacional observada en los datos de temperatura.
+
+<br>
+
+**Resultados del Modelo**
+
+El modelo Holt-Winters se ajustó a los datos con los siguientes componentes resultantes:
+
+* **Nivel (a):** El nivel estimado al final del período modelado es aproximadamente 23.2, indicando el punto de partida ajustado para la temperatura media.
+
+* **Tendencia (b):** La tendencia estimada es muy pequeña (aproximadamente 0.000787), lo que sugiere cambios mínimos en la tendencia de la temperatura a lo largo del tiempo.
+
+* **Componentes Estacionales (s1 a s365):** Estos coeficientes reflejan las variaciones estacionales diarias a lo largo del año, ajustando la predicción para cada día específico en base a patrones estacionales pasados.
+
+<br>
+
+* **Justificación del Modelo**
+
+La elección del modelo Holt-Winters se justifica por la clara presencia de una estacionalidad y una tendencia en la serie temporal. Dado que la temperatura media varía a lo largo del año y muestra una tendencia general mínima pero estable, este modelo proporciona una herramienta robusta para hacer predicciones futuras. La capacidad del modelo para ajustar y adaptarse tanto a la tendencia como a la estacionalidad es crucial para prever con precisión en contextos donde los patrones estacionales son significativos y donde la tendencia puede ser sutil pero importante a largo plazo.
+
+* **Visualización y Evaluación**
+
+Para evaluar la efectividad del modelo, visualicé los ajustes del modelo en comparación con los datos observados. Esta visualización ayuda a confirmar que el modelo capta adecuadamente tanto la tendencia general como los patrones estacionales. Además, planeo calcular métricas de error como el RMSE para cuantificar objetivamente la precisión del modelo.
+
+
+## Visualización de los ajustes del modelo
+
+```{r}
+# Visualizar los ajustes
+plot(hw_model, main="Ajuste del Modelo Holt-Winters a la Temperatura Media")
+
+```
+
+<br>
+
+**Análisis del Modelo Holt-Winters en la Temperatura Media**
+
+Como se puede ver en la gráfica, tenemos nuestros datos observados en negro y las estimaciones del modelo en rojo.
+
+**Lo que Podemos Ver del Modelo**
+
+* **Seguimiento de los Patrones:** El modelo hace un gran trabajo siguiendo los altibajos de los datos reales. Esto  muestra que el modelo puede capturar bien tanto la tendencia como los patrones estacionales de la temperatura.
+
+* **Respuesta Rápida:** El modelo se adapta rápidamente a los cambios bruscos. Esto es crucial, especialmente cuando estamos tratando con variables climáticas que pueden cambiar rápidamente.
+
+## Suavizamiento exponencial
+
+```{r}
+# Aplicar suavizamiento exponencial simple
+smoothed_data <- HoltWinters(ts_data, beta=FALSE, gamma=FALSE)
+
+# Visualización de la serie suavizada
+plot(smoothed_data$fitted, main="Suavizado Exponencial de la Temperatura Media")
+
+```
+
+**Suavizado Exponencial de la Temperatura Media**
+
+La gráfica muestra el resultado del suavizado exponencial aplicado a la serie temporal de la temperatura media. Este método ha sido implementado utilizando el modelo Holt-Winters con parámetros específicos para minimizar la influencia de la tendencia y la estacionalidad en el suavizado.
+
+**Características del Suavizado**
+
+* **Nivel Único de Suavizado:** Al configurar beta=FALSE y gamma=FALSE, el modelo se centra exclusivamente en el suavizado del nivel de la serie. Esto resulta en una serie más suave que refleja las variaciones generales de la temperatura sin ajustarse a las fluctuaciones estacionales o de tendencia específicas.
+
+* **Comparación de Niveles:** La gráfica superior muestra la serie temporal original con las estimaciones de nivel superpuestas, proporcionando una visión clara de cómo el suavizado alinea los datos a lo largo del tiempo. La gráfica inferior muestra estos niveles de forma más aislada, destacando la suavidad de la serie resultante.
+
+**Justificación del Método**
+
+El uso de suavizado exponencial simple en este contexto se justifica por la necesidad de obtener una visión más general de la tendencia central de la temperatura sin las fluctuaciones menores que podrían ocultar patrones más amplios. Este enfoque es particularmente útil para:
+
+* **Análisis a Largo Plazo:** Facilitar la identificación de cambios a largo plazo en la temperatura media, útil para estudios climáticos y planificación ambiental.
+
+* **Reducción de Ruido:** Minimizar el impacto de variaciones estacionales y otros ruidos, haciendo que la serie sea más manejable para análisis que no requieren una granularidad fina.
+
+**Evaluación y Observaciones**
+
+La evaluación visual sugiere que el suavizado ha sido efectivo para proporcionar una representación clara y continua de la tendencia central de los datos. Sin embargo, es importante considerar que este método puede ocultar detalles importantes necesarios para algunos tipos de análisis específicos. Por ello, se recomienda usar este enfoque cuando se busque una perspectiva general y no se necesiten detalles de fluctuaciones a corto plazo.
+
+# Modulo 2 - Unidad 1
+
+
+## Modelos de Series de Tiempo: Definiciones y Aplicaciones
+
+* **Modelo Autorregresivo (AR):**
+Un modelo AR utiliza dependencias entre observaciones sucesivas para predecir valores futuros basándose únicamente en los valores pasados. Se denota como AR(p), donde 'p' es el número de observaciones pasadas (lags) utilizadas como predictores.
+
+* **Modelo de Media Móvil (MA):**
+En un modelo MA, la predicción se realiza sobre la base de los errores de predicción pasados, no directamente sobre los valores. Se expresa como MA(q), donde 'q' es el número de errores pasados que el modelo toma en cuenta.
+
+* **Modelo ARIMA (AutoRegressive Integrated Moving Average):**
+Combinando AR y MA, este modelo también incorpora un término de diferenciación (d) para convertir la serie en estacionaria, esencial para cumplir con los supuestos de los modelos lineales de series de tiempo. Se denota como ARIMA(p, d, q).
+
+* **Modelo ARIMA Estacional:**
+Extiende el ARIMA para capturar estacionalidades. Se denota como ARIMA(p, d, q)(P, D, Q)[s], donde P, D, y Q representan la autoregresión estacional, la diferenciación estacional, y la media móvil estacional, respectivamente, con 's' indicando la periodicidad de la temporada.
+
+
+**Ajuste de Modelos de Series de Tiempo en R**
+
+**Implementación y Selección de Modelos:**
+
+```{r
+library(forecast)
+auto_fit <- auto.arima(data$variable, seasonal = TRUE, stepwise = TRUE, 
+                       approximation = FALSE, trace = TRUE)
+summary(auto_fit)
+
+```
+
+**Predicción y Visualización:**
+
+```{r
+forecasted_values <- forecast(auto_fit, h = 10)  # Pronósticos para los siguientes 10 periodos
+plot(forecasted_values)
+
+
+```
+
+**Evaluación de Modelos:**
+
+```{r
+checkresiduals(auto_fit)
+
+
+```
+
+**Ajuste de Modelos Lineales:**
+
+```{r
+linear_model <- lm(variable_dependiente ~ variable_independiente1 + variable_independiente2, data = data)
+summary(linear_model)
+
+
+```
 
 

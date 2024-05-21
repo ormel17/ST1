@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Modulo 1 - Unidad 1 | Documento Bookdown Propuesta</title>
+  <meta name="description" content="Bookdown propuesto para la asignatura Series de Tiempo." />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Modulo 1 - Unidad 1 | Documento Bookdown Propuesta" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Bookdown propuesto para la asignatura Series de Tiempo." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Modulo 1 - Unidad 1 | Documento Bookdown Propuesta" />
+  
+  <meta name="twitter:description" content="Bookdown propuesto para la asignatura Series de Tiempo." />
+  
+
+<meta name="author" content="Diego Fernando Ortiz" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="inicio.html"/>
+<link rel="next" href="modulo-1---unidad-2.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="inicio.html"><a href="inicio.html"><i class="fa fa-check"></i><b>1</b> Inicio</a></li>
+<li class="chapter" data-level="2" data-path="modulo-1---unidad-1.html"><a href="modulo-1---unidad-1.html"><i class="fa fa-check"></i><b>2</b> Modulo 1 - Unidad 1</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="modulo-1---unidad-1.html"><a href="modulo-1---unidad-1.html#dataset"><i class="fa fa-check"></i><b>2.1</b> Dataset</a></li>
+<li class="chapter" data-level="2.2" data-path="modulo-1---unidad-1.html"><a href="modulo-1---unidad-1.html#resumen-estadístico-de-las-variables"><i class="fa fa-check"></i><b>2.2</b> Resumen Estadístico de las Variables</a></li>
+<li class="chapter" data-level="2.3" data-path="modulo-1---unidad-1.html"><a href="modulo-1---unidad-1.html#correlación"><i class="fa fa-check"></i><b>2.3</b> Correlación</a></li>
+<li class="chapter" data-level="2.4" data-path="modulo-1---unidad-1.html"><a href="modulo-1---unidad-1.html#análisis-exploratorio-de-datos"><i class="fa fa-check"></i><b>2.4</b> Análisis exploratorio de datos</a></li>
+<li class="chapter" data-level="2.5" data-path="modulo-1---unidad-1.html"><a href="modulo-1---unidad-1.html#descomposición-de-series-temporales"><i class="fa fa-check"></i><b>2.5</b> Descomposición de Series Temporales</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="modulo-1---unidad-2.html"><a href="modulo-1---unidad-2.html"><i class="fa fa-check"></i><b>3</b> Modulo 1 - Unidad 2</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="modulo-1---unidad-2.html"><a href="modulo-1---unidad-2.html#ajuste-de-los-datos"><i class="fa fa-check"></i><b>3.1</b> Ajuste de los datos</a></li>
+<li class="chapter" data-level="3.2" data-path="modulo-1---unidad-2.html"><a href="modulo-1---unidad-2.html#análiis-del-promedio-movil"><i class="fa fa-check"></i><b>3.2</b> Análiis del promedio movil</a></li>
+<li class="chapter" data-level="3.3" data-path="modulo-1---unidad-2.html"><a href="modulo-1---unidad-2.html#análisis-de-rezagos"><i class="fa fa-check"></i><b>3.3</b> Análisis de Rezagos</a></li>
+<li class="chapter" data-level="3.4" data-path="modulo-1---unidad-2.html"><a href="modulo-1---unidad-2.html#análisis-de-estacionalidad"><i class="fa fa-check"></i><b>3.4</b> Análisis de Estacionalidad</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="modulo-1---unidad-3.html"><a href="modulo-1---unidad-3.html"><i class="fa fa-check"></i><b>4</b> Modulo 1 - Unidad 3</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="modulo-1---unidad-3.html"><a href="modulo-1---unidad-3.html#análisis-visual-y-descomposición-de-la-serie-temporal"><i class="fa fa-check"></i><b>4.1</b> Análisis Visual y Descomposición de la Serie Temporal</a></li>
+<li class="chapter" data-level="4.2" data-path="modulo-1---unidad-3.html"><a href="modulo-1---unidad-3.html#verificación-de-estacionareidad"><i class="fa fa-check"></i><b>4.2</b> Verificación de estacionareidad</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="modulo-2---unidad-1.html"><a href="modulo-2---unidad-1.html"><i class="fa fa-check"></i><b>5</b> Modulo 2 - Unidad 1</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="modulo-2---unidad-1.html"><a href="modulo-2---unidad-1.html#modelo-holt-winters"><i class="fa fa-check"></i><b>5.1</b> Modelo Holt-Winters</a></li>
+<li class="chapter" data-level="5.2" data-path="modulo-2---unidad-1.html"><a href="modulo-2---unidad-1.html#aplicación-del-modelo-holt-winters"><i class="fa fa-check"></i><b>5.2</b> Aplicación del modelo Holt-Winters</a></li>
+<li class="chapter" data-level="5.3" data-path="modulo-2---unidad-1.html"><a href="modulo-2---unidad-1.html#visualización-de-los-ajustes-del-modelo"><i class="fa fa-check"></i><b>5.3</b> Visualización de los ajustes del modelo</a></li>
+<li class="chapter" data-level="5.4" data-path="modulo-2---unidad-1.html"><a href="modulo-2---unidad-1.html#suavizamiento-exponencial"><i class="fa fa-check"></i><b>5.4</b> Suavizamiento exponencial</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="modulo-2---unidad-1-1.html"><a href="modulo-2---unidad-1-1.html"><i class="fa fa-check"></i><b>6</b> Modulo 2 - Unidad 1</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="modulo-2---unidad-1-1.html"><a href="modulo-2---unidad-1-1.html#modelos-de-series-de-tiempo-definiciones-y-aplicaciones"><i class="fa fa-check"></i><b>6.1</b> Modelos de Series de Tiempo: Definiciones y Aplicaciones</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Documento Bookdown Propuesta</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="modulo-1---unidad-1" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Modulo 1 - Unidad 1<a href="modulo-1---unidad-1.html#modulo-1---unidad-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="dataset" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Dataset<a href="modulo-1---unidad-1.html#dataset" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="modulo-1---unidad-1.html#cb1-1" tabindex="-1"></a>ruta <span class="ot">&lt;-</span> <span class="st">&quot;C:/Users/Diego Ortiz/OneDrive/Documentos/Series de tiempo/Series1/ST1/DailyDelhiClimateTrain.csv&quot;</span></span>
+<span id="cb1-2"><a href="modulo-1---unidad-1.html#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="modulo-1---unidad-1.html#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="modulo-1---unidad-1.html#cb1-4" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(ruta)</span></code></pre></div>
+<p>Validamos el cargue inicial de nuestro Dataset</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="modulo-1---unidad-1.html#cb2-1" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
+<pre><code>##         date  meantemp humidity wind_speed meanpressure
+## 1 2013-01-01 10.000000 84.50000   0.000000     1015.667
+## 2 2013-01-02  7.400000 92.00000   2.980000     1017.800
+## 3 2013-01-03  7.166667 87.00000   4.633333     1018.667
+## 4 2013-01-04  8.666667 71.33333   1.233333     1017.167
+## 5 2013-01-05  6.000000 86.83333   3.700000     1016.500
+## 6 2013-01-06  7.000000 82.80000   1.480000     1018.000</code></pre>
+</div>
+<div id="resumen-estadístico-de-las-variables" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Resumen Estadístico de las Variables<a href="modulo-1---unidad-1.html#resumen-estadístico-de-las-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="modulo-1---unidad-1.html#cb4-1" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code></pre></div>
+<pre><code>##      date              meantemp        humidity        wind_speed    
+##  Length:1462        Min.   : 6.00   Min.   : 13.43   Min.   : 0.000  
+##  Class :character   1st Qu.:18.86   1st Qu.: 50.38   1st Qu.: 3.475  
+##  Mode  :character   Median :27.71   Median : 62.62   Median : 6.222  
+##                     Mean   :25.50   Mean   : 60.77   Mean   : 6.802  
+##                     3rd Qu.:31.31   3rd Qu.: 72.22   3rd Qu.: 9.238  
+##                     Max.   :38.71   Max.   :100.00   Max.   :42.220  
+##   meanpressure     
+##  Min.   :  -3.042  
+##  1st Qu.:1001.580  
+##  Median :1008.563  
+##  Mean   :1011.105  
+##  3rd Qu.:1014.945  
+##  Max.   :7679.333</code></pre>
+<p><br></p>
+<ul>
+<li><strong>1. Temperatura Media (meantemp)</strong></li>
+</ul>
+<p><br></p>
+<p><strong>Rango:</strong> De 6°C a 38.71°C, mostrando una gran variabilidad anual que es típica de zonas con cambios estacionales marcados.</p>
+<p><strong>Cuartiles:</strong></p>
+<p><strong>1er Cuartil (Q1):</strong> 18.86°C, indicando que el 25% de los días tienen una temperatura igual o menor a este valor.</p>
+<p><strong>Mediana:</strong> 27.71°C, lo que significa que la mitad de los días son más fríos y la otra mitad más calurosos que este valor.</p>
+<p><strong>3er Cuartil (Q3):</strong> 31.31°C, el 75% de los días tienen temperaturas que no superan este valor.</p>
+<p><strong>Media:</strong> 25.50°C, cercana a la mediana, lo que sugiere una distribución relativamente simétrica de las temperaturas alrededor de este valor central.</p>
+<p><br></p>
+<ul>
+<li><strong>2. Humedad</strong></li>
+</ul>
+<p><br></p>
+<p><strong>Rango:</strong> De 13.43% a 100%, indicando días con muy baja humedad hasta saturación completa.</p>
+<p><strong>Cuartiles:</strong></p>
+<p><strong>1er Cuartil (Q1):</strong> 50.38%, el 25% de los días tienen una humedad igual o menor a este valor.</p>
+<p><strong>Mediana:</strong> 62.62%, más de la mitad de los días tienen una humedad superior a este porcentaje.</p>
+<p><strong>Q3:</strong> 72.22%, tres cuartos de los días presentan una humedad que no excede este valor.</p>
+<p><strong>Media:</strong> 60.77%, también cercana a la mediana, sugiriendo una distribución equilibrada de la humedad.</p>
+<p><br></p>
+<ul>
+<li><strong>3. Velocidad del Viento</strong></li>
+</ul>
+<p><br></p>
+<p><strong>Rango:</strong> De 0 km/h a 42.22 km/h, mostrando días sin viento hasta días con vientos fuertes.</p>
+<p><strong>Cuartiles:</strong></p>
+<p><strong>Q1:</strong> 3.475 km/h, un cuarto de los días tienen una velocidad de viento igual o menor a este valor.</p>
+<p><strong>Mediana:</strong> 6.222 km/h, indicando que la mitad de los días tienen velocidades de viento menores a este valor.</p>
+<p><strong>Q3:</strong> 9.238 km/h, el 75% de los días tienen velocidades de viento que no superan este valor.</p>
+<p><strong>Media:</strong> 6.802 km/h, ligeramente superior a la mediana, sugiriendo un leve sesgo hacia días con más viento.</p>
+<p><br></p>
+<ul>
+<li><strong>4. Presión Media</strong></li>
+</ul>
+<p><br></p>
+<p><strong>Rango:</strong> De -3.042 hPa a 7679.333 hPa.</p>
+<p><strong>Cuartiles:</strong></p>
+<p><strong>Q1:</strong> 1001.580 hPa, indicando condiciones normales de presión atmosférica.</p>
+<p><strong>Mediana:</strong> 1008.563 hPa, valor medio típico de la presión atmosférica.</p>
+<p><strong>Q3:</strong> 1014.945 hPa, dentro de lo esperado para la presión normal.</p>
+<p><strong>Media:</strong> 1011.105 hPa, cercana a la mediana.
+<br></p>
+<p>Verificamos si hay valores NA</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="modulo-1---unidad-1.html#cb6-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(data))</span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<p>No tenemos valores nulos en nuestro Dataset
+<br>
+<br></p>
+</div>
+<div id="correlación" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Correlación<a href="modulo-1---unidad-1.html#correlación" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="modulo-1---unidad-1.html#cb8-1" tabindex="-1"></a><span class="co"># Instalar corrplot si no está instalada</span></span>
+<span id="cb8-2"><a href="modulo-1---unidad-1.html#cb8-2" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(corrplot)){</span>
+<span id="cb8-3"><a href="modulo-1---unidad-1.html#cb8-3" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;corrplot&quot;</span>)</span>
+<span id="cb8-4"><a href="modulo-1---unidad-1.html#cb8-4" tabindex="-1"></a>  <span class="fu">library</span>(corrplot)</span>
+<span id="cb8-5"><a href="modulo-1---unidad-1.html#cb8-5" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## Loading required package: corrplot</code></pre>
+<pre><code>## Warning: package &#39;corrplot&#39; was built under R version 4.2.3</code></pre>
+<pre><code>## corrplot 0.92 loaded</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="modulo-1---unidad-1.html#cb12-1" tabindex="-1"></a><span class="co"># Calcular la matriz de correlación</span></span>
+<span id="cb12-2"><a href="modulo-1---unidad-1.html#cb12-2" tabindex="-1"></a>correlation_matrix <span class="ot">&lt;-</span> <span class="fu">cor</span>(data[, <span class="fu">c</span>(<span class="st">&quot;meantemp&quot;</span>, <span class="st">&quot;humidity&quot;</span>, <span class="st">&quot;wind_speed&quot;</span>, <span class="st">&quot;meanpressure&quot;</span>)], <span class="at">use =</span> <span class="st">&quot;complete.obs&quot;</span>)</span>
+<span id="cb12-3"><a href="modulo-1---unidad-1.html#cb12-3" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="modulo-1---unidad-1.html#cb12-4" tabindex="-1"></a><span class="co"># Gráfico de la matriz de correlación</span></span>
+<span id="cb12-5"><a href="modulo-1---unidad-1.html#cb12-5" tabindex="-1"></a><span class="fu">corrplot</span>(correlation_matrix, <span class="at">method =</span> <span class="st">&quot;circle&quot;</span>, <span class="at">type =</span> <span class="st">&quot;upper&quot;</span>, <span class="at">order =</span> <span class="st">&quot;hclust&quot;</span>, </span>
+<span id="cb12-6"><a href="modulo-1---unidad-1.html#cb12-6" tabindex="-1"></a>         <span class="at">tl.col =</span> <span class="st">&quot;black&quot;</span>, <span class="at">tl.srt =</span> <span class="dv">45</span>, <span class="at">addCoef.col =</span> <span class="st">&quot;black&quot;</span>, </span>
+<span id="cb12-7"><a href="modulo-1---unidad-1.html#cb12-7" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">&quot;Matriz de Correlación de Variables Climáticas&quot;</span>, <span class="at">cl.cex =</span> <span class="fl">0.8</span>, <span class="at">tl.cex =</span> <span class="fl">0.8</span>)</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><br></p>
+<ul>
+<li><strong>Temperatura Media (meantemp) y Velocidad del Viento (wind_speed):</strong></li>
+</ul>
+<p><strong>Correlación= 0.31:</strong> Hay una correlación positiva moderada entre la temperatura media y la velocidad del viento. Esto sugiere que, en general, días más cálidos tienden a estar asociados con vientos más fuertes. Esto podría deberse a que el calor puede intensificar los movimientos del aire debido a diferencias en la presión atmosférica.</p>
+<p><br></p>
+<ul>
+<li><strong>Temperatura Media (meantemp) y Humedad (humidity):</strong></li>
+</ul>
+<p><strong>Correlación= -0.057:</strong> La correlación es muy débil y negativa, indicando que no hay una relación lineal significativa entre la temperatura y la humedad. Los días más cálidos no muestran una tendencia clara de ser más o menos húmedos.</p>
+<p><br></p>
+<ul>
+<li><strong>Temperatura Media (meantemp) y Presión Media (meanpressure):</strong></li>
+</ul>
+<p><strong>Correlación= -0.03:</strong> Similar al caso anterior, hay una correlación negativa muy débil, casi inexistente, entre la temperatura media y la presión media. Esto indica que las variaciones en la temperatura tienen poco o ningún efecto lineal sobre la presión atmosférica en este conjunto de datos.</p>
+<p><br></p>
+<ul>
+<li><strong>Velocidad del Viento (wind_speed) y Humedad (humidity):</strong></li>
+</ul>
+<p><strong>Correlación= -0.37:</strong> Existe una correlación negativa moderada entre la velocidad del viento y la humedad. Esto puede sugerir que días con vientos más fuertes tienden a tener menor humedad, posiblemente porque el viento dispersa la humedad del aire.</p>
+<p><br></p>
+<ul>
+<li><strong>Velocidad del Viento (wind_speed) y Presión Media (meanpressure):</strong></li>
+</ul>
+<p><strong>Correlación= -0.02:</strong> Hay una correlación negativa muy baja entre la velocidad del viento y la presión media, lo que sugiere que no hay una relación lineal clara entre estas dos variables.</p>
+<p><br></p>
+<ul>
+<li><strong>Humedad (humidity) y Presión Media (meanpressure):</strong></li>
+</ul>
+<p><strong>Correlación= 0:</strong> No existe correlación entre la humedad y la presión media, indicando que los cambios en una no están linealmente relacionados con cambios en la otra en este conjunto de datos.</p>
+</div>
+<div id="análisis-exploratorio-de-datos" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Análisis exploratorio de datos<a href="modulo-1---unidad-1.html#análisis-exploratorio-de-datos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Distribuciones individuales</strong></p>
+<p><br></p>
+<p><strong>Temperatura Media</strong></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="modulo-1---unidad-1.html#cb13-1" tabindex="-1"></a><span class="co"># Histograma de la temperatura media</span></span>
+<span id="cb13-2"><a href="modulo-1---unidad-1.html#cb13-2" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> meantemp)) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="modulo-1---unidad-1.html#cb13-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">fill =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="modulo-1---unidad-1.html#cb13-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Distribución de la Temperatura Media&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Temperatura Media&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Frecuencia&quot;</span>)</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+El histograma de la temperatura media muestra una distribución bimodal, con dos picos claramente definidos. Esto sugiere patrones estacionales, con temperaturas más bajas en los meses de invierno y más altas en los meses de verano. La distribución relativamente amplia indica variabilidad en las temperaturas diarias a lo largo del año.</p>
+<p><br></p>
+<p><strong>Humedad</strong></p>
+<p><br></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="modulo-1---unidad-1.html#cb14-1" tabindex="-1"></a><span class="co"># Histograma de la humedad</span></span>
+<span id="cb14-2"><a href="modulo-1---unidad-1.html#cb14-2" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> humidity)) <span class="sc">+</span></span>
+<span id="cb14-3"><a href="modulo-1---unidad-1.html#cb14-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">fill =</span> <span class="st">&quot;green&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb14-4"><a href="modulo-1---unidad-1.html#cb14-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Distribución de la Humedad&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Humedad&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Frecuencia&quot;</span>)</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+La distribución de la humedad parece ser ligeramente sesgada hacia la derecha, con un rango que cubre desde muy baja hasta saturación (100%). La mayoría de los valores se concentra alrededor del 50-80%, indicando una humedad generalmente alta en esta área.</p>
+<p><br></p>
+<p><strong>Velocidad del viento</strong></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="modulo-1---unidad-1.html#cb15-1" tabindex="-1"></a><span class="co"># Histograma de la velocidad del viento</span></span>
+<span id="cb15-2"><a href="modulo-1---unidad-1.html#cb15-2" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> wind_speed)) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="modulo-1---unidad-1.html#cb15-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">fill =</span> <span class="st">&quot;red&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb15-4"><a href="modulo-1---unidad-1.html#cb15-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Distribución de la Velocidad del Viento&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Velocidad del Viento&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Frecuencia&quot;</span>)</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+El histograma para la velocidad del viento muestra una distribución sesgada hacia la derecha, con la mayoría de los días teniendo velocidades bajas a moderadas y unos pocos días con velocidades extremadamente altas. Esto es típico en áreas donde los días de viento extremo son menos frecuentes pero pueden alcanzar velocidades significativas.</p>
+</div>
+<div id="descomposición-de-series-temporales" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Descomposición de Series Temporales<a href="modulo-1---unidad-1.html#descomposición-de-series-temporales" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="modulo-1---unidad-1.html#cb16-1" tabindex="-1"></a><span class="co"># Asegurándose de que la columna de fecha es de tipo Date</span></span>
+<span id="cb16-2"><a href="modulo-1---unidad-1.html#cb16-2" tabindex="-1"></a>data<span class="sc">$</span>date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(data<span class="sc">$</span>date)</span>
+<span id="cb16-3"><a href="modulo-1---unidad-1.html#cb16-3" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="modulo-1---unidad-1.html#cb16-4" tabindex="-1"></a><span class="co"># Cargar ggplot2 para gráficos</span></span>
+<span id="cb16-5"><a href="modulo-1---unidad-1.html#cb16-5" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+<p><br>
+<strong>Temperatura Media</strong></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="modulo-1---unidad-1.html#cb17-1" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> meantemp)) <span class="sc">+</span></span>
+<span id="cb17-2"><a href="modulo-1---unidad-1.html#cb17-2" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">group=</span><span class="dv">1</span>, <span class="at">colour=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="modulo-1---unidad-1.html#cb17-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Serie Temporal de la Temperatura Media&quot;</span>, <span class="at">x=</span><span class="st">&quot;Fecha&quot;</span>, <span class="at">y=</span><span class="st">&quot;Temperatura Media (°C)&quot;</span>)</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+El gráfico de la serie temporal de la temperatura media muestra una clara estacionalidad con temperaturas que oscilan regularmente cada año, sin una tendencia general evidente de aumento o disminución a lo largo del tiempo. Las variaciones estacionales son prominentes, con picos durante los meses de verano y valles en los meses de invierno, reflejando la típica fluctuación climática de la región. La variabilidad interanual en la amplitud de estas oscilaciones sugiere diferencias en la intensidad de las estaciones que podrían estar influenciadas por factores climáticos adicionales. No se observan tendencias a largo plazo en el aumento o disminución de las temperaturas medias anuales, lo que indica una relativa estabilidad en el clima durante el período observado.</p>
+<p><br>
+<strong>Humeda</strong></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="modulo-1---unidad-1.html#cb18-1" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> humidity)) <span class="sc">+</span></span>
+<span id="cb18-2"><a href="modulo-1---unidad-1.html#cb18-2" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">group=</span><span class="dv">1</span>, <span class="at">colour=</span><span class="st">&quot;green&quot;</span>) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="modulo-1---unidad-1.html#cb18-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Serie Temporal de la Humedad&quot;</span>, <span class="at">x=</span><span class="st">&quot;Fecha&quot;</span>, <span class="at">y=</span><span class="st">&quot;Humedad (%)&quot;</span>)</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>El gráfico de la serie temporal de la humedad muestra una estacionalidad marcada, con oscilaciones claras y repetidas que indican variaciones significativas entre períodos húmedos y secos a lo largo del año. Las diferencias anuales en la altura de los picos sugieren variabilidad en la intensidad de las estaciones lluviosas, probablemente relacionadas con cambios en los patrones climáticos locales. Los períodos de alta humedad, que a menudo alcanzan el 100%, podrían corresponder a las temporadas de monzones, mientras que los valles representan los tiempos más secos, destacando la influencia de los ciclos estacionales en el clima de la región.</p>
+<p><br>
+<strong>Velocidad del Viento</strong></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="modulo-1---unidad-1.html#cb19-1" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> wind_speed)) <span class="sc">+</span></span>
+<span id="cb19-2"><a href="modulo-1---unidad-1.html#cb19-2" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">group=</span><span class="dv">1</span>, <span class="at">colour=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="modulo-1---unidad-1.html#cb19-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Serie Temporal de la Velocidad del Viento&quot;</span>, <span class="at">x=</span><span class="st">&quot;Fecha&quot;</span>, <span class="at">y=</span><span class="st">&quot;Velocidad del Viento (km/h)&quot;</span>)</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+El gráfico muestra la velocidad del viento a lo largo de varios años, destacando variaciones diarias significativas sin una tendencia clara de aumento o disminución a largo plazo. La velocidad del viento presenta una estacionalidad menos marcada comparada con la temperatura y la humedad, aunque se observan picos ocasionales que podrían corresponder a eventos meteorológicos específicos como tormentas o frentes de alta velocidad. Estos picos son notables y esporádicos, con la mayoría de los valores concentrados en rangos más bajos, indicando que días con vientos extremadamente fuertes son menos frecuentes. La serie muestra una variabilidad considerable día a día, lo cual es típico en los registros de velocidad del viento debido a su naturaleza altamente dinámica y susceptible a cambios rápidos debido a las condiciones locales y regionales.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="inicio.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="modulo-1---unidad-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": false,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

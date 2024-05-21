@@ -153,15 +153,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3" data-path="unidad-2.html"><a href="unidad-2.html"><i class="fa fa-check"></i><b>3</b> Unidad 2</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="unidad-2.html"><a href="unidad-2.html#análiis-del-promedio-movil"><i class="fa fa-check"></i><b>3.1</b> Análiis del promedio movil</a></li>
-<li class="chapter" data-level="3.2" data-path="unidad-2.html"><a href="unidad-2.html#análisis-de-rezagos"><i class="fa fa-check"></i><b>3.2</b> Análisis de Rezagos</a></li>
-<li class="chapter" data-level="3.3" data-path="unidad-2.html"><a href="unidad-2.html#análisis-de-estacionalidad"><i class="fa fa-check"></i><b>3.3</b> Análisis de Estacionalidad</a></li>
+<li class="chapter" data-level="3.1" data-path="unidad-2.html"><a href="unidad-2.html#ajuste-de-los-datos"><i class="fa fa-check"></i><b>3.1</b> Ajuste de los datos</a></li>
+<li class="chapter" data-level="3.2" data-path="unidad-2.html"><a href="unidad-2.html#análiis-del-promedio-movil"><i class="fa fa-check"></i><b>3.2</b> Análiis del promedio movil</a></li>
+<li class="chapter" data-level="3.3" data-path="unidad-2.html"><a href="unidad-2.html#análisis-de-rezagos"><i class="fa fa-check"></i><b>3.3</b> Análisis de Rezagos</a></li>
+<li class="chapter" data-level="3.4" data-path="unidad-2.html"><a href="unidad-2.html#análisis-de-estacionalidad"><i class="fa fa-check"></i><b>3.4</b> Análisis de Estacionalidad</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="unidad-3.html"><a href="unidad-3.html"><i class="fa fa-check"></i><b>4</b> Unidad 3</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="unidad-3.html"><a href="unidad-3.html#análisis-visual-y-descomposición-de-la-serie-temporal"><i class="fa fa-check"></i><b>4.1</b> Análisis Visual y Descomposición de la Serie Temporal</a></li>
 <li class="chapter" data-level="4.2" data-path="unidad-3.html"><a href="unidad-3.html#verificación-de-estacionareidad"><i class="fa fa-check"></i><b>4.2</b> Verificación de estacionareidad</a></li>
 </ul></li>
+<li class="chapter" data-level="5" data-path="modulo-2---unidad-1.html"><a href="modulo-2---unidad-1.html"><i class="fa fa-check"></i><b>5</b> Modulo 2 - Unidad 1</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="modulo-2---unidad-1.html"><a href="modulo-2---unidad-1.html#modelo-holt-winters"><i class="fa fa-check"></i><b>5.1</b> Modelo Holt-Winters</a></li>
+<li class="chapter" data-level="5.2" data-path="modulo-2---unidad-1.html"><a href="modulo-2---unidad-1.html#aplicación-del-modelo-holt-winters"><i class="fa fa-check"></i><b>5.2</b> Aplicación del modelo Holt-Winters</a></li>
+<li class="chapter" data-level="5.3" data-path="modulo-2---unidad-1.html"><a href="modulo-2---unidad-1.html#visualización-de-los-ajustes-del-modelo"><i class="fa fa-check"></i><b>5.3</b> Visualización de los ajustes del modelo</a></li>
+<li class="chapter" data-level="5.4" data-path="modulo-2---unidad-1.html"><a href="modulo-2---unidad-1.html#suavizamiento-exponencial"><i class="fa fa-check"></i><b>5.4</b> Suavizamiento exponencial</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="modulo-2---unidad-1-1.html"><a href="modulo-2---unidad-1-1.html"><i class="fa fa-check"></i><b>6</b> Modulo 2 - Unidad 1</a></li>
 </ul>
 
       </nav>
@@ -181,7 +190,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="unidad-2" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number">Chapter 3</span> Unidad 2<a href="unidad-2.html#unidad-2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>##Ajuste de los datos</p>
+<div id="ajuste-de-los-datos" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Ajuste de los datos<a href="unidad-2.html#ajuste-de-los-datos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Ajustamos el formato fecha</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="unidad-2.html#cb20-1" tabindex="-1"></a><span class="co"># Imprimir las primeras fechas para verificar el formato</span></span>
 <span id="cb20-2"><a href="unidad-2.html#cb20-2" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(data<span class="sc">$</span>date))</span></code></pre></div>
@@ -211,8 +221,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  $ humidity    : num  84.5 92 87 71.3 86.8 ...
 ##  $ wind_speed  : num  0 2.98 4.63 1.23 3.7 ...
 ##  $ meanpressure: num  1016 1018 1019 1017 1016 ...</code></pre>
-<div id="análiis-del-promedio-movil" class="section level2 hasAnchor" number="3.1">
-<h2><span class="header-section-number">3.1</span> Análiis del promedio movil<a href="unidad-2.html#análiis-del-promedio-movil" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="análiis-del-promedio-movil" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Análiis del promedio movil<a href="unidad-2.html#análiis-del-promedio-movil" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="unidad-2.html#cb26-1" tabindex="-1"></a><span class="co"># Cargar la biblioteca para el cálculo de medias móviles</span></span>
 <span id="cb26-2"><a href="unidad-2.html#cb26-2" tabindex="-1"></a><span class="fu">library</span>(zoo)</span></code></pre></div>
 <pre><code>## 
@@ -241,8 +252,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="index_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 El gráfico muestra claramente las tendencias subyacentes y suaviza las fluctuaciones diarias, resaltando la estacionalidad marcada en la serie de tiempo. La línea roja del promedio móvil sigue de cerca los picos y valles del gráfico de temperatura original (azul), pero con menos ruido, facilitando la identificación de los períodos más cálidos y fríos del año. Esta suavización ayuda a visualizar la tendencia central de la temperatura a lo largo del tiempo, lo cual es especialmente útil para analizar patrones estacionales y para detectar anomalías o cambios inusuales en el clima que podrían no ser evidentes en los datos diarios.</p>
 </div>
-<div id="análisis-de-rezagos" class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> Análisis de Rezagos<a href="unidad-2.html#análisis-de-rezagos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="análisis-de-rezagos" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Análisis de Rezagos<a href="unidad-2.html#análisis-de-rezagos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="unidad-2.html#cb32-1" tabindex="-1"></a><span class="co"># Crear rezagos de la temperatura media</span></span>
 <span id="cb32-2"><a href="unidad-2.html#cb32-2" tabindex="-1"></a>data<span class="sc">$</span>lag1 <span class="ot">&lt;-</span> <span class="fu">lag</span>(data<span class="sc">$</span>meantemp, <span class="dv">1</span>)  <span class="co"># Rezago de un día</span></span>
 <span id="cb32-3"><a href="unidad-2.html#cb32-3" tabindex="-1"></a>data<span class="sc">$</span>lag7 <span class="ot">&lt;-</span> <span class="fu">lag</span>(data<span class="sc">$</span>meantemp, <span class="dv">7</span>)  <span class="co"># Rezago de una semana</span></span>
@@ -276,8 +287,8 @@ El gráfico de la temperatura media junto con sus rezagos de 1 día y 7 días il
 <pre><code>## [1] 0.9161794</code></pre>
 <p>La correlación de 0.916 para el rezago de siete días sigue siendo muy alta, lo que sugiere que la temperatura también tiene una fuerte memoria semanal. Aunque la influencia se atenúa ligeramente con el tiempo, el valor sigue siendo lo suficientemente alto como para indicar que la temperatura de una semana puede predecir bastante bien la temperatura de la semana siguiente. Esto puede ser útil para pronósticos a corto plazo, ya que muestra que las temperaturas tienden a mantenerse relativamente estables o seguir patrones predecibles a lo largo de una semana.</p>
 </div>
-<div id="análisis-de-estacionalidad" class="section level2 hasAnchor" number="3.3">
-<h2><span class="header-section-number">3.3</span> Análisis de Estacionalidad<a href="unidad-2.html#análisis-de-estacionalidad" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="análisis-de-estacionalidad" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Análisis de Estacionalidad<a href="unidad-2.html#análisis-de-estacionalidad" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Análisis estacional</strong></p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="unidad-2.html#cb39-1" tabindex="-1"></a><span class="co"># Extraer el mes de cada fecha para análisis estacional</span></span>
 <span id="cb39-2"><a href="unidad-2.html#cb39-2" tabindex="-1"></a>data<span class="sc">$</span>month <span class="ot">&lt;-</span> <span class="fu">month</span>(data<span class="sc">$</span>date)</span>
