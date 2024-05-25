@@ -983,23 +983,4 @@ ggplot() +
 
 ```
 
-```{r}
-# Predicción futura con el modelo SARIMA
-sarima_forecast <- forecast(sarima_model, h = 10)  # Predice los próximos 10 días
-
-# Crear un data frame para las fechas futuras
-future_dates <- seq(max(data$date) + 1, by = "day", length.out = 10)
-future_data <- data.frame(date = future_dates, meantemp_log = sarima_forecast$mean)
-
-# Visualización de las predicciones
-ggplot() +
-  geom_line(data = data, aes(x = date, y = meantemp_log), color = "red") +
-  geom_line(data = future_data, aes(x = date, y = meantemp_log), color = "blue") +
-  labs(title = "Predicción de Temperatura Media con Modelo SARIMA",
-       x = "Fecha", y = "Temperatura Media Logarítmica") +
-  theme_minimal() +
-  scale_x_date(date_labels = "%Y", date_breaks = "1 year") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
-```
 

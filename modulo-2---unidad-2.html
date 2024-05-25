@@ -482,23 +482,6 @@ La prueba de Ljung-Box se utiliza para verificar la autocorrelación en los resi
 <span id="cb75-12"><a href="modulo-2---unidad-2.html#cb75-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Predicción de Temperatura Media con Modelo SARIMA&quot;</span>,</span>
 <span id="cb75-13"><a href="modulo-2---unidad-2.html#cb75-13" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Fecha&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Temperatura Media Logarítmica&quot;</span>)</span></code></pre></div>
 <p><img src="index_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="modulo-2---unidad-2.html#cb76-1" tabindex="-1"></a><span class="co"># Predicción futura con el modelo SARIMA</span></span>
-<span id="cb76-2"><a href="modulo-2---unidad-2.html#cb76-2" tabindex="-1"></a>sarima_forecast <span class="ot">&lt;-</span> <span class="fu">forecast</span>(sarima_model, <span class="at">h =</span> <span class="dv">10</span>)  <span class="co"># Predice los próximos 10 días</span></span>
-<span id="cb76-3"><a href="modulo-2---unidad-2.html#cb76-3" tabindex="-1"></a></span>
-<span id="cb76-4"><a href="modulo-2---unidad-2.html#cb76-4" tabindex="-1"></a><span class="co"># Crear un data frame para las fechas futuras</span></span>
-<span id="cb76-5"><a href="modulo-2---unidad-2.html#cb76-5" tabindex="-1"></a>future_dates <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">max</span>(data<span class="sc">$</span>date) <span class="sc">+</span> <span class="dv">1</span>, <span class="at">by =</span> <span class="st">&quot;day&quot;</span>, <span class="at">length.out =</span> <span class="dv">10</span>)</span>
-<span id="cb76-6"><a href="modulo-2---unidad-2.html#cb76-6" tabindex="-1"></a>future_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">date =</span> future_dates, <span class="at">meantemp_log =</span> sarima_forecast<span class="sc">$</span>mean)</span>
-<span id="cb76-7"><a href="modulo-2---unidad-2.html#cb76-7" tabindex="-1"></a></span>
-<span id="cb76-8"><a href="modulo-2---unidad-2.html#cb76-8" tabindex="-1"></a><span class="co"># Visualización de las predicciones</span></span>
-<span id="cb76-9"><a href="modulo-2---unidad-2.html#cb76-9" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb76-10"><a href="modulo-2---unidad-2.html#cb76-10" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> data, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> meantemp_log), <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb76-11"><a href="modulo-2---unidad-2.html#cb76-11" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> future_data, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> meantemp_log), <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
-<span id="cb76-12"><a href="modulo-2---unidad-2.html#cb76-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Predicción de Temperatura Media con Modelo SARIMA&quot;</span>,</span>
-<span id="cb76-13"><a href="modulo-2---unidad-2.html#cb76-13" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Fecha&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Temperatura Media Logarítmica&quot;</span>) <span class="sc">+</span></span>
-<span id="cb76-14"><a href="modulo-2---unidad-2.html#cb76-14" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb76-15"><a href="modulo-2---unidad-2.html#cb76-15" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">date_labels =</span> <span class="st">&quot;%Y&quot;</span>, <span class="at">date_breaks =</span> <span class="st">&quot;1 year&quot;</span>) <span class="sc">+</span></span>
-<span id="cb76-16"><a href="modulo-2---unidad-2.html#cb76-16" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 </div>
 </div>
             </section>
