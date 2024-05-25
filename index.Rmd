@@ -576,6 +576,9 @@ print(adf_result_transformed)
 
 El p-valor bajo y el valor crítico altamente negativo implican que la serie diferenciada y logarítmicamente transformada de la temperatura media ahora es estacionaria. Esto significa que la serie no presenta tendencias o patrones estacionales que dependan del tiempo, lo cual es crucial para el análisis de series temporales y el modelado predictivo.
 
+
+
+
 # Modulo 2 - Unidad 1
 
 ## Modelo Holt-Winters
@@ -687,7 +690,37 @@ El uso de suavizado exponencial simple en este contexto se justifica por la nece
 
 La evaluación visual sugiere que el suavizado ha sido efectivo para proporcionar una representación clara y continua de la tendencia central de los datos. Sin embargo, es importante considerar que este método puede ocultar detalles importantes necesarios para algunos tipos de análisis específicos. Por ello, se recomienda usar este enfoque cuando se busque una perspectiva general y no se necesiten detalles de fluctuaciones a corto plazo.
 
-# Modulo 2 - Unidad 1
+
+
+
+# Modulo 2 - Unidad 2
+
+
+* **Inclusión de Variables en el Tiempo ** 
+
+```{r}
+library(lubridate)  # para manejo de fechas
+
+# Convertir la columna de fecha a tipo Date si no está convertida
+data$date <- as.Date(data$date)
+
+# Crear nuevas variables de tiempo
+data$year <- year(data$date)
+data$month <- month(data$date)
+data$day <- day(data$date)
+data$day_of_week <- wday(data$date, label = TRUE)  # Días de la semana con etiquetas
+
+```
+
+
+
+
+
+
+
+
+
+
 
 
 ## Modelos de Series de Tiempo: Definiciones y Aplicaciones
@@ -707,40 +740,266 @@ Extiende el ARIMA para capturar estacionalidades. Se denota como ARIMA(p, d, q)(
 
 **Ajuste de Modelos de Series de Tiempo en R**
 
-**Implementación y Selección de Modelos:**
-
-```{r
+*
+```{r}
+# Cargar las librerías necesarias
+library(tseries)
 library(forecast)
-auto_fit <- auto.arima(data$variable, seasonal = TRUE, stepwise = TRUE, 
-                       approximation = FALSE, trace = TRUE)
-summary(auto_fit)
+library(ggplot2)
+library(lubridate)
+
+# Cargar el dataset
+ruta <- "C:/Users/Diego Ortiz/OneDrive/Documentos/Series de tiempo/Series1/ST1/DailyDelhiClimateTrain.csv"
+data <- read.csv(ruta)
+
+# Ajuste del formato de la fecha
+data$date <- as.Date(data$date)
+data$day_of_week <- wday(data$date, label = TRUE)
+
+# Crear nuevas variables temporales
+data$year <- year(data$date)
+data$month <- month(data$date)
+data$day <- day(data$date)
+
+# Análisis de Estacionariedad y Transformaciones
+# Verificación inicial de estacionariedad
+adf_result_original <- adf.test(data$meantemp, alternative = "stationary")
+print(adf_result_original)
+```
+
+* **Estadístico de Dickey-Fuller: -1.8526**
+
+Este valor es el estadístico de la prueba de Dickey-Fuller. Valores más negativos indican una mayor evidencia contra la hipótesis nula de no estacionariedad.
+
+* **Orden de Rezago: 11 **
+
+Indica el número de retardos utilizados en la prueba. Un valor de 11 sugiere que la prueba tomó en cuenta 11 términos de rezago para corregir la autocorrelación en la serie.
+
+* **+*p-valor: 0.6407**
+
+El p-valor asociado con esta prueba es 0.6407. Un p-valor alto (mayor que 0.05) indica que no podemos rechazar la hipótesis nula de que la serie tiene una raíz unitaria (es decir, la serie no es estacionaria).
+
+Con base en los resultados de la prueba ADF, podemos concluir que la serie de temperatura media no es estacionaria, ya que el p-valor es significativamente mayor que 0.05. Esto implica que hay una tendencia o patrones cíclicos en la serie que deben ser tratados antes de proceder con el modelado de series temporales.
+
+## Tranformación y Diferenciación
+
+```{r}
+# Transformación logarítmica
+data$meantemp_log <- log(data$meantemp)
+
+# Diferenciación de la serie transformada
+data$meantemp_diff <- c(NA, diff(data$meantemp_log))  # Agrega NA al inicio para mantener la longitud
+
+# Reevaluar estacionariedad con la serie diferenciada
+adf_result_diff <- adf.test(na.omit(data$meantemp_diff), alternative = "stationary")
+print(adf_result_diff)
 
 ```
 
-**Predicción y Visualización:**
+** Interpretación de los Resultados**
 
-```{r
-forecasted_values <- forecast(auto_fit, h = 10)  # Pronósticos para los siguientes 10 periodos
-plot(forecasted_values)
+* **Estadístico de Dickey-Fuller: -13.915**
+
+Este valor es mucho más negativo en comparación con el valor original de -1.8526, lo que sugiere una fuerte evidencia en contra de la hipótesis nula de no estacionariedad.
+
+* **Orden de Rezago: 11**
+
+Al igual que en la prueba anterior, este valor indica el número de términos de rezago utilizados en la prueba para corregir la autocorrelación.
+
+* **p-valor: 0.01**
+
+El p-valor asociado es 0.01, lo que es significativamente menor que 0.05. Esto nos permite rechazar la hipótesis nula de no estacionariedad con un nivel de confianza del 99%.
+Conclusión
+
+Con base en estos resultados, podemos concluir que la serie diferenciada y transformada de la temperatura media es estacionaria, podemos proceder con el ajuste de un modelo de series temporales.
+
+## Ajuste del Modelo Lineal Estacionario
+
+```{r}
+# Remover NA creado por la diferenciación
+data <- na.omit(data)
+
+# Ajuste de un Modelo Lineal Estacionario
+# Modelo lineal utilizando variables temporales y la serie transformada y diferenciada
+model <- lm(meantemp_diff ~ year + month + day_of_week, data = data)
+
+# Revisar el resumen del modelo para ver la significancia de los predictores
+summary(model)
+```
+
+**Análisis de los Resultados:**
+
+**Coeficientes:**
+
+* **Intercepto:** No es significativo con un valor p de 0.65942.
+* **Año (year):** No es significativo con un valor p de 0.66144.
+* **Mes (month):** Significativo con un valor p de 0.00796. Esto sugiere que la diferencia logarítmica de la temperatura media tiene una relación significativa con el mes del año.
+* **Día de la Semana (day_of_week):** Ninguno de los componentes del polinomio ortogonal es significativo individualmente.
+
+
+**Errores Residuales:**
+
+* **Residual estándar:** 0.07531
+* **Mínimo:** -0.40903
+* **1er Cuartil:** -0.03496
+* **Mediana:** 0.00410
+* **3er Cuartil:** 0.03966
+* **Máximo:** 0.44474
+
+
+**Estadísticas del Modelo:**
+
+* **R-cuadrado múltiple:** 0.0104, lo que indica que solo el 1.04% de la variabilidad en la diferencia logarítmica de la temperatura media es explicada por el modelo.
+* **R-cuadrado ajustado:** 0.004946, que es ligeramente inferior al R-cuadrado múltiple.
+* **F-estadístico:** 1.907 con un valor p de 0.05521, lo que sugiere que el modelo en su conjunto no es significativo al nivel del 5%, pero está cerca de serlo.
+
+
+* Mes: Es la única variable que parece tener un efecto significativo en la diferencia logarítmica de la temperatura media.
+* Ajuste del Modelo: El modelo actual explica muy poca variabilidad en la serie temporal de la temperatura media (1.04%). Esto puede indicar que hay otros factores no incluidos en el modelo que son importantes.
+* Prueba de Normalidad: Realizar la prueba de normalidad de los residuos para verificar su distribución.
+* Análisis de Residuos: Examinar los residuos del modelo para verificar la adecuación del modelo.
+
+
+
+## Diagnóstico del Modelo
+
+**Gráfico de Residuos:**
+
+```{r}
+# Diagnóstico del Modelo
+# Verificar los residuos del modelo
+# Gráfico de residuos
+ggplot(data, aes(x = date, y = residuals(model))) +
+  geom_line() +
+  labs(title = "Residuos del Modelo de Temperatura", y = "Residuos", x = "Fecha")
+```
+
+El gráfico de residuos muestra las diferencias entre los valores predichos por el modelo y los valores observados en la serie temporal de la temperatura media. Observaciones clave:
+
+* **Comportamiento de los Residuos:**
+
+* Los residuos parecen tener una media alrededor de cero, lo cual es bueno y esperado.
+* Sin embargo, la variabilidad de los residuos no es constante a lo largo del tiempo. Este fenómeno, conocido como heterocedasticidad, puede indicar que el modelo no captura completamente la estructura de los datos.
+
+* **Patrones en los Residuos:**
+
+* Algunos períodos muestran residuos más grandes, especialmente al inicio y en ciertos picos alrededor de los años 2014 y 2015. Esto puede sugerir que hay factores adicionales no considerados en el modelo que afectan la temperatura en estos períodos.
+
+**Prueba de normalidad de los residuos**
+
+```{r}
+
+shapiro_test_result <- shapiro.test(residuals(model))
+print(shapiro_test_result)
+```
+
+**Resultados:**
+
+* **W = 0.94823:** Este es el estadístico de la prueba de Shapiro-Wilk. Un valor cercano a 1 indica que los datos son aproximadamente normales, mientras que valores menores sugieren desviaciones de la normalidad.
+* **p-value < 2.2e-16:** El p-valor es extremadamente pequeño, significativamente menor que cualquier nivel típico de significancia
+
+
+
+
+## Previsión Futura
+
+```{r}
+# Previsión Futura
+# Generar un nuevo conjunto de datos para las predicciones futuras
+future_dates <- seq(max(data$date) + 1, by = "day", length.out = 10)
+new_data <- data.frame(
+  date = future_dates,
+  day_of_week = factor(wday(future_dates, label = TRUE)),
+  meantemp_diff = NA,  # Placeholder, no se usa en el modelo de predicción
+  year = year(future_dates),
+  month = month(future_dates)
+)
+
+# Predecir usando el modelo ajustado
+prediction <- predict(model, newdata = new_data)
+
+# Visualizar las predicciones
+plot(future_dates, prediction, type = "l", col = "blue", xlab = "Date", ylab = "Predicted Mean Temperature",
+     main = "Forecast of Mean Temperature")
+lines(data$date, data$meantemp, col = "red")  # Añadir los datos originales para comparar
+
+```
+
+
+* **Tendencia General:**
+
+La predicción muestra una variabilidad en la temperatura media para los próximos 10 días.
+Se observa un descenso inicial en la temperatura, seguido de un aumento significativo hacia el final del período de predicción.
+
+* **Amplitud de Predicción:**
+
+La amplitud de la predicción varía considerablemente, lo que podría sugerir una alta volatilidad en los datos predichos.
+
+
+
+
+## SARIMA
+
+Dados los resultados aplicaremos SARIMA
+
+```{r}
+# Cargar las librerías necesarias
+library(forecast)
+library(ggplot2)
+
+# Ajuste del modelo SARIMA utilizando auto.arima para identificar el mejor modelo
+sarima_model <- auto.arima(data$meantemp_log, seasonal = TRUE)
+
+# Resumen del modelo ajustado
+summary(sarima_model)
+
+# Diagnóstico de residuos del modelo SARIMA
+checkresiduals(sarima_model)
+
+```
+El gráfico muestra los residuos del modelo ARIMA ajustado, indicando que el modelo ARIMA(4,1,3) fue seleccionado como el mejor ajuste para la serie temporal
+
+**Residuos del Modelo**
+El gráfico de los residuos muestra que, en general, los residuos parecen ser ruido blanco, lo cual es una buena indicación de que el modelo está capturando bien las estructuras en los datos. Sin embargo, algunos picos en los residuos sugieren que podría haber eventos extremos o outliers no capturados por el modelo.
+
+**Prueba de Ljung-Box**
+La prueba de Ljung-Box se utiliza para verificar la autocorrelación en los residuos del modelo de series temporales. En este caso, el p-valor de 0.1566 indica que no podemos rechazar la hipótesis nula de que los residuos no están correlacionados. 
+
+```{r}
+# Predicción futura con el modelo SARIMA
+sarima_forecast <- forecast(sarima_model, h = 10)  # Predice los próximos 10 días
+
+# Crear un data frame para las fechas futuras
+future_dates <- seq(max(data$date) + 1, by = "day", length.out = 10)
+future_data <- data.frame(date = future_dates, meantemp_log = sarima_forecast$mean)
+
+# Visualización de las predicciones
+ggplot() +
+  geom_line(data = data, aes(x = date, y = meantemp_log), color = "red") +
+  geom_line(data = future_data, aes(x = date, y = meantemp_log), color = "blue") +
+  labs(title = "Predicción de Temperatura Media con Modelo SARIMA",
+       x = "Fecha", y = "Temperatura Media Logarítmica")
 
 
 ```
 
-**Evaluación de Modelos:**
+```{r}
+# Predicción futura con el modelo SARIMA
+sarima_forecast <- forecast(sarima_model, h = 10)  # Predice los próximos 10 días
 
-```{r
-checkresiduals(auto_fit)
+# Crear un data frame para las fechas futuras
+future_dates <- seq(max(data$date) + 1, by = "day", length.out = 10)
+future_data <- data.frame(date = future_dates, meantemp_log = sarima_forecast$mean)
 
+# Visualización de las predicciones
+ggplot() +
+  geom_line(data = data, aes(x = date, y = meantemp_log), color = "red") +
+  geom_line(data = future_data, aes(x = date, y = meantemp_log), color = "blue") +
+  labs(title = "Predicción de Temperatura Media con Modelo SARIMA",
+       x = "Fecha", y = "Temperatura Media Logarítmica") +
+  theme_minimal() +
+  scale_x_date(date_labels = "%Y", date_breaks = "1 year") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 ```
-
-**Ajuste de Modelos Lineales:**
-
-```{r
-linear_model <- lm(variable_dependiente ~ variable_independiente1 + variable_independiente2, data = data)
-summary(linear_model)
-
-
-```
-
 

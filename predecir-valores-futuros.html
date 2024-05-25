@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Documento Bookdown Propuesta</title>
+  <title>Chapter 7 Predecir valores futuros | Documento Bookdown Propuesta</title>
   <meta name="description" content="Bookdown propuesto para la asignatura Series de Tiempo." />
   <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Documento Bookdown Propuesta" />
+  <meta property="og:title" content="Chapter 7 Predecir valores futuros | Documento Bookdown Propuesta" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Bookdown propuesto para la asignatura Series de Tiempo." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Documento Bookdown Propuesta" />
+  <meta name="twitter:title" content="Chapter 7 Predecir valores futuros | Documento Bookdown Propuesta" />
   
   <meta name="twitter:description" content="Bookdown propuesto para la asignatura Series de Tiempo." />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="modulo-1---unidad-1.html"/>
+<link rel="prev" href="modulo-2---unidad-1-1.html"/>
+<link rel="next" href="visualización-de-las-predicciones.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -163,14 +163,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3" data-path="modulo-2---unidad-1.html"><a href="modulo-2---unidad-1.html#visualización-de-los-ajustes-del-modelo"><i class="fa fa-check"></i><b>5.3</b> Visualización de los ajustes del modelo</a></li>
 <li class="chapter" data-level="5.4" data-path="modulo-2---unidad-1.html"><a href="modulo-2---unidad-1.html#suavizamiento-exponencial"><i class="fa fa-check"></i><b>5.4</b> Suavizamiento exponencial</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="modulo-2---unidad-2.html"><a href="modulo-2---unidad-2.html"><i class="fa fa-check"></i><b>6</b> Modulo 2 - Unidad 2</a>
+<li class="chapter" data-level="6" data-path="modulo-2---unidad-1-1.html"><a href="modulo-2---unidad-1-1.html"><i class="fa fa-check"></i><b>6</b> Modulo 2 - Unidad 1</a></li>
+<li class="chapter" data-level="7" data-path="predecir-valores-futuros.html"><a href="predecir-valores-futuros.html"><i class="fa fa-check"></i><b>7</b> Predecir valores futuros</a></li>
+<li class="chapter" data-level="8" data-path="visualización-de-las-predicciones.html"><a href="visualización-de-las-predicciones.html"><i class="fa fa-check"></i><b>8</b> Visualización de las predicciones</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="modulo-2---unidad-2.html"><a href="modulo-2---unidad-2.html#modelos-de-series-de-tiempo-definiciones-y-aplicaciones"><i class="fa fa-check"></i><b>6.1</b> Modelos de Series de Tiempo: Definiciones y Aplicaciones</a></li>
-<li class="chapter" data-level="6.2" data-path="modulo-2---unidad-2.html"><a href="modulo-2---unidad-2.html#tranformación-y-diferenciación"><i class="fa fa-check"></i><b>6.2</b> Tranformación y Diferenciación</a></li>
-<li class="chapter" data-level="6.3" data-path="modulo-2---unidad-2.html"><a href="modulo-2---unidad-2.html#ajuste-del-modelo-lineal-estacionario"><i class="fa fa-check"></i><b>6.3</b> Ajuste del Modelo Lineal Estacionario</a></li>
-<li class="chapter" data-level="6.4" data-path="modulo-2---unidad-2.html"><a href="modulo-2---unidad-2.html#diagnóstico-del-modelo"><i class="fa fa-check"></i><b>6.4</b> Diagnóstico del Modelo</a></li>
-<li class="chapter" data-level="6.5" data-path="modulo-2---unidad-2.html"><a href="modulo-2---unidad-2.html#previsión-futura"><i class="fa fa-check"></i><b>6.5</b> Previsión Futura</a></li>
-<li class="chapter" data-level="6.6" data-path="modulo-2---unidad-2.html"><a href="modulo-2---unidad-2.html#sarima"><i class="fa fa-check"></i><b>6.6</b> SARIMA</a></li>
+<li class="chapter" data-level="8.1" data-path="visualización-de-las-predicciones.html"><a href="visualización-de-las-predicciones.html#modelos-de-series-de-tiempo-definiciones-y-aplicaciones"><i class="fa fa-check"></i><b>8.1</b> Modelos de Series de Tiempo: Definiciones y Aplicaciones</a></li>
 </ul></li>
 </ul>
 
@@ -189,34 +186,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Documento Bookdown Propuesta</h1>
-<p class="author"><em>Diego Fernando Ortiz</em></p>
-<p class="date"><em>Daily Climate time series data</em></p>
-</div>
-<div id="inicio" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Inicio<a href="inicio.html#inicio" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><strong>Fuente:</strong> <a href="https://www.kaggle.com/datasets/sumanthvrao/daily-climate-time-series-data">Kaggle</a></p>
-<ul>
-<li><p><strong>Relevancia Temática</strong>
-Aunque el dataset es específico de Delhi, India, la observación de tendencias y patrones en el comportamiento climático en una región que experimenta variaciones significativas puede proporcionar información valiosa. Estos datos pueden servir como un estudio comparativo para anticipar escenarios posibles en Colombia, especialmente bajo condiciones climáticas extremas similares.</p></li>
-<li><p><strong>Datos Detallados y Granulares</strong>
-El conjunto de datos ofrece mediciones diarias desde el 1 de enero de 2013 hasta el 24 de abril de 2017, proporcionando un marco detallado para el análisis de tendencias a largo plazo y variaciones estacionales en Delhi. Esta granularidad facilita el estudio detallado de la relación entre las variaciones de temperatura y otros parámetros climáticos, crucial para entender las dinámicas ambientales que pueden ser similares en otras partes del mundo, incluida Colombia.</p></li>
-<li><p><strong>Aplicabilidad de Análisis Multivariado</strong>
-Con variables como temperatura media, humedad, velocidad del viento y presión media, es posible realizar análisis multivariado para investigar cómo las fluctuaciones de estos elementos se correlacionan entre sí y afectan condiciones ambientales más amplias. Esto es relevante para estudiar posibles vínculos entre altas temperaturas y sequías, un fenómeno preocupante también en Colombia.</p></li>
-<li><p><strong>Comparación Interregional</strong>
-Mientras que este conjunto de datos es específico de una ciudad, los métodos analíticos aplicados aquí pueden ser extrapolados para comparar diferentes regiones dentro de Colombia, un país con una diversidad climática considerable. Entender cómo diferentes microclimas responden a variaciones similares en parámetros climáticos puede ofrecer insights cruciales para la gestión de recursos y la preparación ante eventos extremos.</p></li>
-<li><p><strong>Soporte para Modelos Predictivos</strong>
-Utilizando este conjunto de datos, podemos desarrollar y validar modelos predictivos que estimen el impacto de las variaciones climáticas en los recursos hídricos. Tales modelos no solo son pertinentes para la región de Delhi sino que pueden ser adaptados para prever y mitigar efectos similares en Colombia, especialmente en preparación para futuros eventos climáticos extremos.</p></li>
-</ul>
+<div id="predecir-valores-futuros" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Predecir valores futuros<a href="predecir-valores-futuros.html#predecir-valores-futuros" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>library(forecast)
+prediction &lt;- forecast(model, newdata = new_data) # ‘new_data’ deberá ser creado con fechas futuras</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="modulo-1---unidad-1.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="modulo-2---unidad-1-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="visualización-de-las-predicciones.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -186,6 +186,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="modulo-2---unidad-1-1" class="section level1 hasAnchor" number="6">
 <h1><span class="header-section-number">Chapter 6</span> Modulo 2 - Unidad 1<a href="modulo-2---unidad-1-1.html#modulo-2---unidad-1-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<ul>
+<li><strong>Inclusión de Variables en el Tiempo </strong></li>
+</ul>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="modulo-2---unidad-1-1.html#cb58-1" tabindex="-1"></a><span class="fu">library</span>(lubridate)  <span class="co"># para manejo de fechas</span></span>
+<span id="cb58-2"><a href="modulo-2---unidad-1-1.html#cb58-2" tabindex="-1"></a></span>
+<span id="cb58-3"><a href="modulo-2---unidad-1-1.html#cb58-3" tabindex="-1"></a><span class="co"># Convertir la columna de fecha a tipo Date si no está convertida</span></span>
+<span id="cb58-4"><a href="modulo-2---unidad-1-1.html#cb58-4" tabindex="-1"></a>data<span class="sc">$</span>date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(data<span class="sc">$</span>date)</span>
+<span id="cb58-5"><a href="modulo-2---unidad-1-1.html#cb58-5" tabindex="-1"></a></span>
+<span id="cb58-6"><a href="modulo-2---unidad-1-1.html#cb58-6" tabindex="-1"></a><span class="co"># Crear nuevas variables de tiempo</span></span>
+<span id="cb58-7"><a href="modulo-2---unidad-1-1.html#cb58-7" tabindex="-1"></a>data<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">year</span>(data<span class="sc">$</span>date)</span>
+<span id="cb58-8"><a href="modulo-2---unidad-1-1.html#cb58-8" tabindex="-1"></a>data<span class="sc">$</span>month <span class="ot">&lt;-</span> <span class="fu">month</span>(data<span class="sc">$</span>date)</span>
+<span id="cb58-9"><a href="modulo-2---unidad-1-1.html#cb58-9" tabindex="-1"></a>data<span class="sc">$</span>day <span class="ot">&lt;-</span> <span class="fu">day</span>(data<span class="sc">$</span>date)</span>
+<span id="cb58-10"><a href="modulo-2---unidad-1-1.html#cb58-10" tabindex="-1"></a>data<span class="sc">$</span>day_of_week <span class="ot">&lt;-</span> <span class="fu">wday</span>(data<span class="sc">$</span>date, <span class="at">label =</span> <span class="cn">TRUE</span>)  <span class="co"># Días de la semana con etiquetas</span></span></code></pre></div>
 <div id="modelos-de-series-de-tiempo-definiciones-y-aplicaciones" class="section level2 hasAnchor" number="6.1">
 <h2><span class="header-section-number">6.1</span> Modelos de Series de Tiempo: Definiciones y Aplicaciones<a href="modulo-2---unidad-1-1.html#modelos-de-series-de-tiempo-definiciones-y-aplicaciones" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
@@ -199,31 +212,119 @@ Combinando AR y MA, este modelo también incorpora un término de diferenciació
 Extiende el ARIMA para capturar estacionalidades. Se denota como ARIMA(p, d, q)(P, D, Q)[s], donde P, D, y Q representan la autoregresión estacional, la diferenciación estacional, y la media móvil estacional, respectivamente, con ‘s’ indicando la periodicidad de la temporada.</p></li>
 </ul>
 <p><strong>Ajuste de Modelos de Series de Tiempo en R</strong></p>
-<p><strong>Implementación y Selección de Modelos:</strong></p>
-<p>```{r
-library(forecast)
-auto_fit &lt;- auto.arima(data$variable, seasonal = TRUE, stepwise = TRUE,
-approximation = FALSE, trace = TRUE)
-summary(auto_fit)</p>
-<pre><code>
-**Predicción y Visualización:**
-
-```{r
-forecasted_values &lt;- forecast(auto_fit, h = 10)  # Pronósticos para los siguientes 10 periodos
-plot(forecasted_values)
-
-</code></pre>
-<p><strong>Evaluación de Modelos:</strong></p>
-<p>```{r
-checkresiduals(auto_fit)</p>
-<pre><code>
-**Ajuste de Modelos Lineales:**
-
-```{r
-linear_model &lt;- lm(variable_dependiente ~ variable_independiente1 + variable_independiente2, data = data)
-summary(linear_model)
-
-</code></pre>
+<ul>
+<li></li>
+</ul>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="modulo-2---unidad-1-1.html#cb59-1" tabindex="-1"></a><span class="co"># Cargar las librerías necesarias</span></span>
+<span id="cb59-2"><a href="modulo-2---unidad-1-1.html#cb59-2" tabindex="-1"></a><span class="fu">library</span>(tseries)</span>
+<span id="cb59-3"><a href="modulo-2---unidad-1-1.html#cb59-3" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb59-4"><a href="modulo-2---unidad-1-1.html#cb59-4" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb59-5"><a href="modulo-2---unidad-1-1.html#cb59-5" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb59-6"><a href="modulo-2---unidad-1-1.html#cb59-6" tabindex="-1"></a></span>
+<span id="cb59-7"><a href="modulo-2---unidad-1-1.html#cb59-7" tabindex="-1"></a><span class="co"># Cargar el dataset</span></span>
+<span id="cb59-8"><a href="modulo-2---unidad-1-1.html#cb59-8" tabindex="-1"></a>ruta <span class="ot">&lt;-</span> <span class="st">&quot;C:/Users/Diego Ortiz/OneDrive/Documentos/Series de tiempo/Series1/ST1/DailyDelhiClimateTrain.csv&quot;</span></span>
+<span id="cb59-9"><a href="modulo-2---unidad-1-1.html#cb59-9" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(ruta)</span>
+<span id="cb59-10"><a href="modulo-2---unidad-1-1.html#cb59-10" tabindex="-1"></a></span>
+<span id="cb59-11"><a href="modulo-2---unidad-1-1.html#cb59-11" tabindex="-1"></a><span class="co"># Ajuste del formato de la fecha</span></span>
+<span id="cb59-12"><a href="modulo-2---unidad-1-1.html#cb59-12" tabindex="-1"></a>data<span class="sc">$</span>date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(data<span class="sc">$</span>date)</span>
+<span id="cb59-13"><a href="modulo-2---unidad-1-1.html#cb59-13" tabindex="-1"></a>data<span class="sc">$</span>day_of_week <span class="ot">&lt;-</span> <span class="fu">wday</span>(data<span class="sc">$</span>date, <span class="at">label =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb59-14"><a href="modulo-2---unidad-1-1.html#cb59-14" tabindex="-1"></a></span>
+<span id="cb59-15"><a href="modulo-2---unidad-1-1.html#cb59-15" tabindex="-1"></a><span class="co"># Análisis de Estacionariedad y Transformaciones</span></span>
+<span id="cb59-16"><a href="modulo-2---unidad-1-1.html#cb59-16" tabindex="-1"></a><span class="co"># Verificación inicial de estacionariedad</span></span>
+<span id="cb59-17"><a href="modulo-2---unidad-1-1.html#cb59-17" tabindex="-1"></a>adf_result_original <span class="ot">&lt;-</span> <span class="fu">adf.test</span>(data<span class="sc">$</span>meantemp, <span class="at">alternative =</span> <span class="st">&quot;stationary&quot;</span>)</span>
+<span id="cb59-18"><a href="modulo-2---unidad-1-1.html#cb59-18" tabindex="-1"></a><span class="fu">print</span>(adf_result_original)</span></code></pre></div>
+<pre><code>## 
+##  Augmented Dickey-Fuller Test
+## 
+## data:  data$meantemp
+## Dickey-Fuller = -1.8526, Lag order = 11, p-value = 0.6407
+## alternative hypothesis: stationary</code></pre>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="modulo-2---unidad-1-1.html#cb61-1" tabindex="-1"></a><span class="co"># Transformación logarítmica</span></span>
+<span id="cb61-2"><a href="modulo-2---unidad-1-1.html#cb61-2" tabindex="-1"></a>data<span class="sc">$</span>meantemp_log <span class="ot">&lt;-</span> <span class="fu">log</span>(data<span class="sc">$</span>meantemp)</span>
+<span id="cb61-3"><a href="modulo-2---unidad-1-1.html#cb61-3" tabindex="-1"></a></span>
+<span id="cb61-4"><a href="modulo-2---unidad-1-1.html#cb61-4" tabindex="-1"></a><span class="co"># Diferenciación de la serie transformada</span></span>
+<span id="cb61-5"><a href="modulo-2---unidad-1-1.html#cb61-5" tabindex="-1"></a>data<span class="sc">$</span>meantemp_diff <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="fu">diff</span>(data<span class="sc">$</span>meantemp_log))  <span class="co"># Agrega NA al inicio para mantener la longitud</span></span>
+<span id="cb61-6"><a href="modulo-2---unidad-1-1.html#cb61-6" tabindex="-1"></a></span>
+<span id="cb61-7"><a href="modulo-2---unidad-1-1.html#cb61-7" tabindex="-1"></a><span class="co"># Reevaluar estacionariedad con la serie diferenciada</span></span>
+<span id="cb61-8"><a href="modulo-2---unidad-1-1.html#cb61-8" tabindex="-1"></a>adf_result_diff <span class="ot">&lt;-</span> <span class="fu">adf.test</span>(<span class="fu">na.omit</span>(data<span class="sc">$</span>meantemp_diff), <span class="at">alternative =</span> <span class="st">&quot;stationary&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning in adf.test(na.omit(data$meantemp_diff), alternative = &quot;stationary&quot;):
+## p-value smaller than printed p-value</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="modulo-2---unidad-1-1.html#cb63-1" tabindex="-1"></a><span class="fu">print</span>(adf_result_diff)</span></code></pre></div>
+<pre><code>## 
+##  Augmented Dickey-Fuller Test
+## 
+## data:  na.omit(data$meantemp_diff)
+## Dickey-Fuller = -13.915, Lag order = 11, p-value = 0.01
+## alternative hypothesis: stationary</code></pre>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="modulo-2---unidad-1-1.html#cb65-1" tabindex="-1"></a><span class="co"># Remover NA creado por la diferenciación</span></span>
+<span id="cb65-2"><a href="modulo-2---unidad-1-1.html#cb65-2" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(data)</span>
+<span id="cb65-3"><a href="modulo-2---unidad-1-1.html#cb65-3" tabindex="-1"></a></span>
+<span id="cb65-4"><a href="modulo-2---unidad-1-1.html#cb65-4" tabindex="-1"></a><span class="co"># Ajuste de un Modelo Lineal Estacionario</span></span>
+<span id="cb65-5"><a href="modulo-2---unidad-1-1.html#cb65-5" tabindex="-1"></a><span class="co"># Modelo lineal utilizando variables temporales y la serie transformada y diferenciada</span></span>
+<span id="cb65-6"><a href="modulo-2---unidad-1-1.html#cb65-6" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(meantemp_diff <span class="sc">~</span> <span class="fu">year</span>(date) <span class="sc">+</span> <span class="fu">month</span>(date) <span class="sc">+</span> day_of_week, <span class="at">data =</span> data)</span>
+<span id="cb65-7"><a href="modulo-2---unidad-1-1.html#cb65-7" tabindex="-1"></a></span>
+<span id="cb65-8"><a href="modulo-2---unidad-1-1.html#cb65-8" tabindex="-1"></a><span class="co"># Revisar el resumen del modelo para ver la significancia de los predictores</span></span>
+<span id="cb65-9"><a href="modulo-2---unidad-1-1.html#cb65-9" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = meantemp_diff ~ year(date) + month(date) + day_of_week, 
+##     data = data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.40903 -0.03496  0.00410  0.03966  0.44474 
+## 
+## Coefficients:
+##                 Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)    1.5627646  3.5452077   0.441  0.65942   
+## year(date)    -0.0007708  0.0017598  -0.438  0.66144   
+## month(date)   -0.0015183  0.0005713  -2.658  0.00796 **
+## day_of_week.L -0.0056606  0.0052113  -1.086  0.27757   
+## day_of_week.Q -0.0083401  0.0052105  -1.601  0.10968   
+## day_of_week.C  0.0083180  0.0052134   1.595  0.11082   
+## day_of_week^4 -0.0055981  0.0052131  -1.074  0.28307   
+## day_of_week^5  0.0017441  0.0052152   0.334  0.73811   
+## day_of_week^6 -0.0039548  0.0052126  -0.759  0.44816   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.07531 on 1452 degrees of freedom
+## Multiple R-squared:  0.0104, Adjusted R-squared:  0.004946 
+## F-statistic: 1.907 on 8 and 1452 DF,  p-value: 0.05521</code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="modulo-2---unidad-1-1.html#cb67-1" tabindex="-1"></a><span class="co"># Diagnóstico del Modelo</span></span>
+<span id="cb67-2"><a href="modulo-2---unidad-1-1.html#cb67-2" tabindex="-1"></a><span class="co"># Verificar los residuos del modelo</span></span>
+<span id="cb67-3"><a href="modulo-2---unidad-1-1.html#cb67-3" tabindex="-1"></a><span class="co"># Gráfico de residuos</span></span>
+<span id="cb67-4"><a href="modulo-2---unidad-1-1.html#cb67-4" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> <span class="fu">residuals</span>(model))) <span class="sc">+</span></span>
+<span id="cb67-5"><a href="modulo-2---unidad-1-1.html#cb67-5" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb67-6"><a href="modulo-2---unidad-1-1.html#cb67-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Residuos del Modelo de Temperatura&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Residuos&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Fecha&quot;</span>)</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="modulo-2---unidad-1-1.html#cb68-1" tabindex="-1"></a><span class="co"># Prueba de normalidad de los residuos</span></span>
+<span id="cb68-2"><a href="modulo-2---unidad-1-1.html#cb68-2" tabindex="-1"></a>shapiro_test_result <span class="ot">&lt;-</span> <span class="fu">shapiro.test</span>(<span class="fu">residuals</span>(model))</span>
+<span id="cb68-3"><a href="modulo-2---unidad-1-1.html#cb68-3" tabindex="-1"></a><span class="fu">print</span>(shapiro_test_result)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  residuals(model)
+## W = 0.94823, p-value &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="modulo-2---unidad-1-1.html#cb70-1" tabindex="-1"></a><span class="co"># Previsión Futura</span></span>
+<span id="cb70-2"><a href="modulo-2---unidad-1-1.html#cb70-2" tabindex="-1"></a><span class="co"># Generar un nuevo conjunto de datos para las predicciones futuras</span></span>
+<span id="cb70-3"><a href="modulo-2---unidad-1-1.html#cb70-3" tabindex="-1"></a>future_dates <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">max</span>(data<span class="sc">$</span>date) <span class="sc">+</span> <span class="dv">1</span>, <span class="at">by =</span> <span class="st">&quot;day&quot;</span>, <span class="at">length.out =</span> <span class="dv">10</span>)</span>
+<span id="cb70-4"><a href="modulo-2---unidad-1-1.html#cb70-4" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb70-5"><a href="modulo-2---unidad-1-1.html#cb70-5" tabindex="-1"></a>  <span class="at">date =</span> future_dates,</span>
+<span id="cb70-6"><a href="modulo-2---unidad-1-1.html#cb70-6" tabindex="-1"></a>  <span class="at">day_of_week =</span> <span class="fu">factor</span>(<span class="fu">wday</span>(future_dates, <span class="at">label =</span> <span class="cn">TRUE</span>)),</span>
+<span id="cb70-7"><a href="modulo-2---unidad-1-1.html#cb70-7" tabindex="-1"></a>  <span class="at">meantemp_diff =</span> <span class="cn">NA</span>,  <span class="co"># Placeholder, no se usa en el modelo de predicción</span></span>
+<span id="cb70-8"><a href="modulo-2---unidad-1-1.html#cb70-8" tabindex="-1"></a>  <span class="at">year =</span> <span class="fu">year</span>(future_dates),</span>
+<span id="cb70-9"><a href="modulo-2---unidad-1-1.html#cb70-9" tabindex="-1"></a>  <span class="at">month =</span> <span class="fu">month</span>(future_dates)</span>
+<span id="cb70-10"><a href="modulo-2---unidad-1-1.html#cb70-10" tabindex="-1"></a>)</span>
+<span id="cb70-11"><a href="modulo-2---unidad-1-1.html#cb70-11" tabindex="-1"></a></span>
+<span id="cb70-12"><a href="modulo-2---unidad-1-1.html#cb70-12" tabindex="-1"></a><span class="co"># Predecir usando el modelo ajustado</span></span>
+<span id="cb70-13"><a href="modulo-2---unidad-1-1.html#cb70-13" tabindex="-1"></a>prediction <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, <span class="at">newdata =</span> new_data)</span>
+<span id="cb70-14"><a href="modulo-2---unidad-1-1.html#cb70-14" tabindex="-1"></a></span>
+<span id="cb70-15"><a href="modulo-2---unidad-1-1.html#cb70-15" tabindex="-1"></a><span class="co"># Visualizar las predicciones</span></span>
+<span id="cb70-16"><a href="modulo-2---unidad-1-1.html#cb70-16" tabindex="-1"></a><span class="fu">plot</span>(future_dates, prediction, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Date&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Predicted Mean Temperature&quot;</span>,</span>
+<span id="cb70-17"><a href="modulo-2---unidad-1-1.html#cb70-17" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Forecast of Mean Temperature&quot;</span>)</span>
+<span id="cb70-18"><a href="modulo-2---unidad-1-1.html#cb70-18" tabindex="-1"></a><span class="fu">lines</span>(data<span class="sc">$</span>date, data<span class="sc">$</span>meantemp, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)  <span class="co"># Añadir los datos originales para comparar</span></span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-31-2.png" width="672" /></p>
 </div>
 </div>
             </section>
