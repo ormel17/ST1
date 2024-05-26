@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="modulo-2---unidad-1.html"/>
-
+<link rel="next" href="modulo-3---unidad-2.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -171,6 +171,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.4" data-path="modulo-2---unidad-2.html"><a href="modulo-2---unidad-2.html#diagnóstico-del-modelo"><i class="fa fa-check"></i><b>6.4</b> Diagnóstico del Modelo</a></li>
 <li class="chapter" data-level="6.5" data-path="modulo-2---unidad-2.html"><a href="modulo-2---unidad-2.html#previsión-futura"><i class="fa fa-check"></i><b>6.5</b> Previsión Futura</a></li>
 <li class="chapter" data-level="6.6" data-path="modulo-2---unidad-2.html"><a href="modulo-2---unidad-2.html#sarima"><i class="fa fa-check"></i><b>6.6</b> SARIMA</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="modulo-3---unidad-2.html"><a href="modulo-3---unidad-2.html"><i class="fa fa-check"></i><b>7</b> Modulo 3 - Unidad 2</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="modulo-3---unidad-2.html"><a href="modulo-3---unidad-2.html#justificación-del-uso-de-prophet"><i class="fa fa-check"></i><b>7.1</b> Justificación del Uso de Prophet</a></li>
 </ul></li>
 </ul>
 
@@ -475,13 +479,30 @@ La prueba de Ljung-Box se utiliza para verificar la autocorrelación en los resi
 <span id="cb75-5"><a href="modulo-2---unidad-2.html#cb75-5" tabindex="-1"></a>future_dates <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">max</span>(data<span class="sc">$</span>date) <span class="sc">+</span> <span class="dv">1</span>, <span class="at">by =</span> <span class="st">&quot;day&quot;</span>, <span class="at">length.out =</span> <span class="dv">10</span>)</span>
 <span id="cb75-6"><a href="modulo-2---unidad-2.html#cb75-6" tabindex="-1"></a>future_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">date =</span> future_dates, <span class="at">meantemp_log =</span> sarima_forecast<span class="sc">$</span>mean)</span>
 <span id="cb75-7"><a href="modulo-2---unidad-2.html#cb75-7" tabindex="-1"></a></span>
-<span id="cb75-8"><a href="modulo-2---unidad-2.html#cb75-8" tabindex="-1"></a><span class="co"># Visualización de las predicciones</span></span>
-<span id="cb75-9"><a href="modulo-2---unidad-2.html#cb75-9" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb75-10"><a href="modulo-2---unidad-2.html#cb75-10" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> data, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> meantemp_log), <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb75-11"><a href="modulo-2---unidad-2.html#cb75-11" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> future_data, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> meantemp_log), <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
-<span id="cb75-12"><a href="modulo-2---unidad-2.html#cb75-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Predicción de Temperatura Media con Modelo SARIMA&quot;</span>,</span>
-<span id="cb75-13"><a href="modulo-2---unidad-2.html#cb75-13" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Fecha&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Temperatura Media Logarítmica&quot;</span>)</span></code></pre></div>
+<span id="cb75-8"><a href="modulo-2---unidad-2.html#cb75-8" tabindex="-1"></a><span class="co"># Gráfico de los datos históricos</span></span>
+<span id="cb75-9"><a href="modulo-2---unidad-2.html#cb75-9" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> meantemp_log)) <span class="sc">+</span></span>
+<span id="cb75-10"><a href="modulo-2---unidad-2.html#cb75-10" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb75-11"><a href="modulo-2---unidad-2.html#cb75-11" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Temperatura Media Histórica&quot;</span>,</span>
+<span id="cb75-12"><a href="modulo-2---unidad-2.html#cb75-12" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Fecha&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Temperatura Media Logarítmica&quot;</span>) <span class="sc">+</span></span>
+<span id="cb75-13"><a href="modulo-2---unidad-2.html#cb75-13" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb75-14"><a href="modulo-2---unidad-2.html#cb75-14" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">date_labels =</span> <span class="st">&quot;%Y&quot;</span>, <span class="at">date_breaks =</span> <span class="st">&quot;1 year&quot;</span>) <span class="sc">+</span></span>
+<span id="cb75-15"><a href="modulo-2---unidad-2.html#cb75-15" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb75-16"><a href="modulo-2---unidad-2.html#cb75-16" tabindex="-1"></a></span>
+<span id="cb75-17"><a href="modulo-2---unidad-2.html#cb75-17" tabindex="-1"></a><span class="co"># Gráfico de las predicciones futuras</span></span>
+<span id="cb75-18"><a href="modulo-2---unidad-2.html#cb75-18" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(future_data, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> meantemp_log)) <span class="sc">+</span></span>
+<span id="cb75-19"><a href="modulo-2---unidad-2.html#cb75-19" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb75-20"><a href="modulo-2---unidad-2.html#cb75-20" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Predicción de Temperatura Media con Modelo SARIMA&quot;</span>,</span>
+<span id="cb75-21"><a href="modulo-2---unidad-2.html#cb75-21" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Fecha&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Temperatura Media Logarítmica&quot;</span>) <span class="sc">+</span></span>
+<span id="cb75-22"><a href="modulo-2---unidad-2.html#cb75-22" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb75-23"><a href="modulo-2---unidad-2.html#cb75-23" tabindex="-1"></a></span>
+<span id="cb75-24"><a href="modulo-2---unidad-2.html#cb75-24" tabindex="-1"></a><span class="co"># Mostrar ambos gráficos</span></span>
+<span id="cb75-25"><a href="modulo-2---unidad-2.html#cb75-25" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb75-26"><a href="modulo-2---unidad-2.html#cb75-26" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1, p2, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="index_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<p><strong>Históricos:</strong></p>
+<p>El gráfico superior muestra las temperaturas medias logarítmicas históricas con una estacionalidad clara. Los picos y valles anuales son evidentes.</p>
+<p><strong>Predicciones Futura:</strong></p>
+<p>El gráfico inferior muestra la predicción futura para los próximos 10 días, con un aumento gradual y una estabilización.</p>
 </div>
 </div>
             </section>
@@ -489,8 +510,8 @@ La prueba de Ljung-Box se utiliza para verificar la autocorrelación en los resi
           </div>
         </div>
       </div>
-<a href="modulo-2---unidad-1.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="modulo-2---unidad-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="modulo-3---unidad-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

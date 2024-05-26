@@ -965,7 +965,7 @@ El gráfico de los residuos muestra que, en general, los residuos parecen ser ru
 **Prueba de Ljung-Box**
 La prueba de Ljung-Box se utiliza para verificar la autocorrelación en los residuos del modelo de series temporales. En este caso, el p-valor de 0.1566 indica que no podemos rechazar la hipótesis nula de que los residuos no están correlacionados. 
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 # Predicción futura con el modelo SARIMA
 sarima_forecast <- forecast(sarima_model, h = 10)  # Predice los próximos 10 días
 
@@ -973,14 +973,138 @@ sarima_forecast <- forecast(sarima_model, h = 10)  # Predice los próximos 10 d�
 future_dates <- seq(max(data$date) + 1, by = "day", length.out = 10)
 future_data <- data.frame(date = future_dates, meantemp_log = sarima_forecast$mean)
 
-# Visualización de las predicciones
-ggplot() +
-  geom_line(data = data, aes(x = date, y = meantemp_log), color = "red") +
-  geom_line(data = future_data, aes(x = date, y = meantemp_log), color = "blue") +
-  labs(title = "Predicción de Temperatura Media con Modelo SARIMA",
-       x = "Fecha", y = "Temperatura Media Logarítmica")
+# Gráfico de los datos históricos
+p1 <- ggplot(data, aes(x = date, y = meantemp_log)) +
+  geom_line(color = "red") +
+  labs(title = "Temperatura Media Histórica",
+       x = "Fecha", y = "Temperatura Media Logarítmica") +
+  theme_minimal() +
+  scale_x_date(date_labels = "%Y", date_breaks = "1 year") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
+# Gráfico de las predicciones futuras
+p2 <- ggplot(future_data, aes(x = date, y = meantemp_log)) +
+  geom_line(color = "blue") +
+  labs(title = "Predicción de Temperatura Media con Modelo SARIMA",
+       x = "Fecha", y = "Temperatura Media Logarítmica") +
+  theme_minimal()
+
+# Mostrar ambos gráficos
+library(gridExtra)
+grid.arrange(p1, p2, ncol = 1)
 
 ```
 
 
+**Históricos:**
+
+El gráfico superior muestra las temperaturas medias logarítmicas históricas con una estacionalidad clara. Los picos y valles anuales son evidentes.
+
+**Predicciones Futura:**
+
+El gráfico inferior muestra la predicción futura para los próximos 10 días, con un aumento gradual y una estabilización.
+
+# Modulo 3 - Unidad 2
+
+
+```{r message=FALSE, warning=FALSE}
+# Cargar las librerías necesarias
+library(prophet)
+library(dplyr)
+
+# Cargar el dataset
+ruta <- "C:/Users/Diego Ortiz/OneDrive/Documentos/Series de tiempo/Series1/ST1/DailyDelhiClimateTrain.csv"
+data <- read.csv(ruta)
+
+# Ajuste del formato de la fecha y creación del DataFrame requerido para Prophet
+data <- data %>%
+  mutate(ds = as.Date(date),
+         y = log(meantemp)) %>%
+  select(ds, y)
+
+# Verificar los primeros registros
+head(data)
+
+```
+
+
+```{r include=FALSE}
+# Ajustar el modelo Prophet
+prophet_model <- prophet(data)
+
+# Resumen del modelo ajustado
+print(prophet_model)
+
+```
+
+
+```{r}
+# Crear un DataFrame para las fechas futuras
+future <- make_future_dataframe(prophet_model, periods = 365)  # Predice para un año más
+
+# Realizar la predicción
+forecast <- predict(prophet_model, future)
+
+# Visualización de las predicciones
+prophet_plot_components(prophet_model, forecast)
+
+```
+**Tendencia (Trend):**
+
+La primera gráfica muestra la tendencia general de la serie temporal. Se observa un aumento gradual de la temperatura media logarítmica a lo largo del tiempo.
+
+**Estacionalidad Semanal (Weekly Seasonality):**
+
+La segunda gráfica muestra la estacionalidad semanal. Se observa que los miércoles tienden a ser ligeramente más cálidos en comparación con otros días de la semana.
+
+**Estacionalidad Anual (Yearly Seasonality):**
+
+La tercera gráfica muestra la estacionalidad anual. Se puede ver que las temperaturas tienden a ser más altas alrededor de julio y más bajas alrededor de enero, lo cual es consistente con los patrones climáticos estacionales.
+
+
+```{r}
+# Plotear las predicciones
+plot(prophet_model, forecast) +
+  labs(title = "Predicción de Temperatura Media con Prophet",
+       x = "Fecha", y = "Temperatura Media Logarítmica")
+
+```
+
+
+**Datos Históricos:**
+
+* Los puntos negros representan los datos históricos de la temperatura media logarítmica. Observamos patrones estacionales anuales claramente definidos con picos en los meses de verano y valles en los meses de invierno.
+
+**Predicciones del Modelo:**
+
+* La línea azul muestra las predicciones del modelo Prophet. Las áreas sombreadas en azul claro alrededor de la línea de predicción representan los intervalos de confianza de las predicciones. Estos intervalos nos dan una idea de la incertidumbre en las predicciones.
+
+**Consistencia del Modelo:**
+
+* La línea de predicción sigue de cerca los datos históricos, lo que indica que el modelo Prophet ha capturado bien la estacionalidad y la tendencia de la serie temporal.
+* Las predicciones para el futuro (a partir de 2017) muestran una tendencia continua con el mismo patrón estacional observado en los datos históricos.
+
+
+## Justificación del Uso de Prophet
+
+El uso de Prophet es justificado debido a varias razones:
+
+* **Captura de Estacionalidades Complejas:**
+
+Prophet es capaz de capturar estacionalidades múltiples (diaria, semanal, anual) y permite la incorporación de efectos de festivos o eventos especiales.
+
+* **Robustez a Datos Faltantes y Outliers:**
+
+Es robusto frente a datos faltantes y outliers, lo que lo hace adecuado para datos reales que pueden tener estos problemas.
+
+* **Facilidad de Uso y Interpretabilidad:**
+
+La implementación es sencilla y la interpretación de los resultados es intuitiva, con componentes de tendencia y estacionalidad claramente definidos.
+
+* **Predicción a Largo Plazo:**
+
+Es adecuado para predicciones a largo plazo debido a su capacidad para modelar tendencias no lineales y estacionalidades recurrentes.
+
+* **Comparación con Otros Modelos:**
+
+Comparado con otros modelos como ARIMA, Prophet ofrece una metodología complementaria que es menos sensible a la necesidad de diferenciar los datos para lograr la estacionaridad.
