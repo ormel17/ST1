@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="modulo-2---unidad-1.html"/>
-<link rel="next" href="modulo-3---unidad-2.html"/>
+<link rel="next" href="modulo-2---unidad-3.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -172,9 +172,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.5" data-path="modulo-2---unidad-2.html"><a href="modulo-2---unidad-2.html#previsión-futura"><i class="fa fa-check"></i><b>6.5</b> Previsión Futura</a></li>
 <li class="chapter" data-level="6.6" data-path="modulo-2---unidad-2.html"><a href="modulo-2---unidad-2.html#sarima"><i class="fa fa-check"></i><b>6.6</b> SARIMA</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="modulo-3---unidad-2.html"><a href="modulo-3---unidad-2.html"><i class="fa fa-check"></i><b>7</b> Modulo 3 - Unidad 2</a>
+<li class="chapter" data-level="7" data-path="modulo-2---unidad-3.html"><a href="modulo-2---unidad-3.html"><i class="fa fa-check"></i><b>7</b> Modulo 2 - Unidad 3</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="modulo-3---unidad-2.html"><a href="modulo-3---unidad-2.html#justificación-del-uso-de-prophet"><i class="fa fa-check"></i><b>7.1</b> Justificación del Uso de Prophet</a></li>
+<li class="chapter" data-level="7.1" data-path="modulo-2---unidad-3.html"><a href="modulo-2---unidad-3.html#justificación-del-uso-de-prophet"><i class="fa fa-check"></i><b>7.1</b> Justificación del Uso de Prophet</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="modulo-3.html"><a href="modulo-3.html"><i class="fa fa-check"></i><b>8</b> Modulo 3</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="modulo-3.html"><a href="modulo-3.html#organización-datos"><i class="fa fa-check"></i><b>8.1</b> Organización datos</a></li>
 </ul></li>
 </ul>
 
@@ -307,12 +311,11 @@ Conclusión</p>
 <div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="modulo-2---unidad-2.html#cb65-1" tabindex="-1"></a><span class="co"># Remover NA creado por la diferenciación</span></span>
 <span id="cb65-2"><a href="modulo-2---unidad-2.html#cb65-2" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(data)</span>
 <span id="cb65-3"><a href="modulo-2---unidad-2.html#cb65-3" tabindex="-1"></a></span>
-<span id="cb65-4"><a href="modulo-2---unidad-2.html#cb65-4" tabindex="-1"></a><span class="co"># Ajuste de un Modelo Lineal Estacionario</span></span>
-<span id="cb65-5"><a href="modulo-2---unidad-2.html#cb65-5" tabindex="-1"></a><span class="co"># Modelo lineal utilizando variables temporales y la serie transformada y diferenciada</span></span>
-<span id="cb65-6"><a href="modulo-2---unidad-2.html#cb65-6" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(meantemp_diff <span class="sc">~</span> year <span class="sc">+</span> month <span class="sc">+</span> day_of_week, <span class="at">data =</span> data)</span>
-<span id="cb65-7"><a href="modulo-2---unidad-2.html#cb65-7" tabindex="-1"></a></span>
-<span id="cb65-8"><a href="modulo-2---unidad-2.html#cb65-8" tabindex="-1"></a><span class="co"># Revisar el resumen del modelo para ver la significancia de los predictores</span></span>
-<span id="cb65-9"><a href="modulo-2---unidad-2.html#cb65-9" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div>
+<span id="cb65-4"><a href="modulo-2---unidad-2.html#cb65-4" tabindex="-1"></a><span class="co"># Modelo lineal utilizando variables temporales y la serie transformada y diferenciada</span></span>
+<span id="cb65-5"><a href="modulo-2---unidad-2.html#cb65-5" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(meantemp_diff <span class="sc">~</span> year <span class="sc">+</span> month <span class="sc">+</span> day_of_week, <span class="at">data =</span> data)</span>
+<span id="cb65-6"><a href="modulo-2---unidad-2.html#cb65-6" tabindex="-1"></a></span>
+<span id="cb65-7"><a href="modulo-2---unidad-2.html#cb65-7" tabindex="-1"></a><span class="co"># Revisar el resumen del modelo </span></span>
+<span id="cb65-8"><a href="modulo-2---unidad-2.html#cb65-8" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = meantemp_diff ~ year + month + day_of_week, data = data)
@@ -511,7 +514,7 @@ La prueba de Ljung-Box se utiliza para verificar la autocorrelación en los resi
         </div>
       </div>
 <a href="modulo-2---unidad-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="modulo-3---unidad-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="modulo-2---unidad-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

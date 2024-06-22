@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Documento Bookdown Propuesta</title>
+  <title>Chapter 7 Modulo 2 - Unidad 3 | Documento Bookdown Propuesta</title>
   <meta name="description" content="Bookdown propuesto para la asignatura Series de Tiempo." />
   <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Documento Bookdown Propuesta" />
+  <meta property="og:title" content="Chapter 7 Modulo 2 - Unidad 3 | Documento Bookdown Propuesta" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Bookdown propuesto para la asignatura Series de Tiempo." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Documento Bookdown Propuesta" />
+  <meta name="twitter:title" content="Chapter 7 Modulo 2 - Unidad 3 | Documento Bookdown Propuesta" />
   
   <meta name="twitter:description" content="Bookdown propuesto para la asignatura Series de Tiempo." />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="modulo-1---unidad-1.html"/>
+<link rel="prev" href="modulo-2---unidad-2.html"/>
+<link rel="next" href="modulo-3.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -197,34 +197,73 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Documento Bookdown Propuesta</h1>
-<p class="author"><em>Diego Fernando Ortiz</em></p>
-<p class="date"><em>Daily Climate time series data</em></p>
-</div>
-<div id="inicio" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Inicio<a href="inicio.html#inicio" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><strong>Fuente:</strong> <a href="https://www.kaggle.com/datasets/sumanthvrao/daily-climate-time-series-data">Kaggle</a></p>
+<div id="modulo-2---unidad-3" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Modulo 2 - Unidad 3<a href="modulo-2---unidad-3.html#modulo-2---unidad-3" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="modulo-2---unidad-3.html#cb76-1" tabindex="-1"></a><span class="co"># Crear un DataFrame para las fechas futuras</span></span>
+<span id="cb76-2"><a href="modulo-2---unidad-3.html#cb76-2" tabindex="-1"></a>future <span class="ot">&lt;-</span> <span class="fu">make_future_dataframe</span>(prophet_model, <span class="at">periods =</span> <span class="dv">365</span>)  <span class="co"># Predice para un año más</span></span>
+<span id="cb76-3"><a href="modulo-2---unidad-3.html#cb76-3" tabindex="-1"></a></span>
+<span id="cb76-4"><a href="modulo-2---unidad-3.html#cb76-4" tabindex="-1"></a><span class="co"># Realizar la predicción</span></span>
+<span id="cb76-5"><a href="modulo-2---unidad-3.html#cb76-5" tabindex="-1"></a>forecast <span class="ot">&lt;-</span> <span class="fu">predict</span>(prophet_model, future)</span>
+<span id="cb76-6"><a href="modulo-2---unidad-3.html#cb76-6" tabindex="-1"></a></span>
+<span id="cb76-7"><a href="modulo-2---unidad-3.html#cb76-7" tabindex="-1"></a><span class="co"># Visualización de las predicciones</span></span>
+<span id="cb76-8"><a href="modulo-2---unidad-3.html#cb76-8" tabindex="-1"></a><span class="fu">prophet_plot_components</span>(prophet_model, forecast)</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-41-1.png" width="672" />
+<strong>Tendencia (Trend):</strong></p>
+<p>La primera gráfica muestra la tendencia general de la serie temporal. Se observa un aumento gradual de la temperatura media logarítmica a lo largo del tiempo.</p>
+<p><strong>Estacionalidad Semanal (Weekly Seasonality):</strong></p>
+<p>La segunda gráfica muestra la estacionalidad semanal. Se observa que los miércoles tienden a ser ligeramente más cálidos en comparación con otros días de la semana.</p>
+<p><strong>Estacionalidad Anual (Yearly Seasonality):</strong></p>
+<p>La tercera gráfica muestra la estacionalidad anual. Se puede ver que las temperaturas tienden a ser más altas alrededor de julio y más bajas alrededor de enero, lo cual es consistente con los patrones climáticos estacionales.</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="modulo-2---unidad-3.html#cb77-1" tabindex="-1"></a><span class="co"># Plotear las predicciones</span></span>
+<span id="cb77-2"><a href="modulo-2---unidad-3.html#cb77-2" tabindex="-1"></a><span class="fu">plot</span>(prophet_model, forecast) <span class="sc">+</span></span>
+<span id="cb77-3"><a href="modulo-2---unidad-3.html#cb77-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Predicción de Temperatura Media con Prophet&quot;</span>,</span>
+<span id="cb77-4"><a href="modulo-2---unidad-3.html#cb77-4" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Fecha&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Temperatura Media Logarítmica&quot;</span>)</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<p><strong>Datos Históricos:</strong></p>
 <ul>
-<li><p><strong>Relevancia Temática</strong>
-Aunque el dataset es específico de Delhi, India, la observación de tendencias y patrones en el comportamiento climático en una región que experimenta variaciones significativas puede proporcionar información valiosa. Estos datos pueden servir como un estudio comparativo para anticipar escenarios posibles en Colombia, especialmente bajo condiciones climáticas extremas similares.</p></li>
-<li><p><strong>Datos Detallados y Granulares</strong>
-El conjunto de datos ofrece mediciones diarias desde el 1 de enero de 2013 hasta el 24 de abril de 2017, proporcionando un marco detallado para el análisis de tendencias a largo plazo y variaciones estacionales en Delhi. Esta granularidad facilita el estudio detallado de la relación entre las variaciones de temperatura y otros parámetros climáticos, crucial para entender las dinámicas ambientales que pueden ser similares en otras partes del mundo, incluida Colombia.</p></li>
-<li><p><strong>Aplicabilidad de Análisis Multivariado</strong>
-Con variables como temperatura media, humedad, velocidad del viento y presión media, es posible realizar análisis multivariado para investigar cómo las fluctuaciones de estos elementos se correlacionan entre sí y afectan condiciones ambientales más amplias. Esto es relevante para estudiar posibles vínculos entre altas temperaturas y sequías, un fenómeno preocupante también en Colombia.</p></li>
-<li><p><strong>Comparación Interregional</strong>
-Mientras que este conjunto de datos es específico de una ciudad, los métodos analíticos aplicados aquí pueden ser extrapolados para comparar diferentes regiones dentro de Colombia, un país con una diversidad climática considerable. Entender cómo diferentes microclimas responden a variaciones similares en parámetros climáticos puede ofrecer insights cruciales para la gestión de recursos y la preparación ante eventos extremos.</p></li>
-<li><p><strong>Soporte para Modelos Predictivos</strong>
-Utilizando este conjunto de datos, podemos desarrollar y validar modelos predictivos que estimen el impacto de las variaciones climáticas en los recursos hídricos. Tales modelos no solo son pertinentes para la región de Delhi sino que pueden ser adaptados para prever y mitigar efectos similares en Colombia, especialmente en preparación para futuros eventos climáticos extremos.</p></li>
+<li>Los puntos negros representan los datos históricos de la temperatura media logarítmica. Observamos patrones estacionales anuales claramente definidos con picos en los meses de verano y valles en los meses de invierno.</li>
 </ul>
+<p><strong>Predicciones del Modelo:</strong></p>
+<ul>
+<li>La línea azul muestra las predicciones del modelo Prophet. Las áreas sombreadas en azul claro alrededor de la línea de predicción representan los intervalos de confianza de las predicciones. Estos intervalos nos dan una idea de la incertidumbre en las predicciones.</li>
+</ul>
+<p><strong>Consistencia del Modelo:</strong></p>
+<ul>
+<li>La línea de predicción sigue de cerca los datos históricos, lo que indica que el modelo Prophet ha capturado bien la estacionalidad y la tendencia de la serie temporal.</li>
+<li>Las predicciones para el futuro (a partir de 2017) muestran una tendencia continua con el mismo patrón estacional observado en los datos históricos.</li>
+</ul>
+<div id="justificación-del-uso-de-prophet" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Justificación del Uso de Prophet<a href="modulo-2---unidad-3.html#justificación-del-uso-de-prophet" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>El uso de Prophet es justificado debido a varias razones:</p>
+<ul>
+<li><strong>Captura de Estacionalidades Complejas:</strong></li>
+</ul>
+<p>Prophet es capaz de capturar estacionalidades múltiples (diaria, semanal, anual) y permite la incorporación de efectos de festivos o eventos especiales.</p>
+<ul>
+<li><strong>Robustez a Datos Faltantes y Outliers:</strong></li>
+</ul>
+<p>Es robusto frente a datos faltantes y outliers, lo que lo hace adecuado para datos reales que pueden tener estos problemas.</p>
+<ul>
+<li><strong>Facilidad de Uso y Interpretabilidad:</strong></li>
+</ul>
+<p>La implementación es sencilla y la interpretación de los resultados es intuitiva, con componentes de tendencia y estacionalidad claramente definidos.</p>
+<ul>
+<li><strong>Predicción a Largo Plazo:</strong></li>
+</ul>
+<p>Es adecuado para predicciones a largo plazo debido a su capacidad para modelar tendencias no lineales y estacionalidades recurrentes.</p>
+<ul>
+<li><strong>Comparación con Otros Modelos:</strong></li>
+</ul>
+<p>Comparado con otros modelos como ARIMA, Prophet ofrece una metodología complementaria que es menos sensible a la necesidad de diferenciar los datos para lograr la estacionaridad.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="modulo-1---unidad-1.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="modulo-2---unidad-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="modulo-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

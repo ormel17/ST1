@@ -51,7 +51,7 @@ data <- read.csv(ruta)
 
 
 ```{r include=FALSE}
-# Carga de la biblioteca necesaria
+
 library(tidyverse)
 ```
 
@@ -819,11 +819,10 @@ Con base en estos resultados, podemos concluir que la serie diferenciada y trans
 # Remover NA creado por la diferenciación
 data <- na.omit(data)
 
-# Ajuste de un Modelo Lineal Estacionario
 # Modelo lineal utilizando variables temporales y la serie transformada y diferenciada
 model <- lm(meantemp_diff ~ year + month + day_of_week, data = data)
 
-# Revisar el resumen del modelo para ver la significancia de los predictores
+# Revisar el resumen del modelo 
 summary(model)
 ```
 
@@ -1004,10 +1003,10 @@ El gráfico superior muestra las temperaturas medias logarítmicas históricas c
 
 El gráfico inferior muestra la predicción futura para los próximos 10 días, con un aumento gradual y una estabilización.
 
-# Modulo 3 - Unidad 2
+# Modulo 2 - Unidad 3
 
 
-```{r message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE, include=FALSE}
 # Cargar las librerías necesarias
 library(prophet)
 library(dplyr)
@@ -1108,3 +1107,105 @@ Es adecuado para predicciones a largo plazo debido a su capacidad para modelar t
 * **Comparación con Otros Modelos:**
 
 Comparado con otros modelos como ARIMA, Prophet ofrece una metodología complementaria que es menos sensible a la necesidad de diferenciar los datos para lograr la estacionaridad.
+
+
+
+
+
+
+# Modulo 3
+
+
+
+## Organización datos
+
+
+```{r}
+# Instalar y cargar librerías necesarias
+if (!require(RSNNS)) install.packages("RSNNS", repos = "http://cran.us.r-project.org")
+if (!require(tidyverse)) install.packages("tidyverse", repos = "http://cran.us.r-project.org")
+library(RSNNS)
+library(tidyverse)
+
+# Cargar y preparar datos
+ruta <- "C:/Users/Diego Ortiz/OneDrive/Documentos/Series de tiempo/Series1/ST1/DailyDelhiClimateTrain.csv"
+data <- read.csv(ruta) %>%
+  mutate(date = as.Date(date),
+         log_meantemp = log(meantemp)) %>%
+  select(date, meantemp, log_meantemp)
+
+# Escalar los datos
+max_value <- max(data$log_meantemp, na.rm = TRUE)
+min_value <- min(data$log_meantemp, na.rm = TRUE)
+data$scaled_log_meantemp <- (data$log_meantemp - min_value) / (max_value - min_value)
+
+# Crear conjuntos de entrenamiento y prueba
+train_size <- round(nrow(data) * 0.8)
+train_data <- data[1:train_size, ]
+test_data <- data[(train_size + 1):nrow(data), ]
+
+# Función para crear secuencias
+create_sequences <- function(x, n_steps) {
+  x_mat <- matrix(NA, nrow = length(x) - n_steps + 1, ncol = n_steps)
+  for (i in 1:(length(x) - n_steps + 1)) {
+    x_mat[i,] <- x[i:(i + n_steps - 1)]
+  }
+  return(x_mat)
+}
+
+n_steps <- 7
+input_train <- create_sequences(train_data$scaled_log_meantemp, n_steps)
+output_train <- train_data$scaled_log_meantemp[n_steps:length(train_data$scaled_log_meantemp)]
+input_test <- create_sequences(test_data$scaled_log_meantemp, n_steps)
+```
+
+
+```{r}
+# Función para entrenar, predecir y evaluar modelos
+train_predict_evaluate <- function(model_type, input_train, output_train, input_test) {
+  set.seed(123)
+  if (model_type == "elman") {
+    model <- elman(input_train, output_train, size = c(10, 5), learnFuncParams = c(0.1), maxit = 1000, linOut = TRUE)
+  } else if (model_type == "jordan") {
+    model <- jordan(input_train, output_train, size = 4, learnFuncParams = c(0.01), maxit = 1000, linOut = TRUE)
+  }
+  
+  # Gráfico de convergencia del error
+  plotIterativeError(model)
+  
+  predictions <- predict(model, input_test)
+  predictions <- predictions * (max_value - min_value) + min_value
+  actual_values <- test_data$log_meantemp[n_steps:length(test_data$log_meantemp)]
+  
+  rmse <- sqrt(mean((predictions - actual_values)^2))
+  mae <- mean(abs(predictions - actual_values))
+  mape <- mean(abs((predictions - actual_values) / actual_values)) * 100
+  
+  cat(toupper(model_type), "RMSE:", rmse, "\n")
+  cat(toupper(model_type), "MAE:", mae, "\n")
+  cat(toupper(model_type), "MAPE:", mape, "%\n")
+  
+  # Visualizar resultados
+  plot(test_data$date[n_steps:length(test_data$date)], actual_values, type = "l", col = "red", 
+       main = paste("Predicción con Red", toupper(model_type)), xlab = "Fecha", ylab = "Temperatura Media Logarítmica")
+  lines(test_data$date[n_steps:length(test_data$date)], predictions, col = "blue")
+  legend("topright", legend = c("Real", "Predicción"), col = c("red", "blue"), lty = 1)
+  
+  # Gráfico de errores
+  errors <- predictions - actual_values
+  plot(test_data$date[n_steps:length(test_data$date)], errors, type = "l", 
+       main = paste("Errores de predicción -", toupper(model_type)), xlab = "Fecha", ylab = "Error")
+  abline(h = 0, col = "red", lty = 2)
+  
+  return(model)
+}
+```
+
+RESUL
+```{r}
+# Ejecutar modelos
+elman_model <- train_predict_evaluate("elman", input_train, output_train, input_test)
+jordan_model <- train_predict_evaluate("jordan", input_train, output_train, input_test)
+
+```
+
