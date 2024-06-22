@@ -1117,7 +1117,7 @@ Comparado con otros modelos como ARIMA, Prophet ofrece una metodología compleme
 
 
 
-## Organización datos
+## Organizar modelos
 
 
 ```{r}
@@ -1157,10 +1157,7 @@ n_steps <- 7
 input_train <- create_sequences(train_data$scaled_log_meantemp, n_steps)
 output_train <- train_data$scaled_log_meantemp[n_steps:length(train_data$scaled_log_meantemp)]
 input_test <- create_sequences(test_data$scaled_log_meantemp, n_steps)
-```
 
-
-```{r}
 # Función para entrenar, predecir y evaluar modelos
 train_predict_evaluate <- function(model_type, input_train, output_train, input_test) {
   set.seed(123)
@@ -1201,11 +1198,110 @@ train_predict_evaluate <- function(model_type, input_train, output_train, input_
 }
 ```
 
-RESUL
+## Red Neuronal Elman
+
 ```{r}
-# Ejecutar modelos
 elman_model <- train_predict_evaluate("elman", input_train, output_train, input_test)
+```
+
+### Análisis de los Gráficos de la Red Elman
+
+* **Gráfico del Error Ponderado (SSE) a lo Largo de las Iteraciones:**
+
+**Descripción:**
+Este gráfico muestra cómo se reduce el error ponderado (SSE, Sum of Squared Errors) durante las iteraciones de entrenamiento de la red Elman.
+
+**Observaciones:**
+El error decrece rápidamente en las primeras iteraciones, lo que indica un aprendizaje rápido inicial.
+A partir de aproximadamente la iteración 200, la reducción del error se estabiliza, sugiriendo que el modelo ha alcanzado una convergencia.
+El gráfico muestra que la red Elman es capaz de minimizar el error de manera efectiva durante el entrenamiento.
+
+* **Gráfico de Predicción con Red Elman:**
+
+**Descripción:**
+Este gráfico compara las predicciones de la red Elman (línea azul) con los valores reales de la temperatura media logarítmica (línea roja) durante el período de prueba.
+
+**Observaciones:**
+La red Elman sigue de cerca los valores reales, capturando adecuadamente la tendencia y la estacionalidad de los datos.
+Hay ligeras desviaciones en algunos picos y valles, pero en general, el ajuste es bastante preciso.
+La capacidad de la red Elman para capturar la dinámica temporal es evidente en la similitud entre las líneas de predicción y los valores reales.
+
+* **Gráfico de Errores de Predicción - Elman:**
+
+**Descripción:**
+Este gráfico muestra los errores de predicción (diferencia entre las predicciones y los valores reales) a lo largo del período de prueba.
+
+**Observaciones:**
+Los errores se distribuyen alrededor de cero, lo que indica que no hay un sesgo sistemático en las predicciones.
+Los mayores errores se observan al principio del período de prueba, con una tendencia a estabilizarse en torno a cero conforme avanza el tiempo.
+La línea roja discontinua en el cero ayuda a visualizar la distribución de los errores, mostrando que los errores positivos y negativos se compensan entre sí.
+
+
+## Red Neuronal Jordan
+```{r}
+
+
 jordan_model <- train_predict_evaluate("jordan", input_train, output_train, input_test)
 
 ```
+
+
+
+### Análisis de los Gráficos de la Red Jordan
+
+* **Gráfico del Error Ponderado (SSE) a lo Largo de las Iteraciones:**
+
+**Descripción:**
+Similar al gráfico de la red Elman, este gráfico muestra cómo se reduce el error ponderado durante las iteraciones de entrenamiento de la red Jordan.
+
+**Observaciones:**
+El error decrece rápidamente en las primeras iteraciones, indicando un buen proceso de aprendizaje inicial.
+La estabilización del error alrededor de la iteración 200 sugiere que el modelo ha alcanzado la convergencia.
+El modelo es eficaz en minimizar el error durante el entrenamiento, similar a la red Elman.
+
+* **Gráfico de Predicción con Red Jordan:**
+
+**Descripción:**
+Este gráfico compara las predicciones de la red Jordan (línea azul) con los valores reales de la temperatura media logarítmica (línea roja) durante el período de prueba.
+
+**Observaciones:**
+La red Jordan también sigue de cerca los valores reales, capturando la tendencia y la estacionalidad.
+Las desviaciones en picos y valles son mínimas, mostrando una precisión comparativa a la red Elman.
+La red Jordan es igualmente competente en capturar la dinámica temporal de los datos.
+
+* **Gráfico de Errores de Predicción - Jordan:**
+
+**Descripción:**
+Este gráfico muestra los errores de predicción de la red Jordan a lo largo del período de prueba.
+
+**Observaciones:**
+Los errores se distribuyen alrededor de cero, similar al comportamiento observado con la red Elman.
+La magnitud de los errores es mayor al inicio del período de prueba, estabilizándose conforme avanza el tiempo.
+La distribución de errores alrededor de la línea roja discontinua (cero) indica que no hay un sesgo sistemático en las predicciones.
+
+### Comparación de Redes Elman y Jordan:
+
+**Convergencia y Entrenamiento:**
+
+Ambas redes muestran una rápida disminución del error durante las primeras iteraciones y convergen alrededor de la iteración 200.
+Ambas redes minimizan el error de manera efectiva durante el entrenamiento.
+
+**Precisión de Predicción:**
+
+Tanto la red Elman como la red Jordan capturan bien la tendencia y la estacionalidad de los datos.
+Las predicciones de ambas redes siguen de cerca los valores reales, con ligeras desviaciones en los picos y valles.
+
+**Errores de Predicción:**
+
+Los errores de predicción de ambas redes se distribuyen alrededor de cero, sin sesgo sistemático.
+Las mayores desviaciones ocurren al inicio del período de prueba, con una tendencia a estabilizarse.
+
+**Conclusión:**
+Las redes Elman y Jordan son eficaces para la predicción de series temporales, mostrando una precisión y un comportamiento de errores similares. La elección entre una y otra puede depender de la especificidad del problema y las características de los datos.
+
+
+
+
+
+
 
