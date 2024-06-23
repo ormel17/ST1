@@ -645,11 +645,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="suavizamiento-exponencial" class="section level2 hasAnchor" number="5.4">
 <h2><span class="header-section-number">5.4</span> Suavizamiento exponencial<a href="modulo-2---unidad-1.html#suavizamiento-exponencial" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="modulo-2---unidad-1.html#cb57-1" tabindex="-1"></a><span class="co"># Aplicar suavizamiento exponencial simple</span></span>
-<span id="cb57-2"><a href="modulo-2---unidad-1.html#cb57-2" tabindex="-1"></a>smoothed_data <span class="ot">&lt;-</span> <span class="fu">HoltWinters</span>(ts_data, <span class="at">beta=</span><span class="cn">FALSE</span>, <span class="at">gamma=</span><span class="cn">FALSE</span>)</span>
-<span id="cb57-3"><a href="modulo-2---unidad-1.html#cb57-3" tabindex="-1"></a></span>
-<span id="cb57-4"><a href="modulo-2---unidad-1.html#cb57-4" tabindex="-1"></a><span class="co"># Visualización de la serie suavizada</span></span>
-<span id="cb57-5"><a href="modulo-2---unidad-1.html#cb57-5" tabindex="-1"></a><span class="fu">plot</span>(smoothed_data<span class="sc">$</span>fitted, <span class="at">main=</span><span class="st">&quot;Suavizado Exponencial de la Temperatura Media&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="modulo-2---unidad-1.html#cb57-1" tabindex="-1"></a>smoothed_data <span class="ot">&lt;-</span> <span class="fu">HoltWinters</span>(ts_data, <span class="at">beta=</span><span class="cn">FALSE</span>, <span class="at">gamma=</span><span class="cn">FALSE</span>)</span>
+<span id="cb57-2"><a href="modulo-2---unidad-1.html#cb57-2" tabindex="-1"></a></span>
+<span id="cb57-3"><a href="modulo-2---unidad-1.html#cb57-3" tabindex="-1"></a><span class="fu">plot</span>(smoothed_data<span class="sc">$</span>fitted, <span class="at">main=</span><span class="st">&quot;Suavizado Exponencial de la Temperatura Media&quot;</span>)</span></code></pre></div>
 <p><img src="index_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 <p><strong>Suavizado Exponencial de la Temperatura Media</strong></p>
 <p>La gráfica muestra el resultado del suavizado exponencial aplicado a la serie temporal de la temperatura media. Este método ha sido implementado utilizando el modelo Holt-Winters con parámetros específicos para minimizar la influencia de la tendencia y la estacionalidad en el suavizado.</p>

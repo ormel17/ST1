@@ -153,7 +153,7 @@ No tenemos valores nulos en nuestro Dataset
 
 
 ```{R}
-# Instalar corrplot si no está instalada
+# Instalar corrplot 
 if(!require(corrplot)){
   install.packages("corrplot")
   library(corrplot)
@@ -260,7 +260,7 @@ El histograma para la velocidad del viento muestra una distribución sesgada hac
 # Asegurándose de que la columna de fecha es de tipo Date
 data$date <- as.Date(data$date)
 
-# Cargar ggplot2 para gráficos
+# Cargar ggplot2 
 library(ggplot2)
 ```
 
@@ -307,7 +307,7 @@ Ajustamos el formato fecha
 
 
 ```{r}
-# Imprimir las primeras fechas para verificar el formato
+
 print(head(data$date))
 ```
 
@@ -410,7 +410,7 @@ monthly_avg <- data %>%
   group_by(month) %>%
   summarise(mean_temp = mean(meantemp, na.rm = TRUE))
 
-# Ordenar los resultados por mes para correcta visualización
+# Ordenar los resultados por mes 
 monthly_avg <- monthly_avg %>%
   arrange(month)
 
@@ -434,7 +434,7 @@ Este patrón refleja las características climáticas de un clima subtropical, d
 
 ```{r}
 # Usar la función stl() para descomposición estacional
-data_ts <- ts(data$meantemp, frequency = 12)  # Asumiendo datos mensuales
+data_ts <- ts(data$meantemp, frequency = 12)  
 result_stl <- stl(data_ts, s.window = "periodic")
 
 # Visualizar los componentes de la descomposición
@@ -488,9 +488,9 @@ La variabilidad en las temperaturas también puede sugerir la influencia de fen�
 library(forecast)  
 
 
-ts_data <- ts(data$meantemp, frequency = 365)  # Ajusta la frecuencia 
+ts_data <- ts(data$meantemp, frequency = 365)  
 
-# Aplicar STL
+
 result_stl <- stl(ts_data, s.window = "periodic")  
 
 plot(result_stl)
@@ -549,7 +549,7 @@ ggplot(data, aes(x = date, y = log_meantemp)) +
 ```{r}
 # Calcular la diferenciación logarítmica y eliminar la primera fila para mantener la consistencia de datos
 diff_series <- diff(data$log_meantemp)
-data <- data[-1, ]  # Elimina la primera fila
+data <- data[-1, ]  
 data$diff_log_meantemp <- diff_series
 
 # Visualización de la serie diferenciada
@@ -660,10 +660,8 @@ Como se puede ver en la gráfica, tenemos nuestros datos observados en negro y l
 ## Suavizamiento exponencial
 
 ```{r}
-# Aplicar suavizamiento exponencial simple
 smoothed_data <- HoltWinters(ts_data, beta=FALSE, gamma=FALSE)
 
-# Visualización de la serie suavizada
 plot(smoothed_data$fitted, main="Suavizado Exponencial de la Temperatura Media")
 
 ```
@@ -699,16 +697,15 @@ La evaluación visual sugiere que el suavizado ha sido efectivo para proporciona
 * **Inclusión de Variables en el Tiempo ** 
 
 ```{r}
-library(lubridate)  # para manejo de fechas
+library(lubridate)  
 
-# Convertir la columna de fecha a tipo Date si no está convertida
 data$date <- as.Date(data$date)
 
-# Crear nuevas variables de tiempo
+
 data$year <- year(data$date)
 data$month <- month(data$date)
 data$day <- day(data$date)
-data$day_of_week <- wday(data$date, label = TRUE)  # Días de la semana con etiquetas
+data$day_of_week <- wday(data$date, label = TRUE)  
 
 ```
 
@@ -762,7 +759,7 @@ data$month <- month(data$date)
 data$day <- day(data$date)
 
 # Análisis de Estacionariedad y Transformaciones
-# Verificación inicial de estacionariedad
+
 adf_result_original <- adf.test(data$meantemp, alternative = "stationary")
 print(adf_result_original)
 ```
@@ -788,7 +785,7 @@ Con base en los resultados de la prueba ADF, podemos concluir que la serie de te
 data$meantemp_log <- log(data$meantemp)
 
 # Diferenciación de la serie transformada
-data$meantemp_diff <- c(NA, diff(data$meantemp_log))  # Agrega NA al inicio para mantener la longitud
+data$meantemp_diff <- c(NA, diff(data$meantemp_log))  
 
 # Reevaluar estacionariedad con la serie diferenciada
 adf_result_diff <- adf.test(na.omit(data$meantemp_diff), alternative = "stationary")
@@ -816,13 +813,11 @@ Con base en estos resultados, podemos concluir que la serie diferenciada y trans
 ## Ajuste del Modelo Lineal Estacionario
 
 ```{r}
-# Remover NA creado por la diferenciación
+
 data <- na.omit(data)
 
-# Modelo lineal utilizando variables temporales y la serie transformada y diferenciada
 model <- lm(meantemp_diff ~ year + month + day_of_week, data = data)
 
-# Revisar el resumen del modelo 
 summary(model)
 ```
 
@@ -865,9 +860,7 @@ summary(model)
 **Gráfico de Residuos:**
 
 ```{r}
-# Diagnóstico del Modelo
-# Verificar los residuos del modelo
-# Gráfico de residuos
+
 ggplot(data, aes(x = date, y = residuals(model))) +
   geom_line() +
   labs(title = "Residuos del Modelo de Temperatura", y = "Residuos", x = "Fecha")
@@ -904,7 +897,6 @@ print(shapiro_test_result)
 
 ```{r}
 # Previsión Futura
-# Generar un nuevo conjunto de datos para las predicciones futuras
 future_dates <- seq(max(data$date) + 1, by = "day", length.out = 10)
 new_data <- data.frame(
   date = future_dates,
@@ -914,13 +906,12 @@ new_data <- data.frame(
   month = month(future_dates)
 )
 
-# Predecir usando el modelo ajustado
+
 prediction <- predict(model, newdata = new_data)
 
-# Visualizar las predicciones
 plot(future_dates, prediction, type = "l", col = "blue", xlab = "Date", ylab = "Predicted Mean Temperature",
      main = "Forecast of Mean Temperature")
-lines(data$date, data$meantemp, col = "red")  # Añadir los datos originales para comparar
+lines(data$date, data$meantemp, col = "red")  
 
 ```
 
@@ -949,13 +940,13 @@ library(ggplot2)
 # Ajuste del modelo SARIMA utilizando auto.arima para identificar el mejor modelo
 sarima_model <- auto.arima(data$meantemp_log, seasonal = TRUE)
 
-# Resumen del modelo ajustado
+
 summary(sarima_model)
 
-# Diagnóstico de residuos del modelo SARIMA
 checkresiduals(sarima_model)
 
 ```
+
 El gráfico muestra los residuos del modelo ARIMA ajustado, indicando que el modelo ARIMA(4,1,3) fue seleccionado como el mejor ajuste para la serie temporal
 
 **Residuos del Modelo**
@@ -966,7 +957,7 @@ La prueba de Ljung-Box se utiliza para verificar la autocorrelación en los resi
 
 ```{r message=FALSE, warning=FALSE}
 # Predicción futura con el modelo SARIMA
-sarima_forecast <- forecast(sarima_model, h = 10)  # Predice los próximos 10 días
+sarima_forecast <- forecast(sarima_model, h = 10)  
 
 # Crear un data frame para las fechas futuras
 future_dates <- seq(max(data$date) + 1, by = "day", length.out = 10)
@@ -1239,7 +1230,6 @@ La línea roja discontinua en el cero ayuda a visualizar la distribución de los
 
 ## Red Neuronal Jordan
 ```{r}
-
 
 jordan_model <- train_predict_evaluate("jordan", input_train, output_train, input_test)
 

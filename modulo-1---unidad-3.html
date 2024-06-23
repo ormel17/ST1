@@ -230,9 +230,9 @@ La variabilidad en las temperaturas también puede sugerir la influencia de fen�
 <pre><code>## Registered S3 method overwritten by &#39;quantmod&#39;:
 ##   method            from
 ##   as.zoo.data.frame zoo</code></pre>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="modulo-1---unidad-3.html#cb45-1" tabindex="-1"></a>ts_data <span class="ot">&lt;-</span> <span class="fu">ts</span>(data<span class="sc">$</span>meantemp, <span class="at">frequency =</span> <span class="dv">365</span>)  <span class="co"># Ajusta la frecuencia </span></span>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="modulo-1---unidad-3.html#cb45-1" tabindex="-1"></a>ts_data <span class="ot">&lt;-</span> <span class="fu">ts</span>(data<span class="sc">$</span>meantemp, <span class="at">frequency =</span> <span class="dv">365</span>)  </span>
 <span id="cb45-2"><a href="modulo-1---unidad-3.html#cb45-2" tabindex="-1"></a></span>
-<span id="cb45-3"><a href="modulo-1---unidad-3.html#cb45-3" tabindex="-1"></a><span class="co"># Aplicar STL</span></span>
+<span id="cb45-3"><a href="modulo-1---unidad-3.html#cb45-3" tabindex="-1"></a></span>
 <span id="cb45-4"><a href="modulo-1---unidad-3.html#cb45-4" tabindex="-1"></a>result_stl <span class="ot">&lt;-</span> <span class="fu">stl</span>(ts_data, <span class="at">s.window =</span> <span class="st">&quot;periodic&quot;</span>)  </span>
 <span id="cb45-5"><a href="modulo-1---unidad-3.html#cb45-5" tabindex="-1"></a></span>
 <span id="cb45-6"><a href="modulo-1---unidad-3.html#cb45-6" tabindex="-1"></a><span class="fu">plot</span>(result_stl)</span></code></pre></div>
@@ -273,7 +273,7 @@ Una prueba estadística para verificar la presencia de una raíz unitaria, indic
 <p><strong>Diferenciación y Visualización</strong></p>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="modulo-1---unidad-3.html#cb49-1" tabindex="-1"></a><span class="co"># Calcular la diferenciación logarítmica y eliminar la primera fila para mantener la consistencia de datos</span></span>
 <span id="cb49-2"><a href="modulo-1---unidad-3.html#cb49-2" tabindex="-1"></a>diff_series <span class="ot">&lt;-</span> <span class="fu">diff</span>(data<span class="sc">$</span>log_meantemp)</span>
-<span id="cb49-3"><a href="modulo-1---unidad-3.html#cb49-3" tabindex="-1"></a>data <span class="ot">&lt;-</span> data[<span class="sc">-</span><span class="dv">1</span>, ]  <span class="co"># Elimina la primera fila</span></span>
+<span id="cb49-3"><a href="modulo-1---unidad-3.html#cb49-3" tabindex="-1"></a>data <span class="ot">&lt;-</span> data[<span class="sc">-</span><span class="dv">1</span>, ]  </span>
 <span id="cb49-4"><a href="modulo-1---unidad-3.html#cb49-4" tabindex="-1"></a>data<span class="sc">$</span>diff_log_meantemp <span class="ot">&lt;-</span> diff_series</span>
 <span id="cb49-5"><a href="modulo-1---unidad-3.html#cb49-5" tabindex="-1"></a></span>
 <span id="cb49-6"><a href="modulo-1---unidad-3.html#cb49-6" tabindex="-1"></a><span class="co"># Visualización de la serie diferenciada</span></span>
